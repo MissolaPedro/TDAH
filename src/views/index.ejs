@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><%= title %></title>
+		<%- include('partials/head') %>
 		<link href="/css/styles.css" rel="stylesheet">
 	  </head>
 	<body class="bg-neutral-900">
-	  </body>
+		<%- include('partials/navbar') %>
+
+		<!-- <% if (query.loginSuccess) { %>
+			<p>Login realizado com sucesso!</p>
+		<% } %>
+
+		<% if (registerSuccessMessage) { %>
+			<p><%= registerSuccessMessage %></p>
+		<% } %> -->
+
+		<script type="required" src="../firebase/functions/login.js"></script>
+
+	</body>
 </html>
