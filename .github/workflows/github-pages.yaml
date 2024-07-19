@@ -30,9 +30,8 @@ jobs:
 
     - name: Render EJS files
       run: |
-        mkdir -p public  # Cria o diretório público, se necessário
-        node -e "const ejs = require('ejs'); const fs = require('fs'); const path = require('path'); const renderEJS = (file) => { const filename = path.basename(file, '.ejs') + '.html'; const template = fs.readFileSync(file, 'utf8'); const rendered = ejs.render(template, { title: 'Projeto TDAH' }); fs.writeFileSync(path.join('public', filename), rendered);};
-        ['src/views/index.ejs', 'src/views/partials/other.ejs', 'src/views/other.ejs'].forEach(renderEJS);"
+        mkdir -p public && node -e "const ejs = require('ejs'); const fs = require('fs'); const path = require('path'); const renderEJS = (file) => { const filename = path.basename(file, '.ejs') + '.html'; const template = fs.readFileSync(file, 'utf8'); const rendered = ejs.render(template, { title: 'Projeto TDAH' }); fs.writeFileSync(path.join('public', filename), rendered); }; ['src/views/index.ejs', 'src/views/partials/head.ejs', 'src/views/partials/other.ejs', 'src/views/other.ejs'].forEach(renderEJS);"
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
