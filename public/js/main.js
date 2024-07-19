@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cookieParser = require('cookie-parser');
 
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // Middleware para parsear o corpo das requisições POST
 
 // Configurações do Express e EJS

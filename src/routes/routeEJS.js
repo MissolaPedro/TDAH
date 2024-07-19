@@ -8,6 +8,16 @@ function routeEJS(app) {
         res.render("index", { title: "Projeto TDAH", query: req.query, successMessage: successMessage, registerSuccessMessage: registerSuccessMessage });
     });
 
+    app.get("/auth/status", (req, res) => {
+        try {
+            const isLoggedIn = req.cookies.loggedIn;
+            res.json({ loggedIn: !!isLoggedIn });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    });
+
     app.get("/login", (req, res) => {
         res.render("partials/form-login", { title: "Login", errorMessage: null, successMessage: null });
     });
