@@ -598,8 +598,13 @@ video {
   height: 100%;
 }
 
+<<<<<<< HEAD
 .w-\[35\%\] {
   width: 35%;
+=======
+.w-\[25\%\] {
+  width: 25%;
+>>>>>>> 5a19081e1306e074b3b8762d3d20809ad2086543
 }
 
 .w-fit {
@@ -639,10 +644,13 @@ video {
   gap: 1.5rem;
 }
 
+<<<<<<< HEAD
 .rounded {
   border-radius: 0.25rem;
 }
 
+=======
+>>>>>>> 5a19081e1306e074b3b8762d3d20809ad2086543
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -778,5 +786,8 @@ video {
   --tw-text-opacity: 1;
   color: rgb(38 38 38 / var(--tw-text-opacity));
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5a19081e1306e074b3b8762d3d20809ad2086543
 /*# sourceMappingURL=styles.css.map */

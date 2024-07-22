@@ -2,7 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser');
+<<<<<<< HEAD
 const expressLayouts = require('express-ejs-layouts');
+=======
+>>>>>>> 5a19081e1306e074b3b8762d3d20809ad2086543
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // Middleware para parsear o corpo das requisições POST
