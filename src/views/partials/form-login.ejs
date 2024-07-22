@@ -1,7 +1,6 @@
 <title><%= title %></title>
 <link href="/css/styles.css" rel="stylesheet">
 
-<<<<<<< HEAD
 
     <form id="form-login" action="/login" method="post" class="flex justify-center items-center">
         <fieldset>
@@ -20,24 +19,6 @@
         </fieldset>
     </form>
 
-=======
-<form id="form-login" action="/login" method="post">
-    <fieldset>
-        <legend>Login</legend>
-        <% if (errorMessage) { %>
-            <p class="error-message"><%= errorMessage %></p>
-        <% } %>
-        <% if (successMessage) { %>
-            <p class="success-message"><%= successMessage %></p>
-        <% } %>
-        <label for="flogin-name">Email:</label><br>
-        <input type="email" name="email" id="flogin-name" required><br>
-        <label for="flogin-password">Senha:</label><br>
-        <input type="password" name="password" id="flogin-password" required><br>
-        <button type="submit">Entrar</button>
-    </fieldset>
-</form>
->>>>>>> 5a19081e1306e074b3b8762d3d20809ad2086543
 <script>
     alert("Olá, faça o seu login !")
 </script>
