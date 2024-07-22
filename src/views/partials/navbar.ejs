@@ -8,8 +8,13 @@
         <a href="#">About</a>
         <a href="#">Contact</a>
     </div>
-    <div class="inline-flex gap-6">
+    <div class="inline-flex gap-6" id="ContainerNotLogged">
         <a href="/login" id="linkLogin" class="px-8 py-1 rounded-xl bg-transparent border-neutral-50 border-solid border-2 font-medium" >Login</a>
         <a href="/register" id="linkRegister" class="px-8 py-1 rounded-xl bg-amber-700 font-medium">Registre-se</a>
     </div>
+    <div class="inline-flex gap-6" id="ContainerLogged">
+        <a href="/login" id="linkLogin" class="px-8 py-1 rounded-xl bg-transparent border-neutral-50 border-solid border-2 font-medium" >Sair</a>
+        <a href="/register" id="linkRegister" class="px-8 py-1 rounded-xl bg-red-700 font-medium">Painel do usuario</a>
+    </div>
 </nav>
+<script src="/js/hiddeButtons.js"></script>

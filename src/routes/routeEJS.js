@@ -8,8 +8,18 @@ function routeEJS(app) {
         res.render("index", { title: "Projeto TDAH", query: req.query, successMessage: successMessage, registerSuccessMessage: registerSuccessMessage });
     });
 
+    app.get("/auth/status", (req, res) => {
+        try {
+            const isLoggedIn = req.cookies.loggedIn;
+            res.json({ loggedIn: !!isLoggedIn });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    });
+
     app.get("/login", (req, res) => {
-        res.render("partials/form-login", { title:"Login", errorMessage: null, successMessage: null });
+        res.render("partials/form-login", { title: "Login", errorMessage: null, successMessage: null });
     });
 
     app.get("/register", (req, res) => {
@@ -20,8 +30,10 @@ function routeEJS(app) {
         const { email, password } = req.body;
         signInUser(email, password, (error, user) => {
             if (error) {
-                return res.render("partials/form-login", { errorMessage: "Falha no login. Verifique seu email e senha e tente novamente.", successMessage: null });
+                return res.render("partials/form-login", { title: "Login", errorMessage: "Falha no login. Verifique seu email e senha e tente novamente.", successMessage: null });
             }
+            console.log("Usuário logado com sucesso");
+            res.cookie('loggedIn', true, { maxAge: 900000, httpOnly: true });
             res.redirect("/?loginSuccess=true");
         });
     });
@@ -32,6 +44,8 @@ function routeEJS(app) {
             if (error) {
                 return res.render("partials/form-register", { errorMessage: "Falha no registro. Tente novamente." });
             }
+            console.log("Usuário registrado com sucesso");
+            res.cookie('loggedIn', true, { maxAge: 900000, httpOnly: true });
             res.redirect("/?registerSuccess=true");
         });
     });

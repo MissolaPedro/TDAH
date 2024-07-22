@@ -1,17 +1,24 @@
 <title><%= title %></title>
-<form id="form-login" action="/login" method="post">
-    <fieldset>
-        <legend>Login</legend>
-        <% if (errorMessage) { %>
-            <p class="error-message"><%= errorMessage %></p>
-        <% } %>
-        <% if (successMessage) { %>
-            <p class="success-message"><%= successMessage %></p>
-        <% } %>
-        <label for="flogin-name">Email:</label><br>
-        <input type="email" name="email" id="flogin-name" required><br>
-        <label for="flogin-password">Senha:</label><br>
-        <input type="password" name="password" id="flogin-password" required><br>
-        <button type="submit">Entrar</button>
-    </fieldset>
-</form>
+<link href="/css/styles.css" rel="stylesheet">
+
+
+    <form id="form-login" action="/login" method="post" class="flex justify-center items-center w-auto border-1 bg-red-700">
+        <fieldset>
+            <legend>Login</legend>
+            <% if (errorMessage) { %>
+                <p class="error-message"><%= errorMessage %></p>
+            <% } %>
+            <% if (successMessage) { %>
+                <p class="success-message"><%= successMessage %></p>
+            <% } %>
+            <label for="flogin-name">Email:</label><br>
+            <input type="email" name="email" id="flogin-name" required><br>
+            <label for="flogin-password">Senha:</label><br>
+            <input type="password" name="password" id="flogin-password" required><br>
+            <button type="submit">Entrar</button>
+        </fieldset>
+    </form>
+
+<script>
+    alert("Olá, faça o seu login !")
+</script>
