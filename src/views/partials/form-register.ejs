@@ -1,46 +1,48 @@
-<form id="form-register" action="/register" method="post" class="w-full h-full">
-	<fieldset
-		class="w-[35%] h-[50%] rounded-xl border-solid border-[rgb(255, 255, 255, 0.75)] border-2 p-7 ro flex justify-center items-center flex-col bg-[rgb(255, 255, 255, 0.35)] "
-	>
-		<h2 class="text-2xl font-bold font-sans text-black uppercase">
-			Registre-se
-		</h2>
-		<div class="flex flex-col w-full">
-			<label
-				for="fregister-name"
-				class="text-SM uppercase text-neutral-800 font-medium"
-				>Email:</label
-			>
-			<input
-				class="rounded-lg border-[2px] border-solid bg-neutral-400 bg-opacity-25 border-neutral-300 w-full h-9"
-				type="email"
-				name="email"
-				id="fregister-name"
-				required
-			/><br />
-		</div>
-		<div class="flex flex-col w-full">
-			<label
-				for="fregister-password"
-				class="text-sm uppercase text-neutral-800 font-medium"
-				>Senha:</label
-			>
-			<input
-				class="rounded-lg border-[2px] border-solid bg-neutral-400 bg-opacity-25 border-neutral-300 w-full h-9"
-				type="password"
-				name="password"
-				id="fregister-password"
-				required
-			/><br />
-		</div>
-		<button
-			type="submit"
-			class="bg-amber-500 w-fit h-fit py-1 px-8 border-amber-500 border-opacity-50 border-solid border-2 rounded-lg"
+<body class="w-full h-full flex items-center justify-center">
+	<form id="form-register" action="/register" method="post" class="w-[40%] h-[30%]">
+		<fieldset
+			class="w-[35%] h-[50%] rounded-xl border-solid border-[rgb(255, 255, 255, 0.75)] border-2 p-7 ro flex justify-center items-center flex-col bg-[rgb(255, 255, 255, 0.35)] "
 		>
-			Registrar
-		</button>
-	</fieldset>
-	<% if (typeof errorMessage !== 'undefined') { %>
-	<p><%= errorMessage %></p>
-	<% } %>
-</form>
+			<h2 class="text-2xl font-bold font-sans text-black uppercase">
+				Registre-se
+			</h2>
+			<div class="flex flex-col w-full">
+				<label
+					for="fregister-name"
+					class="text-SM uppercase text-neutral-800 font-medium"
+					>Email:</label
+				>
+				<input
+					class="rounded-lg border-[2px] border-solid bg-neutral-400 bg-opacity-25 border-neutral-300 w-full h-9"
+					type="email"
+					name="email"
+					id="fregister-name"
+					required
+				/><br />
+			</div>
+			<div class="flex flex-col w-full">
+				<label
+					for="fregister-password"
+					class="text-sm uppercase text-neutral-800 font-medium"
+					>Senha:</label
+				>
+				<input
+					class="rounded-lg border-[2px] border-solid bg-neutral-400 bg-opacity-25 border-neutral-300 w-full h-9"
+					type="password"
+					name="password"
+					id="fregister-password"
+					required
+				/><br />
+			</div>
+			<button
+				type="submit"
+				class="bg-amber-500 w-fit h-fit py-1 px-8 border-amber-500 border-opacity-50 border-solid border-2 rounded-lg"
+			>
+				Registrar
+			</button>
+		</fieldset>
+		<% if (typeof errorMessage !== 'undefined') { %>
+		<p><%= errorMessage %></p>
+		<% } %>
+	</form>	
+</body>
