@@ -1,6 +1,8 @@
 const { registrarUsuario } = require("../firebase/functions/register");
 const { signInUser } = require("../firebase/functions/login");
-const { auth, signOut } = require("../../config/auth-firebase");
+const { signOutUser } = require("../firebase/functions/signout");
+const dns = require('dns').promises;
+
 
 function routeEJS(app) {
     app.get("/", (req, res) => {
@@ -27,8 +29,33 @@ function routeEJS(app) {
         res.render("partials/form-register", { errorMessage: null });
     });
 
-    app.post("/login", (req, res) => {
+    app.post("/login", async (req, res) => { // Torna a função assíncrona para usar await
         const { email, password } = req.body;
+    
+        if (!email) {
+            return res.render("partials/form-login", { title: "Login", errorMessage: "O email é obrigatório.", successMessage: null });
+        }
+        if (!password) {
+            return res.render("partials/form-login", { title: "Login", errorMessage: "A senha é obrigatória.", successMessage: null });
+        }
+    
+        const emailRegex = /^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            return res.render("partials/form-login", { title: "Login", errorMessage: "Formato de email inválido.", successMessage: null });
+        }
+    
+        // Extrai o domínio do email
+        const domain = email.split('@')[1];
+        try {
+            await dns.resolveMx(domain); // Verifica se o domínio tem registros MX (Mail Exchange)
+        } catch (error) {
+            return res.render("partials/form-login", { title: "Login", errorMessage: "Domínio de email não existe.", successMessage: null });
+        }
+    
+        if (password.length < 6) {
+            return res.render("partials/form-login", { title: "Login", errorMessage: "Senha deve ter pelo menos 6 caracteres.", successMessage: null });
+        }
+    
         signInUser(email, password, (error, user) => {
             if (error) {
                 return res.render("partials/form-login", { title: "Login", errorMessage: "Falha no login. Verifique seu email e senha e tente novamente.", successMessage: null });
@@ -52,12 +79,15 @@ function routeEJS(app) {
     });
 
     app.get("/logout", (req, res) => {
-        signOut(auth).then(() => {
-            res.clearCookie('loggedIn');
-            res.redirect("/login");
-        }).catch((error) => {
-            console.error("Erro ao deslogar:", error);
-            res.redirect("/");
+        signOutUser((error) => {
+            if (error) {
+                console.error("Erro ao deslogar:", error);
+                res.redirect("/");
+            } else {
+                console.log("Usuário deslogado com sucesso");
+                res.clearCookie('loggedIn');
+                res.redirect("/login");
+            }
         });
     });
 }
