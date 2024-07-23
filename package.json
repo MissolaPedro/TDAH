@@ -4,10 +4,10 @@
   "description": "",
   "main": "./public/js/main.js",
   "scripts": {
-    "build:css": "sass src/sass/output.scss public/css/styles.css && npx tailwindcss -i public/css/styles.css -o public/css/styles.css",
-    "watch:css": "concurrently \"sass src/sass/output.scss public/css/styles.css --watch\" \"npx tailwindcss -i public/css/styles.css -o public/css/styles.css --watch\"",
-    "dev": "node public/js/main.js",
-    "serve": "browser-sync start --proxy localhost:80 --files 'src/views/**/*.ejs, public/css/*.css, public/js/*.js'"
+    "build:css": "tailwindcss -i src/tailwindcss/tailwind.css -o public/css/styles.css",
+    "watch:css": "tailwindcss -i src/tailwindcss/tailwind.css -o public/css/styles.css --watch",
+    "start": "concurrently \"npm run dev\" \"npm run build:css\" \"npm run watch:css\"",
+    "dev": "node public/js/main.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +24,7 @@
     "browser-sync": "^3.0.2",
     "concurrently": "^8.2.2",
     "postcss": "^8.4.39",
-    "sass": "^1.77.6",
+    "postcss-cli": "^11.0.0",
     "tailwindcss": "^3.4.4"
   }
 }
