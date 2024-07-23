@@ -1,5 +1,6 @@
 const { registrarUsuario } = require("../firebase/functions/register");
 const { signInUser } = require("../firebase/functions/login");
+const { auth, signOut } = require("../../config/auth-firebase");
 
 function routeEJS(app) {
     app.get("/", (req, res) => {
@@ -47,6 +48,16 @@ function routeEJS(app) {
             console.log("Usuário registrado com sucesso");
             res.cookie('loggedIn', true, { maxAge: 900000, httpOnly: true });
             res.redirect("/?registerSuccess=true");
+        });
+    });
+
+    app.get("/logout", (req, res) => {
+        signOut(auth).then(() => {
+            res.clearCookie('loggedIn');
+            res.redirect("/login");
+        }).catch((error) => {
+            console.error("Erro ao deslogar:", error);
+            res.redirect("/");
         });
     });
 }

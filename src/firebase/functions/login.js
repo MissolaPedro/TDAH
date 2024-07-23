@@ -1,4 +1,4 @@
-const { auth, signInWithEmailAndPassword, signOut} = require("../../../config/auth-firebase");
+const { auth, signInWithEmailAndPassword} = require("../../../config/auth-firebase");
 
 function signInUser(email, password, callback) {
     signInWithEmailAndPassword(auth, email, password)

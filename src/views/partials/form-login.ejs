@@ -1,24 +1,60 @@
 <title><%= title %></title>
-<link href="/css/styles.css" rel="stylesheet">
+<form
+	id="form-login"
+	action="/login"
+	method="post"
+	class="flex justify-center items-center"
+>
+	<div class="relative z-0 input-filled">
+		<div class="absolute left-4 top-4 z-10">
+			<span class="material-symbols-outlined">
+        email
+        </span>
+		</div>
 
+		<input
+			type="email"
+			aria-label="inputtext"
+			name="email"
+			id="flogin-email"
+			class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t text-gray-800 bg-gray-100 dark:bg-gray-700 border-b focus:border-b-2 border-gray-500 dark:border-gray-400 overflow-x-auto focus:outline-none focus:border-primary-600 focus:ring-0 dark:text-gray-200 dark:focus:border-primary-200 peer"
+			placeholder=" "
+			value=""
+		/>
+		<label
+			for="flogin-email"
+			class="absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 dark:peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600 dark:peer-invalid:text-error-200"
+			>Email</label
+		>
+	</div>
 
-    <form id="form-login" action="/login" method="post" class="flex justify-center items-center">
-        <fieldset>
-            <legend>Login</legend>
-            <% if (errorMessage) { %>
-                <p class="error-message"><%= errorMessage %></p>
-            <% } %>
-            <% if (successMessage) { %>
-                <p class="success-message"><%= successMessage %></p>
-            <% } %>
-            <label for="flogin-name">Email:</label><br>
-            <input type="email" name="email" id="flogin-name" required class="input"><br>
-            <label for="flogin-password">Senha:</label><br>
-            <input type="password" name="password" id="flogin-password" required><br>
-            <button type="submit">Entrar</button>
-        </fieldset>
-    </form>
+	<div class="relative z-0 input-filled">
+		<div class="absolute left-4 top-4 z-10">
+      <span class="material-symbols-outlined">
+        password
+        </span>
+		</div>
 
-<script>
-    alert("Olá, faça o seu login !")
-</script>
+		<input
+			type="password"
+			aria-label="inputtext"
+			name="password"
+			id="flogin-password"
+			class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t text-gray-800 bg-gray-100 dark:bg-gray-700 border-b focus:border-b-2 border-gray-500 dark:border-gray-400 overflow-x-auto focus:outline-none focus:border-primary-600 focus:ring-0 dark:text-gray-200 dark:focus:border-primary-200 peer"
+			placeholder=" "
+			value=""
+		/>
+		<label
+			for="flogin-email"
+			class="absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 dark:peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600 dark:peer-invalid:text-error-200"
+			>Password</label
+		>
+	</div>
+
+	<button
+		type="submit"
+		class="btn relative flex flex-row items-center justify-center gap-x-2 py-2.5 px-6 rounded-[6.25rem] hover:shadow-md text-sm tracking-[.00714em] font-medium bg-primary-600 text-white dark:bg-primary-200 dark:text-primary-800"
+	>
+		Enviar
+	</button>
+</form>
