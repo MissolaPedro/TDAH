@@ -24,7 +24,7 @@ function routeEJS(app) {
         res.render("partials/form-login", { title: "Login", errorMessage: null, successMessage: null });
     });
     app.get("/register", (req, res) => {
-        res.render("partials/form-register", { errorMessage: null });
+        res.render("partials/form-register", { title: "Register", errorMessage: null });
     });
     app.post("/login", async (req, res) => {
         const { email, password, rememberMe } = req.body;
