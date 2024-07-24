@@ -54,8 +54,9 @@
 					<label class="flex items-center">
 						<input
 							type="checkbox"
-							name="checked-demo"
+							name="rememberMe"
 							class="w-[18px] h-[18px] accent-primary-200 hover:accent-primary-600 dark:accent-primary-600 rounded-[2px] ltr:mr-3 rtl:ml-3"
+							value="true"
 						/>
 						<span
 							style="padding-left: 8px"
@@ -105,27 +106,10 @@
 	<p class="flex flex-grow text-sm tracking-[0.25px]">
 		<%= errorMessage ? errorMessage : '' %>
 	</p>
-	<button onclick="closeSnackbar()" class="flex items-center">
+	<button id="closeSnackbarButton" class="flex items-center">
 		<span class="material-symbols-outlined">close</span>
 	</button>
 </div>
 
-<script>
-    window.onload = function() {
-      const errorMessage = "<%= errorMessage %>";
-      if (errorMessage) {
-        const snackbar = document.getElementById('snackbar');
-        // Remove classes de cor neutra e adiciona classes de cor vermelha
-        snackbar.classList.remove('bg-neutral-800', 'dark:bg-neutral-100', 'text-neutral-50', 'dark:text-neutral-800');
-        snackbar.classList.add('bg-red-500', 'text-white', 'opacity-100'); // Adiciona classes para cor vermelha e torna visível
-        setTimeout(function(){ snackbar.style.opacity = '0'; }, 5000); // Inicia o desvanecimento depois de 5 segundos
-      }
-    };
-    
-    function closeSnackbar() {
-      const snackbar = document.getElementById('snackbar');
-      snackbar.style.opacity = '0'; // Altera a opacidade para 0 para desvanecer suavemente
-      // Opcional: remover a snackbar do DOM após a transição
-      setTimeout(function(){ snackbar.classList.remove('opacity-100'); }, 400); // Espera a transição terminar
-    }
-</script>
+<script src="/js/animations/snackbar.js"></script>
+<script src="../../utils/validations.js"></script>

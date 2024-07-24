@@ -3,7 +3,6 @@ const { signInUser } = require("../firebase/functions/login");
 const { signOutUser } = require("../firebase/functions/signout");
 const dns = require('dns').promises;
 
-
 function routeEJS(app) {
     app.get("/", (req, res) => {
         let successMessage = req.query.loginSuccess ? "Login realizado com sucesso!" : null;
@@ -24,13 +23,11 @@ function routeEJS(app) {
     app.get("/login", (req, res) => {
         res.render("partials/form-login", { title: "Login", errorMessage: null, successMessage: null });
     });
-
     app.get("/register", (req, res) => {
         res.render("partials/form-register", { errorMessage: null });
     });
-
-    app.post("/login", async (req, res) => { // Torna a função assíncrona para usar await
-        const { email, password } = req.body;
+    app.post("/login", async (req, res) => {
+        const { email, password, rememberMe } = req.body;
     
         if (!email) {
             return res.render("partials/form-login", { title: "Login", errorMessage: "O email é obrigatório.", successMessage: null });
@@ -55,13 +52,14 @@ function routeEJS(app) {
         if (password.length < 6) {
             return res.render("partials/form-login", { title: "Login", errorMessage: "Senha deve ter pelo menos 6 caracteres.", successMessage: null });
         }
-    
-        signInUser(email, password, (error, user) => {
+
+        signInUser(email, password, rememberMe === 'true', req, (error, user) => {
             if (error) {
                 return res.render("partials/form-login", { title: "Login", errorMessage: "Falha no login. Verifique seu email e senha e tente novamente.", successMessage: null });
             }
-            console.log("Usuário logado com sucesso");
-            res.cookie('loggedIn', true, { maxAge: 900000, httpOnly: true });
+            // Define o cookie com a persistência baseada em "rememberMe"
+            const cookieOptions = rememberMe === 'true' ? { maxAge: 900000, httpOnly: true } : { httpOnly: true, maxAge: null };
+            res.cookie('loggedIn', true, cookieOptions);
             res.redirect("/?loginSuccess=true");
         });
     });
