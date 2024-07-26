@@ -5,7 +5,7 @@ window.onload = function () {
 
     if (errorMessage.length > 0) {
         const snackbar = document.getElementById("snackbar");
-        snackbar.classList.add("bg-red-500", "text-white", "opacity-100");
+        snackbar.classList.add("bg-error-500", "text-white", "opacity-100");
         setTimeout(function () {
             snackbar.style.opacity = "0";
         }, 5000);

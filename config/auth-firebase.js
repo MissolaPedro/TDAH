@@ -1,6 +1,6 @@
 // Importa as funções necessárias do SDK do Firebase
 const { initializeApp } = require("firebase/app");
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } = require("firebase/auth"); // Adicionado sendPasswordResetEmail
 const { getFirestore } = require("firebase/firestore");
 const { getAnalytics, isSupported, logEvent } = require("firebase/analytics");
 
@@ -39,4 +39,4 @@ function logCustomEvent(eventName, eventData) {
   }
 }
 
-module.exports = { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, logCustomEvent, signOut };
+module.exports = { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, logCustomEvent, signOut, sendPasswordResetEmail };
