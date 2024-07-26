@@ -14,10 +14,106 @@
 		<form id="form-register" action="/register" method="post" class="w-full">
 		  
 			<fieldset class="flex flex-col gap-4">
+		
+			
+		
+
 			 <div 
 			  class="relative z-0 input-filled">
 
-			  <div 
+			  <div
+			   class="absolute left-4 top-4 z-10">
+				<span class="material-symbols-outlined dark:text-white">person</span>
+			  </div>
+
+			  <input 
+			  	type="text"
+				name="nome"
+				id="register-nome"
+				class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t text-gray-200 bg-gray-700 border-b focus:border-b-2 border-gray-400 focus:border-primary-200 focus:ring-0 peer"
+			  	placeholder=" "
+				required
+				>
+
+			  <label 
+			  	for="register-nome"
+				class="absolute text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5">
+			    Nome
+			</label>
+		</div>
+			  
+		<div class="relative z-0 w-full max-w-sm item-start justify-start">
+		
+			<input 
+				type="date" 
+				name="datanasc"
+				id="register-datanasc"
+				class="w-full h-14 block leading-3 relative pt-2 pl-14 pr-4 rounded-lg text-gray-200 bg-gray-700 border-b focus:border-b-2 border-gray-400 focus:border-primary-200 focus:ring-0 peer"
+				placeholder=" "
+				required
+			>
+	   
+			<!-- Label do Input -->
+			<label 
+				for="register-datanasc"
+				class="absolute text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 left-4 z-10 origin-[0] peer-focus:left-4 peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5">
+				Data de Nascimento
+			</label>
+		</div>
+
+     <div class="relative z-0 w-full">
+
+    <div class="w-full bg-gray-700 p-6 rounded-lg shadow-lg">
+        <div class="text-color:white">
+		Genero
+	    </div>
+        <form>
+            <!-- Opções de Gênero -->
+            <div class="flex flex-col space-y-4">
+                <div class="flex items-center">
+                    <input 
+                        type="radio" 
+                        id="genero-masculino" 
+                        name="genero" 
+                        value="masculino"
+                        class="h-4 w-4 text-primary-500 border-gray-600 bg-gray-800 focus:ring-primary-500"
+                        required
+                    />
+                    <label for="genero-masculino" class="ml-3 text-gray-200">Masculino</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input 
+                        type="radio" 
+                        id="genero-feminino" 
+                        name="genero" 
+                        value="feminino"
+                        class="h-4 w-4 text-primary-500 border-gray-600 bg-gray-800 focus:ring-primary-500"
+                        required
+                    />
+                    <label for="genero-feminino" class="ml-3 text-gray-200">Feminino</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input 
+                        type="radio" 
+                        id="genero-outro" 
+                        name="genero" 
+                        value="outro"
+                        class="h-4 w-4 text-primary-500 border-gray-600 bg-gray-800 focus:ring-primary-500"
+                        required
+                    />
+                    <label for="genero-outro" class="ml-3 text-gray-200">Outro</label>
+                </div>
+            </div>
+			
+        </form>
+    </div>
+</div>
+
+			<div 
+			 class="relative z-0 input-filled">
+				<div 
 			   class="absolute left-4 top-4 z-10">
 				<span class="material-symbols-outlined dark:text-white">email</span>
 			  </div>
