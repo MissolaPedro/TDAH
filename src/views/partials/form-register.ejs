@@ -1,49 +1,196 @@
-<title><%= title %></title>
-<body class="w-full h-full flex items-center justify-center">
-	<form id="form-register" action="/register" method="post" class="w-[40%] h-[30%]">
-		<fieldset
-			class="w-[35%] h-[50%] rounded-xl border-solid border-[rgb(255, 255, 255, 0.75)] border-2 p-7 ro flex justify-center items-center flex-col bg-[rgb(255, 255, 255, 0.35)] "
-		>
-			<h2 class="text-2xl font-bold font-sans text-black uppercase">
-				Registro
-			</h2>
-			<div class="flex flex-col w-full">
-				<label
-					for="fregister-name"
-					class="text-SM uppercase text-neutral-800 font-medium"
-					>Email:</label
+<body 
+  class="w-full h-screen flex items-center justify-center bg-gray-100">
+	
+  <div 
+	 class="w-full h-screen flex items-center justify-center">
+	  
+	 <div 
+	   class="w-full max-w-md flex flex-col items-center justify-center gap-10 bg-neutral-800 bg-opacity-40 backdrop-blur-xl rounded-xl p-12">
+		
+	   <h1 class="text-[2rem] leading-10 font-semibold text-gray-100 uppercase">
+		Registro
+	</h1>
+
+		<form id="form-register" action="/register" method="post" class="w-full">
+		  
+			<fieldset class="flex flex-col gap-4">
+		
+			
+		
+
+			 <div 
+			  class="relative z-0 input-filled">
+
+			  <div
+			   class="absolute left-4 top-4 z-10">
+				<span class="material-symbols-outlined dark:text-white">person</span>
+			  </div>
+
+			  <input 
+			  	type="text"
+				name="nome"
+				id="register-nome"
+				class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t text-gray-200 bg-gray-700 border-b focus:border-b-2 border-gray-400 focus:border-primary-200 focus:ring-0 peer"
+			  	placeholder=" "
+				required
 				>
-				<input
-					class="rounded-lg border-[2px] border-solid bg-neutral-400 bg-opacity-25 border-neutral-300 w-full h-9"
-					type="email"
-					name="email"
-					id="fregister-name"
-					required
-				/><br />
+
+			  <label 
+			  	for="register-nome"
+				class="absolute text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5">
+			    Nome
+			</label>
+		</div>
+			  
+		<div class="relative z-0 w-full max-w-sm item-start justify-start">
+		
+			<input 
+				type="date" 
+				name="datanasc"
+				id="register-datanasc"
+				class="w-full h-14 block leading-3 relative pt-2 pl-14 pr-4 rounded-lg text-gray-200 bg-gray-700 border-b focus:border-b-2 border-gray-400 focus:border-primary-200 focus:ring-0 peer"
+				placeholder=" "
+				required
+			>
+	   
+			<!-- Label do Input -->
+			<label 
+				for="register-datanasc"
+				class="absolute text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 left-4 z-10 origin-[0] peer-focus:left-4 peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5">
+				Data de Nascimento
+			</label>
+		</div>
+
+     <div class="relative z-0 w-full">
+
+    <div class="w-full bg-gray-700 p-6 rounded-lg shadow-lg">
+        <div class="text-color:white">
+		Genero
+	    </div>
+        <form>
+            <!-- Opções de Gênero -->
+            <div class="flex flex-col space-y-4">
+                <div class="flex items-center">
+                    <input 
+                        type="radio" 
+                        id="genero-masculino" 
+                        name="genero" 
+                        value="masculino"
+                        class="h-4 w-4 text-primary-500 border-gray-600 bg-gray-800 focus:ring-primary-500"
+                        required
+                    />
+                    <label for="genero-masculino" class="ml-3 text-gray-200">Masculino</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input 
+                        type="radio" 
+                        id="genero-feminino" 
+                        name="genero" 
+                        value="feminino"
+                        class="h-4 w-4 text-primary-500 border-gray-600 bg-gray-800 focus:ring-primary-500"
+                        required
+                    />
+                    <label for="genero-feminino" class="ml-3 text-gray-200">Feminino</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input 
+                        type="radio" 
+                        id="genero-outro" 
+                        name="genero" 
+                        value="outro"
+                        class="h-4 w-4 text-primary-500 border-gray-600 bg-gray-800 focus:ring-primary-500"
+                        required
+                    />
+                    <label for="genero-outro" class="ml-3 text-gray-200">Outro</label>
+                </div>
+            </div>
+			
+        </form>
+    </div>
+</div>
+
+			<div 
+			 class="relative z-0 input-filled">
+				<div 
+			   class="absolute left-4 top-4 z-10">
+				<span class="material-symbols-outlined dark:text-white">email</span>
+			  </div>
+			  
+			  <input
+				type="email"
+				aria-label="Email"
+				name="email"
+				id="fregister-email"
+				class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t text-gray-200 bg-gray-700 border-b focus:border-b-2 border-gray-400 focus:border-primary-200 focus:ring-0 peer"
+				placeholder=" "
+				required
+			  />
+
+			  <label
+				for="fregister-email"
+				class="absolute text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5">
+				Email
+			  </label>
+
 			</div>
-			<div class="flex flex-col w-full">
-				<label
-					for="fregister-password"
-					class="text-sm uppercase text-neutral-800 font-medium"
-					>Senha:</label
-				>
-				<input
-					class="rounded-lg border-[2px] border-solid bg-neutral-400 bg-opacity-25 border-neutral-300 w-full h-9"
-					type="password"
-					name="password"
-					id="fregister-password"
-					required
-				/><br />
+			<div 
+			 class="relative z-0 input-filled">
+			  <div 
+			   class="absolute left-4 top-4 z-10">
+				<span class="material-symbols-outlined dark:text-white">password</span>
+			  </div>
+			  <input
+				type="password"
+				aria-label="Password"
+				name="password"
+				id="fregister-password"
+				class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t text-gray-200 bg-gray-700 border-b focus:border-b-2 border-gray-400 focus:border-primary-200 focus:ring-0 peer"
+				placeholder=" "
+				required
+			  />
+			  <label
+				for="fregister-password"
+				class="absolute text-gray-400 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5">
+				Senha
+			  </label>
+			  
 			</div>
 			<button
-				type="submit"
-				class="bg-amber-500 w-fit h-fit py-1 px-8 border-amber-500 border-opacity-50 border-solid border-2 rounded-lg"
+			  type="submit"
+			  class="btn relative flex flex-row items-center justify-center gap-x-2 py-2.5 px-6 rounded-[6.25rem] hover:shadow-md text-sm tracking-[.00714em] font-medium bg-primary-200 text-primary-800 dark:bg-primary-600 dark:text-white"
 			>
-				Registrar
+			  Registrar
 			</button>
-		</fieldset>
+		  </fieldset>
+		</form>
+
+		<div class="flex items-center flex-col gap-2">
+
+			<a
+				href="/"
+				class="text-neutral-600 uppercase text-xs tracking-[0.5px] font-medium inline-flex gap-1 items-center"
+			>
+				<span
+					class="material-symbols-outlined text-neutral-600 text-sm"
+				>
+					home
+				</span>
+				Voltar ao inicio</a
+			>
+		     </div>
+	       </div>
+        </div>
 		<% if (typeof errorMessage !== 'undefined') { %>
-		<p><%= errorMessage %></p>
+		  <div id="snackbar" class="fixed left-4 right-4 bottom-4 opacity-0 duration-400 ease-in-out transition-opacity flex flex-row items-center sm:w-80 gap-4 py-3 px-4 shadow-md rounded text-neutral-50 bg-neutral-800 z-50">
+			<p class="flex flex-grow text-sm tracking-[0.25px]"><%= errorMessage %></p>
+			<button id="closeSnackbarButton" class="flex items-center">
+			  <span class="material-symbols-outlined">close</span>
+			</button>
+		  </div>
 		<% } %>
-	</form>	
-</body>
+	  
+	<script src="/js/animations/snackbar.js"></script>
+	<script src="../../utils/validations.js"></script>
+  </body>
