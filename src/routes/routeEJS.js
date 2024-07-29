@@ -50,7 +50,7 @@ function routeEJS(app) {
 
 	app.get("/register", (req, res) => {
 		res.render("partials/form-register", {
-			title: "Register",
+			title: "Registre-se",
 			errorMessage: null,
 		});
 	});
