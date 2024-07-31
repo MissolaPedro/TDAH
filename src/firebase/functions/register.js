@@ -1,7 +1,7 @@
 const { auth, createUserWithEmailAndPassword } = require("../../../config/auth-firebase");
 
-function registrarUsuario(email, senha, callback) {
-    createUserWithEmailAndPassword(auth, email, senha)
+function registrarUsuario(registeremail, registerpassword, callback) {
+    createUserWithEmailAndPassword(auth, registeremail, registerpassword)
       .then((userCredential) => {
         callback(null, userCredential.user); // Sucesso
       })
