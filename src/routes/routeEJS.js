@@ -55,16 +55,16 @@ function routeEJS(app) {
 		});
 	});
 	app.post("/login", async (req, res) => {
-		const { email, password, rememberMe } = req.body;
+		const { loginemail, loginpassword, loginrememberMe } = req.body;
 
-		if (!email) {
+		if (!loginemail) {
 			return res.render("partials/form-login", {
 				title: "Login",
 				errorMessage: "O email é obrigatório.",
 				successMessage: null,
 			});
 		}
-		if (!password) {
+		if (!loginpassword) {
 			return res.render("partials/form-login", {
 				title: "Login",
 				errorMessage: "A senha é obrigatória.",
@@ -74,7 +74,7 @@ function routeEJS(app) {
 
 		const emailRegex =
 			/^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
-		if (!emailRegex.test(email)) {
+		if (!emailRegex.test(loginemail)) {
 			return res.render("partials/form-login", {
 				title: "Login",
 				errorMessage: "Formato de email inválido.",
@@ -83,7 +83,7 @@ function routeEJS(app) {
 		}
 
 		// Extrai o domínio do email
-		const domain = email.split("@")[1];
+		const domain = loginemail.split("@")[1];
 		try {
 			await dns.resolveMx(domain); // Verifica se o domínio tem registros MX (Mail Exchange)
 		} catch (error) {
@@ -94,7 +94,7 @@ function routeEJS(app) {
 			});
 		}
 
-		if (password.length < 6) {
+		if (loginpassword.length < 6) {
 			return res.render("partials/form-login", {
 				title: "Login",
 				errorMessage: "Senha deve ter pelo menos 6 caracteres.",
@@ -103,9 +103,9 @@ function routeEJS(app) {
 		}
 
 		signInUser(
-			email,
-			password,
-			rememberMe === "true",
+			loginemail,
+			loginpassword,
+			loginrememberMe === "true",
 			req,
 			(error, user) => {
 				if (error) {
@@ -118,7 +118,7 @@ function routeEJS(app) {
 				}
 				// Define o cookie com a persistência baseada em "rememberMe"
 				const cookieOptions =
-					rememberMe === "true"
+				loginrememberMe === "true"
 						? { maxAge: 900000, httpOnly: true }
 						: { httpOnly: true, maxAge: null };
 				res.cookie("loggedIn", true, cookieOptions);
@@ -128,8 +128,8 @@ function routeEJS(app) {
 	});
 
 	app.post("/register", (req, res) => {
-		const { email, password } = req.body;
-		registrarUsuario(email, password, (error, user) => {
+		const { registeremail, registerpassword } = req.body;
+		registrarUsuario(registeremail, registerpassword, (error, user) => {
 			if (error) {
 				return res.render("partials/form-register", {
 					errorMessage: "Falha no registro. Tente novamente.",
