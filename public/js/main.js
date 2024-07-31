@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 const routeEJS = require('../../src/routes/routeEJS.js');
 routeEJS(app);
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
