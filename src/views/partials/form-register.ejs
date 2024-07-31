@@ -39,7 +39,7 @@
 					<input
 						type="text"
 						aria-label="inputtext"
-						name="name"
+						name="surname"
 						id="fregister-surname"
 						class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
 						placeholder=" "
@@ -57,9 +57,9 @@
 					<span class="material-symbols-outlined"> email </span>
 				</div>
 				<input
-					type="text"
+					type="email"
 					aria-label="inputtext"
-					name="name"
+					name="email"
 					id="fregister-email"
 					class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
 					placeholder=" "
@@ -169,7 +169,7 @@
 				<label class="flex items-center">
 					<input
 						type="checkbox"
-						name="rememberMe"
+						name="termos"
 						class="w-[18px] h-[18px] hover:accent-primary-600 accent-primary-600 rounded-[2px] ltr:mr-3 rtl:ml-3"
 						value="true"
 					/>
@@ -179,11 +179,6 @@
 						>Aceito os termos de <a href="#" class="text-primary-600">uso</a> e de <a href="#" class="text-primary-600">privacidade</a></span
 					>
 				</label>
-				<!-- <a
-					href="/resetpassword"
-					class="text-amber-600 uppercase text-xs tracking-[0.5px] font-medium underline"
-					>Esqueci minha senha</a
-				> -->
 			</div>
 			<button
 				type="submit"
@@ -214,7 +209,7 @@
 	</div>
 </div>
 
-<!-- <div
+<div
 	id="snackbar"
 	class="fixed left-4 right-4 bottom-4 opacity-0 duration-400 ease-in-out transition-opacity flex flex-row items-center sm:w-80 gap-4 py-3 px-4 shadow-md rounded text-neutral-50 dark:text-neutral-800 bg-neutral-800 dark:bg-neutral-100 z-50"
 >
@@ -224,8 +219,8 @@
 	<button id="closeSnackbarButton" class="flex items-center">
 		<span class="material-symbols-outlined">close</span>
 	</button>
-</div> -->
+</div>
 
-<!-- <script type="required" src="../firebase/functions/login.js"></script>
+<script type="required" src="../firebase/functions/register.js"></script>
 <script src="/js/animations/snackbar.js"></script>
-<script src="../../utils/validations.js"></script> -->
+<script src="../../utils/validations.js"></script>
