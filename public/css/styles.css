@@ -594,6 +594,10 @@ video {
   top: 1rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -661,6 +665,34 @@ video {
   height: 100vh;
 }
 
+.h-2\/3 {
+  height: 66.666667%;
+}
+
+.h-1\/2 {
+  height: 50%;
+}
+
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[500px\] {
+  height: 500px;
+}
+
+.h-\[700px\] {
+  height: 700px;
+}
+
+.h-\[800px\] {
+  height: 800px;
+}
+
+.h-\[900px\] {
+  height: 900px;
+}
+
 .w-96 {
   width: 24rem;
 }
@@ -676,6 +708,18 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-3\/5 {
+  width: 60%;
 }
 
 .flex-grow {
@@ -725,6 +769,10 @@ video {
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
 .gap-1 {
   gap: 0.25rem;
 }
@@ -747,6 +795,10 @@ video {
 
 .gap-6 {
   gap: 1.5rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
 }
 
 .gap-x-2 {
@@ -902,6 +954,11 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .pl-14 {
   padding-left: 3.5rem;
 }
@@ -914,12 +971,32 @@ video {
   padding-top: 0.5rem;
 }
 
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .font-sans {
   font-family: Roboto, sans-serif;
 }
 
 .text-\[2rem\] {
   font-size: 2rem;
+}
+
+.text-\[50px\] {
+  font-size: 50px;
 }
 
 .text-sm {
@@ -937,6 +1014,15 @@ video {
   line-height: 1rem;
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-\[70px\] {
+  font-size: 70px;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -949,6 +1035,26 @@ video {
   font-weight: 600;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+.font-\[900px\] {
+  font-weight: 900px;
+}
+
+.font-\[1000px\] {
+  font-weight: 1000px;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -959,6 +1065,10 @@ video {
 
 .leading-5 {
   line-height: 1.25rem;
+}
+
+.leading-\[50px\] {
+  line-height: 50px;
 }
 
 .tracking-\[\.00714em\] {
@@ -2290,6 +2400,11 @@ td:is(.dark *), th:is(.dark *) {
 @media (min-width: 640px) {
   .sm\:w-80 {
     width: 20rem;
+  }
+
+  .sm\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }
 
