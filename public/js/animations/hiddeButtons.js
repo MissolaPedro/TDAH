@@ -5,3 +5,5 @@ fetch("/auth/status")
         document.getElementById('ContainerNotLogged').style.display = data.loggedIn ? 'none' : 'inline-flex';
         document.getElementById('ContainerLogged').style.display = data.loggedIn ? 'inline-flex' : 'none';
     });
+
+    
