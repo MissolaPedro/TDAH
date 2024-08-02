@@ -52,7 +52,7 @@ function routeGet(app) {
 		const showRegister = false; // Altere para false se não quiser mostrar o botão de registro
 
         res.render("contact", {
-            title: "Entre em contato",
+            title: "Contato",
             errorMessage: null,
 			welcomeMenssage: null,
             description: "Caso tenha a necessidade de entrar em contato utilize do formulario abaixo",
