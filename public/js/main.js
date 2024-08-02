@@ -26,8 +26,11 @@ app.set('views', path.join(__dirname, '..', '..', 'src', 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
-const routeEJS = require('../../src/routes/routeEJS.js');
-routeEJS(app);
+const routeGet = require('../../src/routes/routeGet.js');
+routeGet(app);
+
+const routePost = require('../../src/routes/routePost.js');
+routePost(app);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -1,3 +1,45 @@
-<header>
-    
+<header class="w-full h-[85vh] flex items-center justify-center">
+    <div
+        class="w-fit h-fit flex flex-col items-center justify-center gap-3 p-12 text-center"
+    >
+        <div class="flex justify-center flex-col gap-3">
+            <div class="flex flex-col gap-2">
+                <p
+                    class="cursor-default text-[1.375rem] leading-7 font-normal text-neutral-200"
+                >
+                    <%= welcomeMenssage %>
+                </p>
+                <h1
+                    class="cursor-default text-7xl leading-[4rem] font-extrabold uppercase text-neutral-100"
+                >
+                    <%= title %>
+                </h1>
+            </div>
+            <p class="cursor-default text-lg tracking-[0.5px] w-[50vw] text-neutral-500">
+                <%= description %>
+            </p>
+        </div>
+        <div class="flex justify-center items-center gap-5">
+            <% if (showContact) { %>
+                <a
+                    href="/contact"
+                    id="maincontact"
+                    class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm bg-white text-black h-9 rounded-md px-6 py-5 uppercase font-medium hover:scale-110 transition duration-500 ease-in-out hover:bg-primary-600 hover:text-neutral-100"
+                >
+                    <span class="material-symbols-outlined"> call </span>
+                    Entre em contato
+                </a>
+            <% } %>
+            <% if (showRegister) { %>
+                <a
+                    href="/register"
+                    id="maingetstarted"
+                    class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm bg-primary-600 text-neutral-100 h-9 rounded-md px-6 py-5 uppercase font-medium hover:scale-110 transition duration-500 ease-in-out hover:bg-white hover:text-black"
+                >
+                    Comece-agora
+                    <span class="material-symbols-outlined"> arrow_outward </span>
+                </a>
+            <% } %>
+        </div>
+    </div>
 </header>

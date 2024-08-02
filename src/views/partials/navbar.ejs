@@ -1,65 +1,79 @@
 <nav
-	class="flex text-neutral-100 justify-between mx-12 my-4 items-center uppercase"
+	class="flex text-neutral-100 justify-center items-center uppercase gap-24 h-[10vh]"
 >
-	<div class="flex items-center gap-4">
-		<img src="/image/Logo.png" alt="Logo" width="48px" />
+	<a href="/" class="flex items-center gap-4 w-fit px-8">
+		<img
+			src="/image/Logo2.png"
+			alt="Logo"
+			width="48px"
+			class="rounded-full"
+		/>
 		<h2 class="font-medium text-xl">Projeto TDAH</h2>
+	</a>
+	<div class="inline-flex gap-2 font-normal w-fit px-8 relative left-12">
+		<a
+			href="/"
+			class="hover:bg-neutral-800 bg-opacity-50 transition duration-500 ease-in-out py-2 px-4"
+			>Home</a
+		>
+		<a
+			href="#"
+			class="hover:bg-neutral-800 bg-opacity-50 transition duration-500 ease-in-out py-2 px-4"
+			>About</a
+		>
+		<a
+			href="/contact"
+			class="hover:bg-neutral-800 bg-opacity-50 transition duration-500 ease-in-out py-2 px-4"
+			>Contact</a
+		>
 	</div>
-	<div class="inline-flex gap-5 font-normal">
-		<a href="#">Home</a>
-		<a href="#">About</a>
-		<a href="#">Contact</a>
+	<div class="inline-flex gap-4 w-fit px-8" id="ContainerNotLogged">
+		<a
+			href="/login"
+			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 rounded-md px-5 h-11"
+		>
+			<span
+				class="material-symbols-outlined lucide lucide-rocket text-primary-600"
+			>
+				login
+			</span>
+			Login
+		</a>
+		<a
+			href="/register"
+			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 rounded-md px-5 h-11"
+		>
+			<span
+				class="material-symbols-outlined lucide lucide-rocket text-primary-600"
+			>
+				account_circle
+			</span>
+			Register
+		</a>
 	</div>
-	<div class="inline-flex gap-6" id="ContainerNotLogged">
-        <a
-        href="/login"
-        class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 h-9 rounded-md px-5 h-11"
-      >
-          <span class="material-symbols-outlined lucide lucide-rocket text-primary-600">
-            login
-            </span>
-        Login
-      </a>
-      <a
-      href="/register"
-      class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 h-9 rounded-md px-5 h-11"
-    >
-        <span class="material-symbols-outlined lucide lucide-rocket text-primary-600">
-            account_circle
-          </span>
-      Register
-    </a>
-	</div>
-	<div class="inline-flex gap-6" id="ContainerLogged">
-        <a
-        href="/logout"
-        class="group flex items-center justify-start w-11 h-11 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1"
-      >
-        <div
-          class="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3"
-        >
-          <svg class="w-4 h-4" viewBox="0 0 512 512" fill="white">
-            <path
-              d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
-            ></path>
-          </svg>
-        </div>
-        <div
-          class="absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-        >
-          Logout
-        </div>
-      </a>
-      
-      <a
-      href="/dashboard"
-      class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 h-9 rounded-md px-5 h-11"
-    >
-        <span class="material-symbols-outlined lucide lucide-rocket text-primary-600">
-            dashboard
-          </span>
-      Painel do usuario
-    </a>
+	<div class="inline-flex gap-4 w-fit px-8" id="ContainerLogged">
+		<a
+			href="/dashboard"
+			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 h-9 rounded-md px-5 h-11"
+		>
+			<span
+				class="material-symbols-outlined lucide lucide-rocket text-primary-600"
+			>
+				dashboard
+			</span>
+			Painel do usuario
+		</a>
+		<a
+			href="/logout"
+			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-error-600 h-9 rounded-md px-5 h-11"
+		>
+			<span
+				class="material-symbols-outlined lucide lucide-rocket text-error-600"
+			>
+				logout
+			</span>
+			Sair
+		</a>
 	</div>
 </nav>
 <script src="/js/animations/hiddeButtons.js"></script>
