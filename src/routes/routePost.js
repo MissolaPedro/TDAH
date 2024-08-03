@@ -148,7 +148,7 @@ function routeEJS(app) {
 	});
 
 	//Troca do get para post--
-	app.post("/logout", (req, res) => {
+	app.get("/logout", (req, res) => {
 		signOutUser(error => {
 			if (error) {
 				console.error("Erro ao deslogar:", error);
@@ -156,7 +156,7 @@ function routeEJS(app) {
 			} else {
 				console.log("Usuário deslogado com sucesso");
 				res.clearCookie("loggedIn");
-				res.redirect("/home");
+				res.redirect("/login");
 				//adicionar perguntar para o usuarío se quer se logar de novo
 			}
 		});
