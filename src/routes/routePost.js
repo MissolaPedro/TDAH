@@ -1,6 +1,5 @@
 const { registrarUsuario } = require("../firebase/functions/register");
 const { signInUser } = require("../firebase/functions/login");
-const { signOutUser } = require("../firebase/functions/signout");
 const {
 	sendPasswordResetEmailFirebase,
 } = require("../firebase/functions/resetpassword");
@@ -147,21 +146,6 @@ function routeEJS(app) {
 		});
 	});
 
-	//Troca do get para post--
-	app.post("/logout", (req, res) => {
-		signOutUser(error => {
-			if (error) {
-				console.error("Erro ao deslogar:", error);
-				res.redirect("/");
-			} else {
-				console.log("Usuário deslogado com sucesso");
-				res.clearCookie("loggedIn");
-				res.redirect("/home");
-				//adicionar perguntar para o usuarío se quer se logar de novo
-			}
-		});
-	});
-
 	// Rota POST para redefinição de senha
 
 	app.post("/resetpassword", async (req, res) => {
@@ -209,6 +193,7 @@ function routeEJS(app) {
 			}
 		});
 	});
+
 	app.post("/contact", async (req, res) => {
         const { name, email, message } = req.body;
         const showContact = false; // Altere para false se não quiser mostrar o botão de contato

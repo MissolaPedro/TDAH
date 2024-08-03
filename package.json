@@ -7,17 +7,24 @@
     "build:css": "tailwindcss -i src/tailwindcss/tailwind.css -o public/css/styles.css",
     "watch:css": "tailwindcss -i src/tailwindcss/tailwind.css -o public/css/styles.css --watch",
     "start": "concurrently \"npm run dev\" \"npm run build:css\" \"npm run watch:css\"",
-    "dev": "node public/js/main.js"
+    "dev": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "csrf": "^3.1.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.0",
-    "firebase": "^10.12.5"
+    "express-validator": "^7.1.0",
+    "firebase": "^10.12.4",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "rotating-file-stream": "^3.2.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

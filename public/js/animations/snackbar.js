@@ -1,5 +1,4 @@
 window.onload = function () {
-    // Corrige a obtenção da mensagem de erro para verificar se ela realmente existe
     const errorMessageElement = document.querySelector('#snackbar p');
     const errorMessage = errorMessageElement ? errorMessageElement.textContent.trim() : '';
 

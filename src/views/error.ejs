@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1>Erro Interno do Servidor</h1>
+  <p><%= errorMessage %></p>
+  <% if (errorDetails) { %>
+    <pre><%= errorDetails %></pre>
+  <% } %>
+</body>
+</html>
