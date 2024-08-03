@@ -82,6 +82,59 @@ function routeEJS(app) {
 
 	app.post("/register", (req, res) => {
 		const { registeremail, registerpassword } = req.body;
+		if(!registeremail){
+			return res.render("partials/form-register", {
+				title: "Registre-se",
+				errorMessage: "O email é obrigatório.",
+			});
+		}
+			const emailRegex =
+			/^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+		if (!emailRegex.test(registeremail)) {
+			return res.render("partials/form-register", {
+				title: "Registre-se",
+				errorMessage: "Formato de email inválido.",
+			});
+		}
+		
+		/*const domain = registeremail.split("@")[1];
+		try {
+			await dns.resolveMx(domain); // Verifica se o domínio tem registros MX (Mail Exchange)
+		} catch (error) {
+			return res.render("partials/form-register", {
+				title: "Registre-se",
+				errorMessage: "Domínio de email não existe.",
+				successMessage: null,
+			});
+		}*/
+
+		// Validação da senha
+		if (!registerpassword) {
+				return res.render("partials/form-register", {
+					title: "Registre-se",
+					errorMessage: "A senha é obrigatória.",
+				});
+		}
+		if (registerpassword.length < 6) {
+			return res.render("partials/form-register", {
+				title: "Registre-se",
+				errorMessage: "A senha deve ter pelo menos 6 caracteres.",
+			});
+		}
+		// Validação da confirmação da senha
+		const { registerconfirmpassword } = req.body;
+		if (!registerconfirmpassword) {
+			return res.render("partials/form-register", {
+				title: "Registre-se",
+				errorMessage: "Confirme a senha.",
+			});
+		}
+		if (registerconfirmpassword !== registerpassword ) {
+			return res.render("partials/form-register", {
+				title: "Registre-se",
+				errorMessage: "As senhas não coincidem.",
+			});
+		}		
 		registrarUsuario(registeremail, registerpassword, (error, user) => {
 			if (error) {
 				return res.render("partials/form-register", {
