@@ -81,7 +81,7 @@ function routeEJS(app) {
 	});
 
 	app.post("/register", (req, res) => {
-		const { registeremail, registerpassword } = req.body;
+		const { registeremail, verificationemail, registerpassword, registerconfirmpassword } = req.body;
 		if(!registeremail){
 			return res.render("partials/form-register", {
 				title: "Registre-se",
@@ -96,17 +96,17 @@ function routeEJS(app) {
 				errorMessage: "Formato de email inválido.",
 			});
 		}
-		
-		/*const domain = registeremail.split("@")[1];
+
+		const domain = registeremail.split("@")[1];
 		try {
-			await dns.resolveMx(domain); // Verifica se o domínio tem registros MX (Mail Exchange)
+			dns.resolveMx(domain); // Verifica se o domínio tem registros MX (Mail Exchange)
 		} catch (error) {
 			return res.render("partials/form-register", {
 				title: "Registre-se",
 				errorMessage: "Domínio de email não existe.",
 				successMessage: null,
 			});
-		}*/
+		}
 
 		// Validação da senha
 		if (!registerpassword) {
@@ -122,7 +122,6 @@ function routeEJS(app) {
 			});
 		}
 		// Validação da confirmação da senha
-		const { registerconfirmpassword } = req.body;
 		if (!registerconfirmpassword) {
 			return res.render("partials/form-register", {
 				title: "Registre-se",
@@ -134,7 +133,8 @@ function routeEJS(app) {
 				title: "Registre-se",
 				errorMessage: "As senhas não coincidem.",
 			});
-		}		
+		}
+
 		registrarUsuario(registeremail, registerpassword, (error, user) => {
 			if (error) {
 				return res.render("partials/form-register", {
@@ -147,7 +147,8 @@ function routeEJS(app) {
 		});
 	});
 
-	app.get("/logout", (req, res) => {
+	//Troca do get para post--
+	app.post("/logout", (req, res) => {
 		signOutUser(error => {
 			if (error) {
 				console.error("Erro ao deslogar:", error);
@@ -155,7 +156,8 @@ function routeEJS(app) {
 			} else {
 				console.log("Usuário deslogado com sucesso");
 				res.clearCookie("loggedIn");
-				res.redirect("/login");
+				res.redirect("/home");
+				//adicionar perguntar para o usuarío se quer se logar de novo
 			}
 		});
 	});
