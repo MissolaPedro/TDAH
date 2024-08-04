@@ -20,8 +20,24 @@ function isValidPassword(password) {
   return password.length >= 6;
 }
 
+function isNotEmpty(value) {
+  return value.trim() !== '';
+}
+
+function isWithinLength(value, minLength, maxLength) {
+  const length = value.trim().length;
+  return length >= minLength && length <= maxLength;
+}
+
+function matchesPattern(value, pattern) {
+  return pattern.test(value.trim());
+}
+
 module.exports = {
   isValidEmail,
   isValidDomain,
   isValidPassword,
+  isNotEmpty,
+  isWithinLength,
+  matchesPattern,
 };

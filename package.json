@@ -22,7 +22,9 @@
     "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
     "firebase": "^10.12.4",
+    "fs": "^0.0.1-security",
     "helmet": "^7.1.0",
+    "https": "^1.0.0",
     "morgan": "^1.10.0",
     "rotating-file-stream": "^3.2.3"
   },

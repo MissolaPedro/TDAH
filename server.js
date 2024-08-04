@@ -1,5 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const https = require('https');
+const fs = require('fs');
 
 dotenv.config();
 
@@ -22,6 +24,18 @@ routePost(app);
 require('./src/middlewares/errorHandler')(app);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+
+if (process.env.NODE_ENV === 'development') {
+  const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+  };
+
+  https.createServer(options, app).listen(port, () => {
+    console.log(`Servidor HTTPS rodando em https://localhost:${port}`);
+  });
+} else {
+  app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}`);
+  });
+}

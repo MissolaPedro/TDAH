@@ -5,17 +5,17 @@ const { signOutUser } = require("../firebase/functions/signout.js");
 function routeGet(app) {
     app.get("/", (req, res) => {
         try {
-            const showContact = true; // Altere para false se não quiser mostrar o botão de contato
-            const showRegister = true; // Altere para false se não quiser mostrar o botão de registro
+            const showContact = true;
+            const showRegister = true;
 
             res.render("index", {
                 title: "Projeto TDAH",
                 query: req.query,
                 welcomeMenssage: "Bem-vindo ao Projeto TDAH",
-                description: "lorem ipsum",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, distinctio architecto accusantium cum enim ipsam quos vitae natus voluptate rem, corporis quidem laborum eveniet ex magnam debitis. Asperiores, in eum!",
                 showContact,
                 showRegister,
-                csrfToken: req.csrfToken() // Inclui o token CSRF
+                csrfToken: req.csrfToken()
             });
         } catch (error) {
             console.error(error);
@@ -43,7 +43,7 @@ function routeGet(app) {
                 title: "Login",
                 errorMessage: null,
                 successMessage: null,
-                csrfToken: req.csrfToken() // Inclui o token CSRF
+                csrfToken: req.csrfToken() // Certifique-se de que o token CSRF está sendo passado
             });
         } catch (error) {
             console.error(error);
@@ -61,7 +61,7 @@ function routeGet(app) {
                 title: "Resetar a senha",
                 errorMessage: null,
                 successMessage: null,
-                csrfToken: req.csrfToken() // Inclui o token CSRF
+                csrfToken: req.csrfToken()
             });
         } catch (error) {
             console.error(error);
@@ -78,7 +78,7 @@ function routeGet(app) {
             res.render("partials/form-register", {
                 title: "Registre-se",
                 errorMessage: null,
-                csrfToken: req.csrfToken() // Inclui o token CSRF
+                csrfToken: req.csrfToken()
             });
         } catch (error) {
             console.error(error);
@@ -92,8 +92,8 @@ function routeGet(app) {
 
     app.get("/contact", (req, res) => {
         try {
-            const showContact = false; // Altere para false se não quiser mostrar o botão de contato
-            const showRegister = false; // Altere para false se não quiser mostrar o botão de registro
+            const showContact = false;
+            const showRegister = false;
 
             res.render("contact", {
                 title: "Contato",
@@ -102,7 +102,7 @@ function routeGet(app) {
                 description: "Caso tenha a necessidade de entrar em contato utilize do formulario abaixo",
                 showContact,
                 showRegister,
-                csrfToken: req.csrfToken() // Inclui o token CSRF
+                csrfToken: req.csrfToken()
             });
         } catch (error) {
             console.error(error);

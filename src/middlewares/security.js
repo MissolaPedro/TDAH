@@ -1,10 +1,11 @@
+const express = require('express');
 const helmet = require('helmet');
 const session = require('express-session');
-const csurf = require('csurf');
+const csrf = require('csrf');
 const cookieParser = require('cookie-parser');
 const { body, validationResult } = require('express-validator');
 
-const csrfProtection = csurf({ cookie: true });
+const tokens = new csrf();
 
 module.exports = (app) => {
   // Configurar Helmet com cabeçalhos de segurança adicionais
@@ -37,8 +38,29 @@ module.exports = (app) => {
     }
   }));
 
+  // Middleware para analisar o corpo da requisição
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
   // Middleware para adicionar proteção CSRF
-  app.use(csrfProtection);
+  app.use((req, res, next) => {
+    if (!req.session.csrfSecret) {
+        req.session.csrfSecret = tokens.secretSync();
+    }
+    req.csrfToken = () => tokens.create(req.session.csrfSecret); // Adiciona a função csrfToken ao objeto req
+    res.locals.csrfToken = req.csrfToken();
+    next();
+  });
+
+  app.use((req, res, next) => {
+    if (req.method === 'POST') {
+        const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];
+        if (!tokens.verify(req.session.csrfSecret, token)) {
+            return res.status(403).send('CSRF token inválido');
+        }
+    }
+    next();
+  });
 
   // Middleware para validar e sanitizar dados de entrada
   app.post('/login', [
