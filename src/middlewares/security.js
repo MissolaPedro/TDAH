@@ -13,10 +13,10 @@ module.exports = (app) => {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com", "https://fonts.googleapis.com"],
       imgSrc: ["'self'", "data:", "https://trusted.cdn.com"],
       connectSrc: ["'self'"],
-      fontSrc: ["'self'", "https://trusted.cdn.com"],
+      fontSrc: ["'self'", "https://trusted.cdn.com", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
     },

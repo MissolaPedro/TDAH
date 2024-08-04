@@ -1,18 +1,18 @@
 // Importa as funções necessárias do SDK do Firebase
 const { initializeApp } = require("firebase/app");
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } = require("firebase/auth"); // Adicionado sendPasswordResetEmail
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } = require("firebase/auth");
 const { getFirestore, collection, addDoc } = require("firebase/firestore");
 const { getAnalytics, isSupported, logEvent } = require("firebase/analytics");
 
-// Configuração do Firebase
+// Configuração do Firebase usando variáveis de ambiente
 const firebaseConfig = {
-  apiKey: "AIzaSyDu3jUJd0loCMud9uxlgdoXpMkRsqWdemw",
-  authDomain: "projeto-tdah.firebaseapp.com",
-  projectId: "projeto-tdah",
-  storageBucket: "projeto-tdah.appspot.com",
-  messagingSenderId: "522286314266",
-  appId: "1:522286314266:web:ea8f8d3c6a2cc1abf432a3",
-  measurementId: "G-3N9VJWHGRX",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
 // Inicializa o Firebase
