@@ -1,8 +1,9 @@
 {
   "name": "tdah",
   "version": "1.0.0",
-  "description": "",
-  "main": "./public/js/main.js",
+  "description": "Combinação dos projetos TDAH e Google Calendar Node.js Quickstart.",
+  "main": "server.js",
+  "private": true,
   "scripts": {
     "build:css": "tailwindcss -i src/tailwindcss/tailwind.css -o public/css/styles.css",
     "watch:css": "tailwindcss -i src/tailwindcss/tailwind.css -o public/css/styles.css --watch",
@@ -12,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
     "cookie-parser": "^1.4.6",
     "csrf": "^3.1.0",
     "csurf": "^1.11.0",
@@ -23,6 +25,7 @@
     "express-validator": "^7.1.0",
     "firebase": "^10.12.4",
     "fs": "^0.0.1-security",
+    "googleapis": "^105.0.0",
     "helmet": "^7.1.0",
     "https": "^1.0.0",
     "morgan": "^1.10.0",
@@ -34,5 +37,8 @@
     "postcss": "^8.4.40",
     "postcss-cli": "^11.0.0",
     "tailwindcss": "^3.4.7"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }
