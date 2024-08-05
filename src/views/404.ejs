@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-</head>
-<body>
-  <h1>Página Não Encontrada</h1>
-  <p><%= errorMessage %></p>
-</body>
+	<head>
+		<%- include('partials/head') %>
+	</head>
+	<body>
+		<%- include('partials/navbar') %>
+		<div class="w-full h-[90vh] flex flex-col items-center justify-center">
+			<h1
+				class="cursor-default text-6xl leading-[4rem] font-extrabold uppercase text-neutral-100 text-center"
+			>
+				 Error 404
+			</h1>
+			<p
+				class="cursor-default text-lg tracking-[0.5px] w-[50vw] text-neutral-500 text-center"
+			>
+				<%= errorMessage %>
+			</p>
+		</div>
+	</body>
 </html>

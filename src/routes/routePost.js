@@ -21,7 +21,7 @@ function routeEJS(app) {
       return res.render('form-login', { errorMessage, csrfToken: req.csrfToken() });
     }
   
-    signInUser(loginemail, loginpassword, loginrememberMe === "true", req, (error, user) => {
+    signInUser(loginemail, loginpassword === "true", req, (error, user) => {
       if (error) {
         return res.status(400).json({ error: error.message });
       }
