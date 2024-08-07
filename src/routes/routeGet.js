@@ -29,13 +29,13 @@ function routeGet(app) {
 
     app.get("/auth/status", (req, res) => {
         try {
-            const isLoggedIn = req.cookies.loggedIn;
-            res.json({ loggedIn: !!isLoggedIn });
+          const isLoggedIn = req.cookies.loggedIn;
+          res.json({ loggedIn: !!isLoggedIn });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Internal Server Error" });
+          console.error(error);
+          res.status(500).json({ error: "Internal Server Error" });
         }
-    });
+      });
 
     app.get("/login", (req, res) => {
         try {

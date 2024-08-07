@@ -1,77 +1,77 @@
-const { registrarUsuario } = require("../firebase/functions/register");
-const { signInUser } = require("../firebase/functions/login");
-const { sendPasswordResetEmailFirebase } = require("../firebase/functions/resetpassword");
-const { isValidEmail, isValidDomain, isValidPassword, isNotEmpty, isWithinLength, matchesPattern } = require("../modules/verifications");
+const { 
+  registrarUsuario, 
+  signInUser, 
+  sendPasswordResetEmailFirebase, 
+  signOutUser 
+} = require("../firebase/functions/login");
+
+const { 
+  isNotEmpty, 
+  validarEmailCompleto, 
+  validateLoginPassword, 
+  validateRegisterPassword 
+} = require("../modules/verifications");
 
 function routeEJS(app) {
   app.post('/login', async (req, res) => {
-    const { loginemail, loginpassword } = req.body;
-  
+    const { loginemail, loginpassword, loginrememberMe } = req.body;
     let errorMessage = '';
-  
-    // Validação do email
-    if (!isValidEmail(loginemail)) {
-      errorMessage = 'Email inválido';
-      return res.render('form-login', { errorMessage, csrfToken: req.csrfToken() });
+
+    // console.log("Dados recebidos para login:", { loginemail, loginpassword, loginrememberMe });
+
+    const emailValidationResult = await validarEmailCompleto(loginemail);
+    if (emailValidationResult !== "O email é válido.") {
+      errorMessage = emailValidationResult;
+      return res.render('partials/form-login', { title: 'Login', errorMessage, csrfToken: req.csrfToken() });
     }
-  
-    // Validação da senha
-    if (!isValidPassword(loginpassword)) {
-      errorMessage = 'Senha deve ter pelo menos 6 caracteres';
-      return res.render('form-login', { errorMessage, csrfToken: req.csrfToken() });
+
+    const passwordErrors = validateLoginPassword(loginpassword);
+    if (passwordErrors.length > 0) {
+      errorMessage = passwordErrors.join(', ');
+      return res.render('partials/form-login', { title: 'Login', errorMessage, csrfToken: req.csrfToken() });
     }
-  
-    signInUser(loginemail, loginpassword === "true", req, (error, user) => {
+
+    signInUser(loginemail, loginpassword, loginrememberMe === "true", req, (error, user) => {
       if (error) {
+        console.error("Erro ao fazer login:", error);
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json({ user });
+      res.cookie("loggedIn", true, { maxAge: 900000, httpOnly: true });
+      res.redirect('/dashboard');
     });
-  
-    res.redirect('/dashboard'); // Redirecionar após login bem-sucedido
   });
-  
 
   app.post("/register", async (req, res) => {
     const { registername, registersurname, registeremail, registerpassword, registerconfirmpassword } = req.body;
-  
     let errorMessage = '';
-  
+
     if (!isNotEmpty(registername)) {
       errorMessage = "Nome é obrigatório";
       return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
     }
-  
+
     if (!isNotEmpty(registersurname)) {
       errorMessage = "Sobrenome é obrigatório";
       return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
     }
-  
-    if (!registeremail || !isValidEmail(registeremail)) {
-      errorMessage = "Email inválido";
+
+    const emailValidationResult = await validarEmailCompleto(registeremail);
+    if (emailValidationResult !== "O email é válido.") {
+      errorMessage = emailValidationResult;
       return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
     }
-  
-    try {
-      if (!await isValidDomain(registeremail)) {
-        errorMessage = "Domínio de email inválido";
-        return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
-      }
-    } catch (error) {
-      errorMessage = "Erro ao verificar domínio de email";
+
+    const passwordErrors = validateRegisterPassword(registerpassword);
+    if (passwordErrors.length > 0) {
+      errorMessage = passwordErrors.join(', ');
       return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
     }
-  
-    if (!registerpassword || !isValidPassword(registerpassword)) {
-      errorMessage = "Senha deve ter pelo menos 6 caracteres";
-      return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
-    }
-  
+
     if (registerconfirmpassword !== registerpassword) {
       errorMessage = "Confirmação de senha não corresponde à senha";
       return res.render("form-register", { errorMessage, csrfToken: req.csrfToken() });
     }
-  
+
     registrarUsuario(registeremail, registerpassword, (error, user) => {
       if (error) {
         errorMessage = "Falha no registro. Tente novamente.";
@@ -99,16 +99,9 @@ function routeEJS(app) {
   app.post("/resetpassword", async (req, res) => {
     const { email } = req.body;
 
-    if (!email || !isValidEmail(email)) {
-      return res.status(400).json({ error: "Email inválido" });
-    }
-
-    try {
-      if (!await isValidDomain(email)) {
-        return res.status(400).json({ error: "Domínio de email inválido" });
-      }
-    } catch (error) {
-      return res.status(500).json({ error: "Erro ao verificar domínio de email" });
+    const emailValidationResult = await validarEmailCompleto(email);
+    if (emailValidationResult !== "O email é válido.") {
+      return res.status(400).json({ error: emailValidationResult });
     }
 
     sendPasswordResetEmailFirebase(email, (error, message) => {
@@ -119,15 +112,16 @@ function routeEJS(app) {
     });
   });
 
-  app.post("/contact", (req, res) => {
+  app.post("/contact", async (req, res) => {
     const { name, email, message } = req.body;
 
     if (!isNotEmpty(name)) {
       return res.status(400).json({ error: "Nome é obrigatório" });
     }
 
-    if (!email || !isValidEmail(email)) {
-      return res.status(400).json({ error: "Email inválido" });
+    const emailValidationResult = await validarEmailCompleto(email);
+    if (emailValidationResult !== "O email é válido.") {
+      return res.status(400).json({ error: emailValidationResult });
     }
 
     if (!isNotEmpty(message)) {

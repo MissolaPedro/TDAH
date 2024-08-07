@@ -1,10 +1,13 @@
-// Importações necessárias
 const { auth, signInWithEmailAndPassword } = require("../../../config/auth-firebase");
 const session = require('express-session'); // Assumindo que express-session está configurado globalmente
 
 function signInUser(loginemail, loginpassword, loginrememberMe, req, callback) {
+    // console.log("Tentando fazer login com:", { loginemail, loginpassword, loginrememberMe });
+
     signInWithEmailAndPassword(auth, loginemail, loginpassword)
         .then((userCredential) => {
+            // console.log("Login bem-sucedido:", userCredential.user);
+
             // Configura a sessão aqui
             req.session.userId = userCredential.user.uid; // Armazena o UID do usuário na sessão
             if (loginrememberMe) {
@@ -19,6 +22,7 @@ function signInUser(loginemail, loginpassword, loginrememberMe, req, callback) {
             }
         })
         .catch((error) => {
+            // console.error("Erro ao fazer login:", error);
             if (typeof callback === 'function') {
                 callback(error, null); // Erro
             }
