@@ -9,7 +9,7 @@
 			Registre-se
 		</h1>
 		<form id="form-register" action="/register" method="post" class="">
-			<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+			<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 			<fieldset
 				class="w-96 h-fit flex flex-col gap-4 justify-center mb-4"
 			>
@@ -34,7 +34,6 @@
 							class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
 							>Primeiro nome</label
 						>
-						<div class="pt-1 px-4 text-xs tracking-[0.4px] text-error-600"><%= errorMessageName %></div>
 					</div>
 					<div class="relative z-0 input-filled">
 						<div class="absolute left-4 top-4 z-10">
@@ -56,7 +55,6 @@
 							class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
 							>Sobrenome</label
 						>
-						<div class="pt-1 px-4 text-xs tracking-[0.4px] text-error-600"><%= errorMessageSurname %></div>
 					</div>
 				</div>
 				<div class="relative z-0 input-filled">
@@ -77,7 +75,6 @@
 						class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
 						>Email</label
 					>
-					<div class="pt-1 px-4 text-xs tracking-[0.4px] text-error-600"><%= errorMessageEmail %></div>
 				</div>
 				<div class="relative z-0 input-filled">
 					<div class="absolute left-4 top-4 z-10">
@@ -97,7 +94,6 @@
 						class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
 						>Senha</label
 					>
-					<div class="pt-1 px-4 text-xs tracking-[0.4px] text-error-600"><%= errorMessagePassword %></div>
 				</div>
 				<div class="relative z-0 input-filled">
 					<div class="absolute left-4 top-4 z-10">
@@ -117,7 +113,6 @@
 						class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
 						>Confirme a Senha</label
 					>
-					<div class="pt-1 px-4 text-xs tracking-[0.4px] text-error-600"><%= errorMessageConfirmaPassword %></div>
 				</div>
 			</fieldset>
 			<fieldset
@@ -142,7 +137,7 @@
 						>
 					</label>
 				</div>
-				<div class="pt-1 px-4 text-xs tracking-[0.4px] text-error-600 flex-none"><%= errorMessageTermos %></div>
+
 				<button
 					type="submit"
 					class="btn relative flex flex-row items-center justify-center gap-x-2 py-2.5 px-6 rounded-[6.25rem] hover:shadow-md text-sm tracking-[.00714em] font-medium bg-primary-600 text-white"

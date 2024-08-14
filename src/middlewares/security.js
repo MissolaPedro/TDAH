@@ -4,8 +4,15 @@ const session = require('express-session');
 const csrf = require('csrf');
 const cookieParser = require('cookie-parser');
 const { body, validationResult } = require('express-validator');
+const fs = require('fs');
+const path = require('path');
+const dotenv = require('dotenv');
+
+// Carregar variáveis de ambiente do arquivo .env
+dotenv.config();
 
 const tokens = new csrf();
+const logFilePath = path.join(__dirname, 'log', 'forms.log');
 
 module.exports = (app) => {
   // Configurar Helmet com cabeçalhos de segurança adicionais
@@ -64,19 +71,28 @@ module.exports = (app) => {
 
   // Middleware para validar e sanitizar dados de entrada
   app.post('/login', [
-    body('loginemail').isEmail().withMessage('Email inválido').normalizeEmail(),
-    body('loginpassword').isLength({ min: 6 }).withMessage('Senha deve ter pelo menos 6 caracteres').trim().escape()
+    body('loginemail').isEmail().normalizeEmail(),
+    body('loginpassword').isLength({ min: 6 }).trim().escape()
   ], (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      // Registra os erros no arquivo de log
+      const errorLog = {
+        timestamp: new Date().toISOString(),
+        errors: errors.array()
+      };
+      fs.appendFile(logFilePath, JSON.stringify(errorLog) + '\n', (err) => {
+        if (err) {
+          console.error('Erro ao registrar no arquivo de log:', err);
+        }
+      });
     }
     next();
   });
 
   app.post('/register', [
-    body('registeremail').isEmail().withMessage('Email inválido').normalizeEmail(),
-    body('registerpassword').isLength({ min: 6 }).withMessage('Senha deve ter pelo menos 6 caracteres').trim().escape(),
+    body('registeremail').isEmail().normalizeEmail(),
+    body('registerpassword').isLength({ min: 6 }).trim().escape(),
     body('registerconfirmpassword').custom((value, { req }) => {
       if (value !== req.body.registerpassword) {
         throw new Error('Confirmação de senha não corresponde à senha');
@@ -86,17 +102,35 @@ module.exports = (app) => {
   ], (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      // Registra os erros no arquivo de log
+      const errorLog = {
+        timestamp: new Date().toISOString(),
+        errors: errors.array()
+      };
+      fs.appendFile(logFilePath, JSON.stringify(errorLog) + '\n', (err) => {
+        if (err) {
+          console.error('Erro ao registrar no arquivo de log:', err);
+        }
+      });
     }
     next();
   });
 
   app.post('/resetpassword', [
-    body('email').isEmail().withMessage('Email inválido').normalizeEmail()
+    body('email').isEmail().normalizeEmail()
   ], (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      // Registra os erros no arquivo de log
+      const errorLog = {
+        timestamp: new Date().toISOString(),
+        errors: errors.array()
+      };
+      fs.appendFile(logFilePath, JSON.stringify(errorLog) + '\n', (err) => {
+        if (err) {
+          console.error('Erro ao registrar no arquivo de log:', err);
+        }
+      });
     }
     next();
   });

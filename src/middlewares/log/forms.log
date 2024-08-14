@@ -1,0 +1,7 @@
+{"timestamp":"2024-08-14T19:52:54.187Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"registeremail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"registerpassword","location":"body"}]}
+{"timestamp":"2024-08-14T19:57:46.302Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"registeremail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"registerpassword","location":"body"}]}
+{"timestamp":"2024-08-14T19:57:47.464Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"registeremail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"registerpassword","location":"body"}]}
+{"timestamp":"2024-08-14T19:57:52.281Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"loginpassword","location":"body"}]}
+{"timestamp":"2024-08-14T19:57:53.527Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"loginpassword","location":"body"}]}
+{"timestamp":"2024-08-14T19:58:04.758Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"email","location":"body"}]}
+{"timestamp":"2024-08-14T19:58:05.685Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"email","location":"body"}]}
