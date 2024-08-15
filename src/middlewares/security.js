@@ -86,6 +86,16 @@ module.exports = (app) => {
           console.error('Erro ao registrar no arquivo de log:', err);
         }
       });
+
+      // Renderiza o formulário de login com mensagens de erro
+      return res.render('partials/form-login', {
+        title: 'Login',
+        csrfToken: req.csrfToken(),
+        loginErrorMessage: errors.array().map(error => error.msg).join(', '),
+        loginSucessMessage: null,
+        styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+        scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
+      });
     }
     next();
   });

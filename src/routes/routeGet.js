@@ -26,7 +26,11 @@ function routeGet(app) {
     app.get("/login", (req, res) => {
         res.render("partials/form-login", {
             title: "Login",
-            csrfToken: req.csrfToken() // Certifique-se de que o token CSRF está sendo passado
+            csrfToken: req.csrfToken(), // Certifique-se de que o token CSRF está sendo passado
+            loginErrorMessage: null,
+            loginSucessMessage: null,
+            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 

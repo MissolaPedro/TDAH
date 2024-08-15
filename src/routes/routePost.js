@@ -1,58 +1,73 @@
 const {
-  registrarUsuario,
-  signInUser,
-  sendPasswordResetEmailFirebase,
-  signOutUser,
-} = require("../firebase/functions/login");
-
-const {
-  isNotEmpty,
-  validarEmailCompleto,
-  validateLoginPassword,
-  validateRegisterPassword,
-} = require("../modules/verifications");
-
-function routeEJS(app) {
-  app.post("/login", async (req, res) => {
-      const { loginemail, loginpassword, loginrememberMe } = req.body;
-
-      // Validação do email
-      const emailValidationResult = await validarEmailCompleto(loginemail);
-      if (emailValidationResult !== "O email é válido.") {
-          return res.render("partials/form-login", {
-              title: "Login",
-              csrfToken: req.csrfToken(),
-          });
-      }
-
-      // Validação da senha
-      const passwordErrors = validateLoginPassword(loginpassword);
-      if (passwordErrors.length > 0) {
-          return res.render("partials/form-login", {
-              title: "Login",
-              csrfToken: req.csrfToken(),
-          });
-      }
-
-      // Tentativa de login
-      signInUser(
-          loginemail,
-          loginpassword,
-          loginrememberMe === "true",
-          req,
-          (error, user) => {
-              if (error) {
-                  console.error("Erro ao fazer login:", error);
-                  return res.status(400).json({ error: error.message });
-              }
-              res.cookie("loggedIn", true, {
-                  maxAge: 900000,
-                  httpOnly: true,
-              });
-              res.redirect("/dashboard");
-          }
-      );
-  });
+    registrarUsuario,
+    signInUser,
+    sendPasswordResetEmailFirebase,
+    signOutUser,
+  } = require("../firebase/functions/login");
+  
+  const {
+    isNotEmpty,
+    validarEmailCompleto,
+    validateLoginPassword,
+    validateRegisterPassword,
+  } = require("../modules/verifications");
+  
+  function routeEJS(app) {
+    app.post("/login", async (req, res) => {
+        const { loginemail, loginpassword, loginrememberMe } = req.body;
+  
+        // Validação do email
+        const emailValidationResult = await validarEmailCompleto(loginemail);
+        if (emailValidationResult !== "O email é válido.") {
+            return res.render("partials/form-login", {
+                title: "Login",
+                csrfToken: req.csrfToken(),
+                loginErrorMessage: emailValidationResult,
+                loginSucessMessage: null,
+                styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+                scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
+            });
+        }
+  
+        // Validação da senha
+        const passwordErrors = validateLoginPassword(loginpassword);
+        if (passwordErrors.length > 0) {
+            return res.render("partials/form-login", {
+                title: "Login",
+                csrfToken: req.csrfToken(),
+                loginErrorMessage: passwordErrors.join(', '),
+                loginSucessMessage: null,
+                styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+                scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
+            });
+        }
+  
+        // Tentativa de login
+        signInUser(
+            loginemail,
+            loginpassword,
+            loginrememberMe === "true",
+            req,
+            (error, user) => {
+                if (error) {
+                    console.error("Erro ao fazer login:", error);
+                    return res.render("partials/form-login", {
+                        title: "Login",
+                        csrfToken: req.csrfToken(),
+                        loginErrorMessage: error.message,
+                        loginSucessMessage: null,
+                        styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+                        scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
+                    });
+                }
+                res.cookie("loggedIn", true, {
+                    maxAge: 900000,
+                    httpOnly: true,
+                });
+                res.redirect("/dashboard");
+            }
+        );
+    });
 
   app.post("/register", async (req, res) => {
       const {
