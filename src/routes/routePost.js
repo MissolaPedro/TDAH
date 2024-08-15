@@ -6,42 +6,32 @@ const {
 } = require("../firebase/functions/login");
 
 const {
-    isNotEmpty,
+    validarEmailSimples,
+    validarSenhaSimples,
+    validateLoginForm,
     validarEmailCompleto,
-    validateLoginPassword,
     validateRegisterPassword,
-} = require("../modules/verifications");
+    isNotEmpty
+} = require('../modules/verifications');
 
 function routeEJS(app) {
     app.post("/login", async (req, res) => {
         const { loginemail, loginpassword, loginrememberMe } = req.body;
-
-        // Validação do email
-        const emailValidationResult = await validarEmailCompleto(loginemail);
-        if (emailValidationResult !== "O email é válido.") {
+    
+        // Validação do formulário de login
+        const { isValid, errors } = await validateLoginForm({ loginemail, loginpassword });
+    
+        if (!isValid) {
             return res.render("partials/form-login", {
                 title: "Login",
                 csrfToken: req.csrfToken(),
-                loginErrorMessage: emailValidationResult,
+                loginErrorMessage: errors.join(', '),
                 loginSucessMessage: null,
                 styles: ['/css/styles.css'],
                 scripts: ['/js/tailmater.js']
             });
         }
-
-        // Validação da senha
-        const passwordErrors = validateLoginPassword(loginpassword);
-        if (passwordErrors.length > 0) {
-            return res.render("partials/form-login", {
-                title: "Login",
-                csrfToken: req.csrfToken(),
-                loginErrorMessage: passwordErrors.join(', '),
-                loginSucessMessage: null,
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
-            });
-        }
-
+    
         // Tentativa de login
         signInUser(
             loginemail,
@@ -50,11 +40,11 @@ function routeEJS(app) {
             req,
             (error, user) => {
                 if (error) {
-                    console.error("Erro ao fazer login:", error);
+                    console.error("Erro ao fazer login",);
                     return res.render("partials/form-login", {
                         title: "Login",
                         csrfToken: req.csrfToken(),
-                        loginErrorMessage: error.message,
+                        loginErrorMessage: 'Informações Invalidas',
                         loginSucessMessage: null,
                         styles: ['/css/styles.css'],
                         scripts: ['/js/tailmater.js']
@@ -78,63 +68,76 @@ function routeEJS(app) {
             registerconfirmpassword,
             termos,
         } = req.body;
-
+    
+        // Verificação do nome
         if (!isNotEmpty(registername)) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                scripts: ['/js/tailmater.js'],
+                registerErrorMessage: "O nome não pode estar vazio."
             });
         }
-
+    
+        // Verificação do sobrenome
         if (!isNotEmpty(registersurname)) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                scripts: ['/js/tailmater.js'],
+                registerErrorMessage: "O sobrenome não pode estar vazio."
             });
         }
-
+    
+        // Validação do email
         const emailValidationResult = await validarEmailCompleto(registeremail);
         if (emailValidationResult !== "O email é válido.") {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                scripts: ['/js/tailmater.js'],
+                registerErrorMessage: emailValidationResult
             });
         }
-
+    
+        // Validação da senha
         const passwordErrors = validateRegisterPassword(registerpassword);
         if (passwordErrors.length > 0) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                scripts: ['/js/tailmater.js'],
+                registerErrorMessage: passwordErrors.join(", ")
             });
         }
-
+    
+        // Verificação da confirmação da senha
         if (registerconfirmpassword !== registerpassword) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                scripts: ['/js/tailmater.js'],
+                registerErrorMessage: "As senhas não coincidem."
             });
         }
-
+    
+        // Verificação dos termos de uso
         if (!termos) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                scripts: ['/js/tailmater.js'],
+                registerErrorMessage: "Você deve aceitar os termos de uso."
             });
         }
-
+    
+        // Registro do usuário
         registrarUsuario(registeremail, registerpassword, (error, user) => {
             if (error) {
                 console.error("Erro ao registrar usuário:", error);
@@ -142,15 +145,22 @@ function routeEJS(app) {
                     title: "Registre-se",
                     csrfToken: req.csrfToken(),
                     styles: ['/css/styles.css'],
-                    scripts: ['/js/tailmater.js']
+                    scripts: ['/js/tailmater.js'],
+                    registerErrorMessage: "Erro ao registrar usuário. Tente novamente."
                 });
             }
             console.log("Usuário registrado com sucesso");
             res.cookie("loggedIn", true, { maxAge: 900000, httpOnly: true });
-            res.redirect("/?registerSuccess=true");
+            res.render("partials/form-register", {
+                title: "Registre-se",
+                csrfToken: req.csrfToken(),
+                styles: ['/css/styles.css'],
+                scripts: ['/js/tailmater.js'],
+                registerSucessMessage: "Usuário registrado com sucesso"
+            });
         });
     });
-
+    
     app.post("/logout", (req, res) => {
         signOutUser(error => {
             if (error) {

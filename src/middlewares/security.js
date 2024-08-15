@@ -71,8 +71,8 @@ module.exports = (app) => {
 
   // Middleware para validar e sanitizar dados de entrada
   app.post('/login', [
-    body('loginemail').isEmail().normalizeEmail(),
-    body('loginpassword').isLength({ min: 6 }).trim().escape()
+    body('loginemail').isEmail().withMessage('Email inválido.').normalizeEmail(),
+    body('loginpassword').isLength({ min: 6 }).withMessage('Senha invalida.').trim().escape()
   ], (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -101,8 +101,8 @@ module.exports = (app) => {
   });
 
   app.post('/register', [
-    body('registeremail').isEmail().normalizeEmail(),
-    body('registerpassword').isLength({ min: 6 }).trim().escape(),
+    body('registeremail').isEmail().withMessage('Email inválido.').normalizeEmail(),
+    body('registerpassword').isLength({ min: 6 }).withMessage('Senha Invalida.').trim().escape(),
     body('registerconfirmpassword').custom((value, { req }) => {
       if (value !== req.body.registerpassword) {
         throw new Error('Confirmação de senha não corresponde à senha');
@@ -121,6 +121,16 @@ module.exports = (app) => {
         if (err) {
           console.error('Erro ao registrar no arquivo de log:', err);
         }
+      });
+  
+      // Renderiza o formulário de registro com mensagens de erro
+      return res.render('partials/form-register', {
+        title: 'Registro',
+        csrfToken: req.csrfToken(),
+        registerErrorMessage: errors.array().map(error => error.msg).join(', '),
+        registerSucessMessage: null,
+        styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+        scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
       });
     }
     next();

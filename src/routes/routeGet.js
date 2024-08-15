@@ -48,7 +48,9 @@ function routeGet(app) {
     app.get("/register", (req, res) => {
         res.render("partials/form-register", {
             title: "Registre-se", // Certifique-se de que esta linha está presente
-            csrfToken: req.csrfToken(),
+            csrfToken: req.csrfToken(), // Certifique-se de que o token CSRF está sendo passado
+            registerErrorMessage: null,
+            registerSucessMessage: null,
             styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
             scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
@@ -65,13 +67,6 @@ function routeGet(app) {
         });
     });
 
-    // Exemplo de um controlador em Node.js usando Express
-    app.get('/layout', (req, res) => {
-        const styles = [
-            '/css/styles.css',
-        ];
-        res.render('layout', { styles: styles });
-    });
 }
 
 module.exports = routeGet;
