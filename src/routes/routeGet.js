@@ -14,7 +14,9 @@ function routeGet(app) {
             description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, distinctio architecto accusantium cum enim ipsam quos vitae natus voluptate rem, corporis quidem laborum eveniet ex magnam debitis. Asperiores, in eum!",
             showContact,
             showRegister,
-            csrfToken: req.csrfToken()
+            csrfToken: req.csrfToken(),
+            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 
@@ -37,14 +39,18 @@ function routeGet(app) {
     app.get("/resetpassword", (req, res) => {
         res.render("partials/form-reset", {
             title: "Resetar a senha",
-            csrfToken: req.csrfToken()
+            csrfToken: req.csrfToken(),
+            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 
     app.get("/register", (req, res) => {
         res.render("partials/form-register", {
             title: "Registre-se", // Certifique-se de que esta linha está presente
-            csrfToken: req.csrfToken()
+            csrfToken: req.csrfToken(),
+            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
+            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 
@@ -57,6 +63,14 @@ function routeGet(app) {
                 res.redirect("/");
             }
         });
+    });
+
+    // Exemplo de um controlador em Node.js usando Express
+    app.get('/layout', (req, res) => {
+        const styles = [
+            '/css/styles.css',
+        ];
+        res.render('layout', { styles: styles });
     });
 }
 

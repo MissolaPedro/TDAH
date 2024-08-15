@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title><%= title %></title>
-		<% if (styles) { %> <% styles.forEach(function(style) { %>
-		<link rel="stylesheet" href="<%= style %>" />
-		<% }); %> <% } %>
-	</head>
-	<html>
+
+<%- include('head') %>
 		<body class="bg-neutral-950 font-sans">
 			<div class="w-full h-[90vh] flex items-center justify-center">
 				<div class="space-y-2 p-4 relative w-fit top-0 left-0">

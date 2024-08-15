@@ -15,3 +15,4 @@
 {"timestamp":"2024-08-15T01:16:20.872Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"loginpassword","location":"body"}]}
 {"timestamp":"2024-08-15T01:17:28.480Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"loginpassword","location":"body"}]}
 {"timestamp":"2024-08-15T01:19:42.891Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"loginpassword","location":"body"}]}
+{"timestamp":"2024-08-15T01:38:31.932Z","errors":[{"type":"field","value":"","msg":"Invalid value","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Invalid value","path":"loginpassword","location":"body"}]}

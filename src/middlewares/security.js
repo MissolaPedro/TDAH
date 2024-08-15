@@ -86,7 +86,7 @@ module.exports = (app) => {
           console.error('Erro ao registrar no arquivo de log:', err);
         }
       });
-
+  
       // Renderiza o formulário de login com mensagens de erro
       return res.render('partials/form-login', {
         title: 'Login',
