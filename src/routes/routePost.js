@@ -26,9 +26,7 @@ function routeEJS(app) {
                 title: "Login",
                 csrfToken: req.csrfToken(),
                 loginErrorMessage: errors.join(', '),
-                loginSucessMessage: null,
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                loginSucessMessage: null
             });
         }
     
@@ -46,8 +44,6 @@ function routeEJS(app) {
                         csrfToken: req.csrfToken(),
                         loginErrorMessage: 'Informações Invalidas',
                         loginSucessMessage: null,
-                        styles: ['/css/styles.css'],
-                        scripts: ['/js/tailmater.js']
                     });
                 }
                 res.cookie("loggedIn", true, {
@@ -74,9 +70,8 @@ function routeEJS(app) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerErrorMessage: "O nome não pode estar vazio."
+                registerErrorMessage: "O nome não pode estar vazio.",
+                loginSucessMessage: null
             });
         }
     
@@ -85,9 +80,8 @@ function routeEJS(app) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerErrorMessage: "O sobrenome não pode estar vazio."
+                registerErrorMessage: "O sobrenome não pode estar vazio.",
+                loginSucessMessage: null
             });
         }
     
@@ -97,9 +91,8 @@ function routeEJS(app) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerErrorMessage: emailValidationResult
+                registerErrorMessage: emailValidationResult,
+                loginSucessMessage: null
             });
         }
     
@@ -109,9 +102,8 @@ function routeEJS(app) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerErrorMessage: passwordErrors.join(", ")
+                registerErrorMessage: passwordErrors.join(", "),
+                loginSucessMessage: null
             });
         }
     
@@ -120,9 +112,8 @@ function routeEJS(app) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerErrorMessage: "As senhas não coincidem."
+                registerErrorMessage: "As senhas não coincidem.",
+                loginSucessMessage: null
             });
         }
     
@@ -131,9 +122,8 @@ function routeEJS(app) {
             return res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerErrorMessage: "Você deve aceitar os termos de uso."
+                registerErrorMessage: "Você deve aceitar os termos de uso.",
+                loginSucessMessage: null
             });
         }
     
@@ -144,9 +134,8 @@ function routeEJS(app) {
                 return res.render("partials/form-register", {
                     title: "Registre-se",
                     csrfToken: req.csrfToken(),
-                    styles: ['/css/styles.css'],
-                    scripts: ['/js/tailmater.js'],
-                    registerErrorMessage: "Erro ao registrar usuário. Tente novamente."
+                    registerErrorMessage: "Erro ao registrar usuário. Tente novamente.",
+                    loginSucessMessage: null
                 });
             }
             console.log("Usuário registrado com sucesso");
@@ -154,9 +143,8 @@ function routeEJS(app) {
             res.render("partials/form-register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js'],
-                registerSucessMessage: "Usuário registrado com sucesso"
+                registerSucessMessage: "Usuário registrado com sucesso",
+                loginErrorMessage: null
             });
         });
     });
@@ -182,8 +170,8 @@ function routeEJS(app) {
             return res.render("partials/form-reset", {
                 title: "Resetar senha",
                 csrfToken: req.csrfToken(),
-                styles: ['/css/styles.css'],
-                scripts: ['/js/tailmater.js']
+                resetSucessMessage: null,
+                resetErrorMessage: "Email inválido."
             });
         }
 
@@ -192,12 +180,13 @@ function routeEJS(app) {
                 return res.render("partials/form-reset", {
                     title: "Resetar senha",
                     csrfToken: req.csrfToken(),
-                    styles: ['/css/styles.css'],
-                    scripts: ['/js/tailmater.js']
+                    resetSucessMessage: null,
+                    resetErrorMessage: "Ocorreu um erro ao reseta a senha. Tente novamente."
                 });
             }
             res.status(200).json({
-                message: "Email de redefinição de senha enviado com sucesso.",
+                resetSucessMessage: "Email de redefinição de senha enviado com sucesso.",
+                resetErrorMessage: null
             });
         });
     });

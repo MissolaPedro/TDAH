@@ -93,8 +93,6 @@ module.exports = (app) => {
         csrfToken: req.csrfToken(),
         loginErrorMessage: errors.array().map(error => error.msg).join(', '),
         loginSucessMessage: null,
-        styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
-        scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
       });
     }
     next();
@@ -129,8 +127,6 @@ module.exports = (app) => {
         csrfToken: req.csrfToken(),
         registerErrorMessage: errors.array().map(error => error.msg).join(', '),
         registerSucessMessage: null,
-        styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
-        scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
       });
     }
     next();

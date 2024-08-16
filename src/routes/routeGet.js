@@ -15,8 +15,6 @@ function routeGet(app) {
             showContact,
             showRegister,
             csrfToken: req.csrfToken(),
-            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
-            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 
@@ -31,8 +29,6 @@ function routeGet(app) {
             csrfToken: req.csrfToken(), // Certifique-se de que o token CSRF está sendo passado
             loginErrorMessage: null,
             loginSucessMessage: null,
-            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
-            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 
@@ -40,8 +36,8 @@ function routeGet(app) {
         res.render("partials/form-reset", {
             title: "Resetar a senha",
             csrfToken: req.csrfToken(),
-            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
-            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
+            resetSucessMessage: null,
+            resetErrorMessage: null
         });
     });
 
@@ -51,8 +47,6 @@ function routeGet(app) {
             csrfToken: req.csrfToken(), // Certifique-se de que o token CSRF está sendo passado
             registerErrorMessage: null,
             registerSucessMessage: null,
-            styles: ['/css/styles.css'], // Adicione o caminho para o seu arquivo de estilos
-            scripts: ['/js/tailmater.js'] // Adicione o caminho para o seu arquivo de scripts
         });
     });
 
@@ -64,6 +58,13 @@ function routeGet(app) {
             } else {
                 res.redirect("/");
             }
+        });
+    });
+
+    app.get("/error", (req, res) => {
+        res.render("error", {
+            title: "Erro",
+            error: req.query.error,
         });
     });
 
