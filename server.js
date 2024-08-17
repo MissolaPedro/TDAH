@@ -2,10 +2,18 @@ const express = require('express');
 const dotenv = require('dotenv');
 const https = require('https');
 const fs = require('fs');
+const session = require('express-session');
 
 dotenv.config();
 
 const app = express();
+
+// Configuração do Express
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
 
 // Importação de Middlewares
 require('./src/middlewares/security')(app);
@@ -23,7 +31,7 @@ routePost(app);
 // Middleware de Tratamento de Erros
 require('./src/middlewares/errorHandler')(app);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 if (process.env.NODE_ENV === 'development') {
   const options = {

@@ -3,17 +3,15 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
+const crypto = require('crypto');
 
-// If modifying these scopes, delete token.json.
+// Constantes
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-// The file token.json stores the user's access and refresh tokens, and is
-// created automatically when the authorization flow completes for the first
-// time.
-const TOKEN_PATH = path.join(process.cwd(), 'token.json');
-const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
+const TOKEN_PATH = path.join(process.cwd(), './src/api/token.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), './src/api/credentials.json');
 
 /**
- * Reads previously authorized credentials from the save file.
+ * Lê credenciais autorizadas previamente do arquivo salvo.
  *
  * @return {Promise<OAuth2Client|null>}
  */
@@ -28,7 +26,7 @@ async function loadSavedCredentialsIfExist() {
 }
 
 /**
- * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
+ * Serializa credenciais para um arquivo compatível com GoogleAuth.fromJSON.
  *
  * @param {OAuth2Client} client
  * @return {Promise<void>}
@@ -47,8 +45,9 @@ async function saveCredentials(client) {
 }
 
 /**
- * Load or request or authorization to call APIs.
+ * Carrega ou solicita autorização para chamar APIs.
  *
+ * @return {Promise<OAuth2Client>}
  */
 async function authorize() {
   let client = await loadSavedCredentialsIfExist();
@@ -66,8 +65,9 @@ async function authorize() {
 }
 
 /**
- * Lists the next 10 events on the user's primary calendar.
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * Lista os próximos 10 eventos no calendário principal do usuário.
+ *
+ * @param {google.auth.OAuth2} auth Um cliente OAuth2 autorizado.
  */
 async function listEvents(auth) {
   const calendar = google.calendar({version: 'v3', auth});
@@ -90,4 +90,26 @@ async function listEvents(auth) {
   });
 }
 
-authorize().then(listEvents).catch(console.error);
+/**
+ * Gera uma URL de autorização para o Google Calendar.
+ *
+ * @param {OAuth2Client} oauth2Client O cliente OAuth2.
+ * @param {Array<string>} scopes Escopos de acesso.
+ * @param {string} state Valor de estado seguro.
+ * @return {string} URL de autorização.
+ */
+function generateAuthUrl(oauth2Client, scopes, state) {
+  return oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: scopes,
+    include_granted_scopes: true,
+    state: state,
+  });
+}
+
+module.exports = {
+  authorize,
+  listEvents,
+  generateAuthUrl,
+  SCOPES // Exportar SCOPES
+};
