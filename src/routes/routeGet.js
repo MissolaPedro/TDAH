@@ -71,48 +71,6 @@ function routeGet(app) {
         });
     });
 
-    // Rotas movidas do server.js
-    app.get('/auth', (req, res) => {
-        const oauth2Client = new google.auth.OAuth2(
-            '522286314266-npn5ee0qbe4lbe08vmhgs67g4u0t5pck.apps.googleusercontent.com',
-            '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',
-            'https://localhost:8080'
-        );
-
-        const state = crypto.randomBytes(32).toString('hex');
-        req.session.state = state;
-
-        const authorizationUrl = generateAuthUrl(oauth2Client, SCOPES, state);
-        res.redirect(authorizationUrl);
-    });
-
-    app.get('/oauth2callback', async (req, res) => {
-        const oauth2Client = new google.auth.OAuth2(
-            process.env.CLIENT_ID,
-            process.env.CLIENT_SECRET,
-            process.env.REDIRECT_URL
-        );
-
-        const {code} = req.query;
-        const {tokens} = await oauth2Client.getToken(code);
-        oauth2Client.setCredentials(tokens);
-        await saveCredentials(oauth2Client);
-
-        res.send('Autorização concluída com sucesso!');
-    });
-
-    app.get('/events', async (req, res) => {
-        const auth = await authorize();
-        const calendar = google.calendar({version: 'v3', auth});
-        const result = await calendar.events.list({
-            calendarId: 'primary',
-            timeMin: new Date().toISOString(),
-            maxResults: 10,
-            singleEvents: true,
-            orderBy: 'startTime',
-        });
-        res.json(result.data.items);
-    });
 }
 
 module.exports = routeGet;
