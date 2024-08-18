@@ -2,10 +2,17 @@ const express = require('express');
 const dotenv = require('dotenv');
 const https = require('https');
 const fs = require('fs');
+const { google } = require('googleapis');
 
 dotenv.config();
 
 const app = express();
+
+const oauth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID, // Seu ID de cliente do Google Cloud
+  process.env.CLIENT_SECRET, // Seu segredo de cliente do Google Cloud
+  'https://localhost:80'  // Deve corresponder ao que está no Google Cloud Console
+);
 
 // Importação de Middlewares
 require('./src/middlewares/security')(app);
@@ -23,7 +30,7 @@ routePost(app);
 // Middleware de Tratamento de Erros
 require('./src/middlewares/errorHandler')(app);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 if (process.env.NODE_ENV === 'development') {
   const options = {

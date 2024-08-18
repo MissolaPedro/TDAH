@@ -1,6 +1,5 @@
-// routeGet.js
-
-const { signOutUser } = require("../firebase/functions/signout.js");
+const { authorize } = require('../auth/auth-API');
+const { google } = require('googleapis');
 
 function routeGet(app) {
     app.get("/", (req, res) => {
@@ -26,7 +25,7 @@ function routeGet(app) {
     app.get("/login", (req, res) => {
         res.render("partials/form-login", {
             title: "Login",
-            csrfToken: req.csrfToken(), // Certifique-se de que o token CSRF está sendo passado
+            csrfToken: req.csrfToken(),
             loginErrorMessage: null,
             loginSucessMessage: null,
         });
@@ -43,8 +42,8 @@ function routeGet(app) {
 
     app.get("/register", (req, res) => {
         res.render("partials/form-register", {
-            title: "Registre-se", // Certifique-se de que esta linha está presente
-            csrfToken: req.csrfToken(), // Certifique-se de que o token CSRF está sendo passado
+            title: "Registre-se",
+            csrfToken: req.csrfToken(),
             registerErrorMessage: null,
             registerSucessMessage: null,
         });
@@ -68,6 +67,32 @@ function routeGet(app) {
         });
     });
 
+    app.get('/events', async (req, res) => {
+        try {
+            // Autenticar e obter o cliente da API do Google
+            const auth = await authorize();
+            const calendar = google.calendar({ version: 'v3', auth });
+            
+            // Listar os próximos 10 eventos no calendário principal do usuário
+            const response = await calendar.events.list({
+                calendarId: 'primary',
+                timeMin: (new Date()).toISOString(),
+                maxResults: 10,
+                singleEvents: true,
+                orderBy: 'startTime',
+            });
+
+            const events = response.data.items;
+            if (events.length) {
+                res.json(events);
+            } else {
+                res.send('Nenhum evento encontrado.');
+            }
+        } catch (error) {
+            console.error('Erro ao listar eventos:', error);
+            res.status(500).send('Erro ao listar eventos.');
+        }
+    });
 }
 
 module.exports = routeGet;

@@ -59,15 +59,16 @@ module.exports = (app) => {
     next();
   });
 
-  app.use((req, res, next) => {
-    if (req.method === 'POST') {
-        const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];
-        if (!tokens.verify(req.session.csrfSecret, token)) {
-            return res.status(403).send('CSRF token inválido');
-        }
-    }
-    next();
-  });
+  // Comentado para verificar se está interferindo na autenticação
+  // app.use((req, res, next) => {
+  //   if (req.method === 'POST') {
+  //       const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];
+  //       if (!tokens.verify(req.session.csrfSecret, token)) {
+  //           return res.status(403).send('CSRF token inválido');
+  //       }
+  //   }
+  //   next();
+  // });
 
   // Middleware para validar e sanitizar dados de entrada
   app.post('/login', [
