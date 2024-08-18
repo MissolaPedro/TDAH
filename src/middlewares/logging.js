@@ -5,7 +5,7 @@ const rfs = require('rotating-file-stream');
 
 module.exports = (app) => {
   // Cria um stream de rotação de arquivos
-  const logDirectory = path.resolve(__dirname, '../auth/log');
+  const logDirectory = path.resolve(__dirname, '../../logs/access.log');
   if (!fs.existsSync(logDirectory)) {
     fs.mkdirSync(logDirectory, { recursive: true });
   }

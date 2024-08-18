@@ -1,5 +1,4 @@
 // routeGet.js
-
 const { signOutUser } = require("../firebase/functions/signout.js");
 
 function routeGet(app) {
@@ -67,33 +66,6 @@ function routeGet(app) {
             title: "Erro",
             error: req.query.error,
         });
-    });
-
-    app.get('/events', async (req, res) => {
-        try {
-            // Autenticar e obter o cliente da API do Google
-            const auth = await authorize();
-            const calendar = google.calendar({ version: 'v3', auth });
-            
-            // Listar os próximos 10 eventos no calendário principal do usuário
-            const response = await calendar.events.list({
-                calendarId: 'primary',
-                timeMin: (new Date()).toISOString(),
-                maxResults: 10,
-                singleEvents: true,
-                orderBy: 'startTime',
-            });
-
-            const events = response.data.items;
-            if (events.length) {
-                res.json(events);
-            } else {
-                res.send('Nenhum evento encontrado.');
-            }
-        } catch (error) {
-            console.error('Erro ao listar eventos:', error);
-            res.status(500).send('Erro ao listar eventos.');
-        }
     });
 }
 

@@ -1,5 +1,5 @@
 <nav
-	class="flex text-neutral-100 justify-center items-center uppercase gap-24 h-[10vh]"
+	class="flex text-neutral-100 justify-between items-center uppercase gap-24 h-[10vh] w-full px-24"
 >
 	<a href="/" class="flex items-center gap-4 w-fit px-8">
 		<img
@@ -8,72 +8,29 @@
 			width="48px"
 			class="rounded-full"
 		/>
-		<h2 class="font-medium text-xl">Projeto TDAH</h2>
+		<h2 class="font-bold text-2xl">Projeto TDAH</h2>
 	</a>
-	<div class="inline-flex gap-2 font-normal w-fit px-8 relative left-12">
-		<a
-			href="/"
-			class="hover:bg-neutral-800 bg-opacity-50 transition duration-500 ease-in-out py-2 px-4"
-			>Home</a
-		>
-		<a
-			href=""
-			class="hover:bg-neutral-800 bg-opacity-50 transition duration-500 ease-in-out py-2 px-4"
-			>About</a
-		>
-		<a
-			href="/contact"
-			class="hover:bg-neutral-800 bg-opacity-50 transition duration-500 ease-in-out py-2 px-4"
-			>Contact</a
-		>
-	</div>
-	<div class="inline-flex gap-4 w-fit px-8" id="ContainerNotLogged">
-		<a
-			href="/login"
-			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 rounded-md px-5 h-11"
-		>
-			<span
-				class="material-symbols-outlined lucide lucide-rocket text-primary-600"
-			>
-				login
-			</span>
-			Login
-		</a>
-		<a
-			href="/register"
-			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 rounded-md px-5 h-11"
-		>
-			<span
-				class="material-symbols-outlined lucide lucide-rocket text-primary-600"
-			>
-				account_circle
-			</span>
-			Register
-		</a>
-	</div>
-	<div class="inline-flex gap-4 w-fit px-8" id="ContainerLogged">
-		<a
-			href="/dashboard"
-			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-primary-600 h-9 rounded-md px-5 h-11"
-		>
-			<span
-				class="material-symbols-outlined lucide lucide-rocket text-primary-600"
-			>
-				dashboard
-			</span>
-			Painel do usuario
-		</a>
-		<a
-			href="/logout"
-			class="cursor-pointer relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-neutral-100 hover:text-error-600 h-9 rounded-md px-5 h-11"
-		>
-			<span
-				class="material-symbols-outlined lucide lucide-rocket text-error-600"
-			>
-				logout
-			</span>
-			Sair
-		</a>
+	<div class="w-fit flex flex-row justify-end items-center gap-10">
+		<div class="inline-flex gap-4 items-center">
+			<a href="/" class="text-neutral-50 font-light text-sm hover:bg-neutral-600/10 px-2 py-2 transition duration-300 rounded">Home</a>
+			<a href="/" class="text-neutral-50 font-light text-sm hover:bg-neutral-600/10 px-2 py-2 transition duration-300 rounded">About</a>
+			<a href="/" class="text-neutral-50 font-light text-sm hover:bg-neutral-600/10 px-2 py-2 transition duration-300 rounded">Feedback</a>
+			<a href="/contact" class="text-neutral-50 font-light text-sm hover:bg-neutral-600/10 px-2 py-2 transition duration-300 rounded">Contact</a>
+		</div>
+		<div class="flex justify-end gap-4 items-center">
+			<a href="/login" class="text-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-300 hover:bg-neutral-50 hover:scale-110">
+				<span class="material-symbols-outlined">
+					login
+					</span>
+				Login
+			</a>
+			<a href="/register" class="text-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-300 hover:bg-neutral-50 hover:scale-110">
+				<span class="material-symbols-outlined">
+					account_circle
+					</span>
+				Register
+			</a>
+		</div>
 	</div>
 </nav>
 <script src="/js/animations/hiddeButtons.js"></script>
