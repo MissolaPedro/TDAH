@@ -1,7 +1,9 @@
-const { authorize } = require('../auth/auth-API');
-const { google } = require('googleapis');
+// routeGet.js
+
+const { signOutUser } = require("../firebase/functions/signout.js");
 
 function routeGet(app) {
+    // Rota para iniciar o processo de autorização
     app.get("/", (req, res) => {
         const showContact = true;
         const showRegister = true;

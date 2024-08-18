@@ -2,17 +2,18 @@ const express = require('express');
 const dotenv = require('dotenv');
 const https = require('https');
 const fs = require('fs');
-const { google } = require('googleapis');
+const session = require('express-session');
 
 dotenv.config();
 
 const app = express();
 
-const oauth2Client = new google.auth.OAuth2(
-  process.env.CLIENT_ID, // Seu ID de cliente do Google Cloud
-  process.env.CLIENT_SECRET, // Seu segredo de cliente do Google Cloud
-  'https://localhost:80'  // Deve corresponder ao que está no Google Cloud Console
-);
+// Configuração do Express
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
 
 // Importação de Middlewares
 require('./src/middlewares/security')(app);
