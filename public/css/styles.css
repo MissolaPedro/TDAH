@@ -1371,6 +1371,14 @@ video {
   transition-duration: 500ms;
 }
 
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.duration-100 {
+  transition-duration: 100ms;
+}
+
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2452,6 +2460,12 @@ td:is(.dark *), th:is(.dark *) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:scale-75:hover {
+  --tw-scale-x: .75;
+  --tw-scale-y: .75;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\:bg-green-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(187 247 208 / var(--tw-bg-opacity));
@@ -2502,6 +2516,14 @@ td:is(.dark *), th:is(.dark *) {
   background-color: rgb(82 82 82 / 0.1);
 }
 
+.hover\:bg-neutral-600\/15:hover {
+  background-color: rgb(82 82 82 / 0.15);
+}
+
+.hover\:bg-neutral-500\/15:hover {
+  background-color: rgb(115 115 115 / 0.15);
+}
+
 .hover\:px-4:hover {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -2515,6 +2537,11 @@ td:is(.dark *), th:is(.dark *) {
 .hover\:text-neutral-100:hover {
   --tw-text-opacity: 1;
   color: rgb(245 245 245 / var(--tw-text-opacity));
+}
+
+.hover\:text-neutral-50:hover {
+  --tw-text-opacity: 1;
+  color: rgb(250 250 250 / var(--tw-text-opacity));
 }
 
 .hover\:accent-primary-600:hover {
@@ -2555,6 +2582,21 @@ td:is(.dark *), th:is(.dark *) {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.active\:scale-75:active {
+  --tw-scale-x: .75;
+  --tw-scale-y: .75;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.active\:bg-neutral-200:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
+}
+
+.active\:bg-none:active {
+  background-image: none;
 }
 
 .peer:-moz-placeholder-shown ~ .peer-placeholder-shown\:translate-y-0 {
