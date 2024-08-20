@@ -7,18 +7,33 @@ async function checkAuthStatus() {
         const data = await response.json();
         console.log(data.loggedIn ? "Usuário está logado." : "Usuário não está logado.");
 
-        const containerNotLogged = document.getElementById('ContainerNotLogged');
-        const containerLogged = document.getElementById('ContainerLogged');
-
-        if (containerNotLogged && containerLogged) {
-            containerNotLogged.style.display = data.loggedIn ? 'none' : 'inline-flex';
-            containerLogged.style.display = data.loggedIn ? 'inline-flex' : 'none';
-        } else {
-            console.error('Elementos DOM não encontrados');
-        }
+        updateDOMElements(data.loggedIn);
     } catch (error) {
         console.error('Erro ao verificar status de autenticação:', error);
     }
 }
 
+function updateDOMElements(isLoggedIn) {
+    const containerNotLogged = document.getElementById('containerNotLogged');
+    const containerLogged = document.getElementById('containerLogged');
+
+    if (containerNotLogged && containerLogged) {
+        toggleVisibility(containerNotLogged, !isLoggedIn);
+        toggleVisibility(containerLogged, isLoggedIn);
+    } else {
+        console.error('Elementos DOM não encontrados');
+    }
+}
+
+function toggleVisibility(element, isVisible) {
+    if (isVisible) {
+        element.classList.remove('hidden');
+        element.classList.add('flex');
+    } else {
+        element.classList.remove('flex');
+        element.classList.add('hidden');
+    }
+}
+
+// Chama a função para verificar o status de autenticação
 checkAuthStatus();

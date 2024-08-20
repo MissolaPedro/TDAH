@@ -20,11 +20,11 @@ module.exports = (app) => {
   app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com", "https://kit.fontawesome.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com", "https://fonts.googleapis.com"],
       imgSrc: ["'self'", "data:", "https://trusted.cdn.com"],
-      connectSrc: ["'self'"],
-      fontSrc: ["'self'", "https://trusted.cdn.com", "https://fonts.gstatic.com"],
+      connectSrc: ["'self'", "https://ka-f.fontawesome.com"],
+      fontSrc: ["'self'", "https://trusted.cdn.com", "https://fonts.gstatic.com", "https://kit.fontawesome.com", "https://ka-f.fontawesome.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
     },
@@ -59,16 +59,15 @@ module.exports = (app) => {
     next();
   });
 
-  // Comentado para verificar se está interferindo na autenticação
-  // app.use((req, res, next) => {
-  //   if (req.method === 'POST') {
-  //       const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];
-  //       if (!tokens.verify(req.session.csrfSecret, token)) {
-  //           return res.status(403).send('CSRF token inválido');
-  //       }
-  //   }
-  //   next();
-  // });
+  app.use((req, res, next) => {
+    if (req.method === 'POST') {
+        const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];
+        if (!tokens.verify(req.session.csrfSecret, token)) {
+            return res.status(403).send('CSRF token inválido');
+        }
+    }
+    next();
+  });
 
   // Middleware para validar e sanitizar dados de entrada
   app.post('/login', [

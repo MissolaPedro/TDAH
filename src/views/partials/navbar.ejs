@@ -1,5 +1,5 @@
 <nav
-	class="flex text-neutral-100 justify-between items-center uppercase gap-24 h-[10vh] w-full px-24"
+	class="flex text-neutral-100 justify-between items-center uppercase gap-24 h-[10vh] w-full"
 >
 	<a href="/" class="flex items-center gap-4 w-fit px-8">
 		<img
@@ -12,23 +12,31 @@
 	</a>
 	<div class="w-fit flex flex-row justify-end items-center gap-10">
 		<div class="inline-flex gap-4 items-center">
-			<a href="/" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-100 rounded active:scale-75 active:bg-none">Home</a>
-			<a href="/" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-100 rounded active:scale-75 active:bg-none">About</a>
-			<a href="/" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-100 rounded active:scale-75 active:bg-none">Feedback</a>
-			<a href="/contact" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-100 rounded active:scale-75 active:bg-none">Contact</a>
+			<a href="/" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-300 rounded active:scale-75 active:bg-none ">Home</a>
+			<a href="/" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-300 rounded active:scale-75 active:bg-none ">About</a>
+			<a href="/" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-300 rounded active:scale-75 active:bg-none ">Feedback</a>
+			<a href="/contact" class="text-neutral-200 font-light text-sm hover:scale-105 px-2 py-2 transition duration-300 rounded active:scale-75 active:bg-none">Contact</a>
 		</div>
-		<div class="flex justify-end gap-4 items-center">
-			<a href="/login" class="text-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-100 hover:scale-110 hover:text-neutral-50 active:scale-75 active:bg-none">
-				<span class="material-symbols-outlined">
-					login
-					</span>
+		<div class="flex justify-end gap-4 items-center" id="containerNotLogged" aria-hidden="false">
+			<a href="/login" class="text-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-300 hover:scale-110 hover:text-neutral-50 active:scale-75 active:bg-none">
+				<span class="material-symbols-outlined">login</span>
 				Login
 			</a>
-			<a href="/register" class="text-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-100 hover:scale-110 hover:text-neutral-50 active:scale-75 active:bg-none">
-				<span class="material-symbols-outlined">
-					account_circle
-					</span>
+			<a href="/register" class="text-neutral-50 bg-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-300 hover:scale-110 hover:text-neutral-50 active:scale-75 active:bg-none">
+				<span class="material-symbols-outlined">account_circle</span>
 				Register
+			</a>
+		</div>
+		<div class="hidden justify-end gap-4 items-center" id="containerLogged" aria-hidden="true">
+			<a href="/login" class="text-primary-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-300 hover:scale-110 hover:text-neutral-50 active:scale-75 active:bg-none">
+				<span class="material-symbols-outlined">
+					dashboard
+					</span>
+					Dashboard
+			</a>
+			<a href="/logout" class="text-neutral-50 bg-error-600 font-medium text-[15px] px-4 rounded-lg py-1 inline-flex gap-2 justify-center items-center transition duration-300 hover:scale-110 hover:text-neutral-50 active:scale-75 active:bg-none">
+				<span class="material-symbols-outlined">logout</span>
+				Logout
 			</a>
 		</div>
 	</div>
