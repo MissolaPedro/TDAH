@@ -102,7 +102,22 @@ module.exports = {
           400: '#332f3a',
           500: '#36323e',
         }
-      }
+      },
+      keyframes: {
+        'slide-fwd-center': {
+          '0%': {
+            '-webkit-transform': 'translateZ(0)',
+            'transform': 'translateZ(0)',
+          },
+          '100%': {
+            '-webkit-transform': 'translateZ(160px)',
+            'transform': 'translateZ(160px)',
+          },
+        },
+      },
+      animation: {
+        'slide-fwd-center': 'slide-fwd-center 1s ease-in-out forwards',
+      },
     },
     fontFamily: {
       sans: ['Roboto', 'sans-serif'],
