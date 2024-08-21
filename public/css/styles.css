@@ -558,87 +558,11 @@ video {
   visibility: collapse;
 }
 
-.static {
-  position: static;
-}
-
-.absolute {
-  position: absolute;
-}
-
-.relative {
-  position: relative;
-}
-
-.bottom-0 {
-  bottom: 0px;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.left-14 {
-  left: 3.5rem;
-}
-
-.left-4 {
-  left: 1rem;
-}
-
-.top-0 {
-  top: 0px;
-}
-
-.top-4 {
-  top: 1rem;
-}
-
-.isolate {
-  isolation: isolate;
-}
-
-.z-0 {
-  z-index: 0;
-}
-
-.z-10 {
-  z-index: 10;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
-.block {
-  display: block;
-}
-
 .flex {
   display: flex;
 }
 
+<<<<<<< HEAD
 .inline-flex {
   display: inline-flex;
 }
@@ -647,10 +571,13 @@ video {
   display: inline-flex !important;
 }
 
+=======
+>>>>>>> 1cdbd2cea6767aae2d05f501bca332dcac2e76b5
 .hidden {
   display: none;
 }
 
+<<<<<<< HEAD
 .h-14 {
   height: 3.5rem;
 }
@@ -1482,6 +1409,8 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+=======
+>>>>>>> 1cdbd2cea6767aae2d05f501bca332dcac2e76b5
 /* button default */
 
 .btn-outline:hover {
@@ -2546,6 +2475,7 @@ td:is(.dark *), th:is(.dark *) {
 }
 
 /* Insert your css in here */
+<<<<<<< HEAD
 
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
@@ -2848,3 +2778,5 @@ td:is(.dark *), th:is(.dark *) {
 .rtl\:ml-3:where([dir="rtl"], [dir="rtl"] *) {
   margin-left: 0.75rem;
 }
+=======
+>>>>>>> 1cdbd2cea6767aae2d05f501bca332dcac2e76b5

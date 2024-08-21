@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
-		<%- include('partials/head') %>
+		<%- include('partials/head.html') %>
 	</head>
 	<body>
-		<%- include('partials/navbar') %>
+		<%- include('partials/navbar.html') %>
 		<div class="w-full h-[90vh] flex flex-col items-center justify-center">
 			<h1
 				class="cursor-default text-6xl leading-[4rem] font-extrabold uppercase text-neutral-100 text-center"
@@ -17,5 +17,6 @@
 				<%= errorMessage %>
 			</p>
 		</div>
+		<%- include('partials/footer.html') %>
 	</body>
 </html>
