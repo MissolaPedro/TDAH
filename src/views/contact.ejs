@@ -4,190 +4,148 @@
         <%- include('partials/head') %>
     </head>
 <body>
-    <div class="px-24">
+    <div class="px-24 bg-neutral-950/25">
         <%- include('partials/navbar') %>
     </div>
-    <section class="h-[90vh] flex flex-col justify-center items-center">
-        <div
-            class="w-[80vw] h-[75%] flex justify-between bg-neutral-900 bg-opacity-20 rounded-xl p-10"
-        >
-            <div
-                class="w-[35%] border-r-2 border-neutral-100 border-solid flex flex-col items-center py-4 px-12 justify-between"
-            >
-                <div class="flex flex-col gap-2">
-                    <h1
-                        class="text-[2.8125rem] leading-[3.25rem] font-semibold uppercase text-neutral-100"
+    <section class="px-8 py-8 lg:py-16">
+        <div class="container mx-auto text-center">
+          <h1
+            class="text-neutral-50 block antialiased tracking-normal font-sans font-semibold leading-tight text-blue-primary-600 mb-4 !text-3xl lg:!text-5xl"
+          >
+          Estamos Aqui para Ajudar
+          </h1>
+          <p
+            class="block antialiased font-sans leading-relaxed text-inherit mb-10 font-normal !text-lg lg:mb-20 mx-auto max-w-3xl !text-neutral-500"
+          >
+          Se você tiver dúvidas sobre nossos serviços, precisar de assistência técnica ou tiver sugestões de melhoria, nossa equipe está pronta para ouvir e ajudar.
+          </p>
+          <div
+            class="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-2 items-start"
+          >
+            <img
+              src="/image/contact-image.png"
+              alt="map"
+              class="w-full h-full lg:max-h-[510px] rounded-xl"
+            />
+            <form action="#" class="flex flex-col gap-4 lg:max-w-sm">
+              <p
+                class="block antialiased font-sans text-sm leading-normal text-inherit text-left !font-semibold !text-neutral-600"
+              >
+                Selecione uma categoria
+              </p>
+              <div class="flex gap-4">
+                <button
+                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit"
+                  type="button"
+                  data-ripple-dark="true"
+                >
+                  Suporte</button
+                ><button
+                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit"
+                  type="button"
+                  data-ripple-dark="true"
+                >
+                  Feedback
+                </button>
+                <button
+                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit"
+                  type="button"
+                  data-ripple-dark="true"
+                >
+                  Duvida
+                </button>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p
+                    class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
+                  >
+                    Primeiro Nome
+                  </p>
+                  <div class="relative w-full h-11 !min-w-full">
+                    <input
+                      placeholder="First Name"
+                      name="first-name"
+                      class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                    /><label
+                      class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[4.1] text-neutral-500 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
                     >
-                        Contato
-                    </h1>
-                    <p class="text-base tracking-[0.5px] text-neutral-400">
-                        Utilize o campo ao lado caso precise entrar em
-                        contato conosco atraves da plataforma
-                    </p>
+                    </label>
+                  </div>
                 </div>
                 <div>
-                    <p class="font-medium text-neutral-400 text-sm inline-flex justify-center items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">
-                            alternate_email
-                            </span>
-                        EMAIL:
-                        <a href="#" class="text-primary-600 underline"
-                            >projetotdah@gmail.com</a
-                        >
-                    </p>
-                    <p class="font-medium text-neutral-400 text-sm inline-flex justify-center items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">
-                            person
-                            </span>
-                        INSTAGRAM:
-                        <a href="#" class="text-primary-600 underline"
-                            >@ProjetoTDAH</a
-                        >
-                    </p>
-                    <p class="font-medium text-neutral-400 text-sm inline-flex justify-center items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">
-                            call
-                            </span>
-                        TELEFONE:
-                        <a href="#" class="text-primary-600 underline"
-                            >19 1234-56789</a
-                        >
-                    </p>
-                </div>
-                <div class="flex flex-row gap-8">
-                    <a href="#" class="text-neutral-400"><i class="fab fa-facebook-f w-12"></i></a>
-                    <a href="#" class="text-neutral-400"><i class="fab fa-twitter w-12"></i></a>
-                    <a href="#" class="text-neutral-400"><i class="fab fa-instagram w-12"></i></a>
-                </div>
-            </div>
-            <form
-                id="form-contact"
-                action="/contact"
-                method="post"
-                class="w-[65%] border-l-2 border-neutral-100 border-solid py-4 px-12"
-            >
-                <fieldset
-                    class="w-full h-fit flex flex-col gap-4 justify-center mb-4"
-                >
-                    <div class="relative z-0 input-filled">
-                        <div class="absolute left-4 top-4 z-10">
-                            <span class="material-symbols-outlined">
-                                person
-                            </span>
-                        </div>
-                        <input
-                            type="text"
-                            aria-label="inputtext"
-                            name="contactname"
-                            id="contactname"
-                            class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                            placeholder=" "
-                            value=""
-                        />
-                        <label
-                            for="contactname"
-                            class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                            >Nome completo</label
-                        >
-                    </div>
-                    <div class="relative z-0 input-filled">
-                        <div class="absolute left-4 top-4 z-10">
-                            <span class="material-symbols-outlined">
-                                email
-                            </span>
-                        </div>
-                        <input
-                            type="email"
-                            aria-label="inputtext"
-                            name="registeremail"
-                            id="registeremail"
-                            class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                            placeholder=" "
-                            value=""
-                        />
-                        <label
-                            for="registeremail"
-                            class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                            >Email</label
-                        >
-                    </div>
-                </fieldset>
-                <fieldset
-                    class="w-full h-fit flex flex-col gap-4 justify-center"
-                >
-                    <div class="flex flex-row gap-4">
-                        <div class="relative z-0 input-filled w-full">
-                            <div class="absolute left-4 top-4 z-10">
-                                <span class="material-symbols-outlined">
-                                    security
-                                </span>
-                            </div>
-                            <select
-                                name="contactverification"
-                                id="contactverification"
-                                class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                placeholder=" "
-                            >
-                                <option value="telephone">Telefone</option>
-                                <option value="email">Email</option>
-                            </select>
-                            <label
-                                for="contactverification"
-                                class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                >Opção de verificação</label
-                            >
-                        </div>
-                        <div class="relative z-0 input-filled w-full">
-                            <div class="absolute left-4 top-4 z-10">
-                                <span class="material-symbols-outlined">
-                                    contacts
-                                </span>
-                            </div>
-                            <select
-                                name="registerphone"
-                                id="registerphone"
-                                class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                placeholder=" "
-                            >
-                                <option value="question">Duvida</option>
-                                <option value="suport">Suporte</option>
-                                <option value="feedback">Avaliação</option>
-                            </select>
-                            <label
-                                for="registerphone"
-                                class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                >Categoria</label
-                            >
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset
-                    class="w-full h-fit flex flex-col gap-4 justify-center mt-4"
-                >
-                    <div class="relative z-0">
-                        <textarea
-                            name="inputtext"
-                            id="inputtext"
-                            class="w-full h-40 max-h-[200px] block leading-5 relative pt-2 px-4 rounded-t text-gray-800 bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:border-primary-600 focus:ring-0 peer"
-                            placeholder=" "
-                            value=""
-                        ></textarea>
-                        <label
-                            for="inputtext"
-                            class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:left-4 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                            >Mensagem</label
-                        >
-                    </div>
-                    <button
-                        type="submit"
-                        class="w-full btn relative flex flex-row items-center justify-center gap-x-2 py-2.5 px-6 rounded-[6.25rem] hover:shadow-md text-sm tracking-[.00714em] font-medium bg-primary-600 text-white"
+                  <p
+                    class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
+                  >
+                    Sobrenome
+                  </p>
+                  <div class="relative w-full h-11 !min-w-full">
+                    <input
+                      placeholder="Last Name"
+                      name="last-name"
+                      class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                    /><label
+                      class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[4.1] text-neutral-500 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
                     >
-                        Enviar
-                    </button>
-                </fieldset>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p
+                  class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
+                >
+                  Email
+                </p>
+                <div class="relative w-full h-11 !min-w-full">
+                  <input
+                    placeholder="name@email.com"
+                    name="email"
+                    class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                  /><label
+                    class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[4.1] text-neutral-500 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
+                  >
+                  </label>
+                </div>
+              </div>
+              <div>
+                <p
+                  class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
+                >
+                  Sua mensagem
+                </p>
+                <div class="relative w-full !min-w-full">
+                  <grammarly-extension
+                    data-grammarly-shadow-root="true"
+                    class="dnXmp"
+                  ></grammarly-extension
+                  ><grammarly-extension
+                    data-grammarly-shadow-root="true"
+                    class="dnXmp"
+                  ></grammarly-extension
+                  ><textarea
+                    rows="6"
+                    placeholder="Message"
+                    name="message"
+                    class="peer w-full h-full min-h-[100px] bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 resize-y disabled:bg-blue-neutral-50 disabled:border-0 disabled:resize-none transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 text-sm px-3 py-2.5 rounded-[7px] !resize-none !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                    spellcheck="false"
+                  ></textarea
+                  ><label
+                    class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[3.75] text-blue-neutral-400 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
+                  ></label>
+                </div>
+              </div>
+              <button
+                class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-primary-600 text-white shadow-md shadow-primary-600/10 hover:shadow-lg hover:shadow-primary-600/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none bg-primary-600 w-full"
+                type="button"
+                data-ripple-light="true"
+              >
+                Enviar Mensagem
+              </button>
             </form>
+          </div>
         </div>
-    </section>
+      </section>
     <%- include('partials/footer') %>
 </body>
 </html>
