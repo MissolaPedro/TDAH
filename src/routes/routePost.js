@@ -22,7 +22,7 @@ function routeEJS(app) {
         const { isValid, errors } = await validateLoginForm({ loginemail, loginpassword });
     
         if (!isValid) {
-            return res.render("partials/form-login", {
+            return res.render("forms/login", {
                 title: "Login",
                 csrfToken: req.csrfToken(),
                 loginErrorMessage: errors.join(', '),
@@ -39,7 +39,7 @@ function routeEJS(app) {
             (error, user) => {
                 if (error) {
                     console.error("Erro ao fazer login",);
-                    return res.render("partials/form-login", {
+                    return res.render("forms/login", {
                         title: "Login",
                         csrfToken: req.csrfToken(),
                         loginErrorMessage: 'Informações Invalidas',
@@ -67,7 +67,7 @@ function routeEJS(app) {
     
         // Verificação do nome
         if (!isNotEmpty(registername)) {
-            return res.render("partials/form-register", {
+            return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: "O nome não pode estar vazio.",
@@ -77,7 +77,7 @@ function routeEJS(app) {
     
         // Verificação do sobrenome
         if (!isNotEmpty(registersurname)) {
-            return res.render("partials/form-register", {
+            return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: "O sobrenome não pode estar vazio.",
@@ -88,7 +88,7 @@ function routeEJS(app) {
         // Validação do email
         const emailValidationResult = await validarEmailCompleto(registeremail);
         if (emailValidationResult !== "O email é válido.") {
-            return res.render("partials/form-register", {
+            return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: emailValidationResult,
@@ -99,7 +99,7 @@ function routeEJS(app) {
         // Validação da senha
         const passwordErrors = validateRegisterPassword(registerpassword);
         if (passwordErrors.length > 0) {
-            return res.render("partials/form-register", {
+            return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: passwordErrors.join(", "),
@@ -109,7 +109,7 @@ function routeEJS(app) {
     
         // Verificação da confirmação da senha
         if (registerconfirmpassword !== registerpassword) {
-            return res.render("partials/form-register", {
+            return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: "As senhas não coincidem.",
@@ -119,7 +119,7 @@ function routeEJS(app) {
     
         // Verificação dos termos de uso
         if (!termos) {
-            return res.render("partials/form-register", {
+            return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: "Você deve aceitar os termos de uso.",
@@ -131,7 +131,7 @@ function routeEJS(app) {
         registrarUsuario(registeremail, registerpassword, (error, user) => {
             if (error) {
                 console.error("Erro ao registrar usuário:", error);
-                return res.render("partials/form-register", {
+                return res.render("forms/register", {
                     title: "Registre-se",
                     csrfToken: req.csrfToken(),
                     registerErrorMessage: "Erro ao registrar usuário. Tente novamente.",
@@ -140,7 +140,7 @@ function routeEJS(app) {
             }
             console.log("Usuário registrado com sucesso");
             res.cookie("loggedIn", true, { maxAge: 900000, httpOnly: true });
-            res.render("partials/form-register", {
+            res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerSucessMessage: "Usuário registrado com sucesso",
@@ -167,7 +167,7 @@ function routeEJS(app) {
 
         const emailValidationResult = await validarEmailCompleto(email);
         if (emailValidationResult !== "O email é válido.") {
-            return res.render("partials/form-reset", {
+            return res.render("forms/reset", {
                 title: "Resetar senha",
                 csrfToken: req.csrfToken(),
                 resetSucessMessage: null,
@@ -177,7 +177,7 @@ function routeEJS(app) {
 
         sendPasswordResetEmailFirebase(email, (error, message) => {
             if (error) {
-                return res.render("partials/form-reset", {
+                return res.render("forms/reset", {
                     title: "Resetar senha",
                     csrfToken: req.csrfToken(),
                     resetSucessMessage: null,

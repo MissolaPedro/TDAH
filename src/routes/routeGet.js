@@ -24,7 +24,7 @@ function routeGet(app) {
     });
 
     app.get("/login", (req, res) => {
-        res.render("partials/form-login", {
+        res.render("forms/login", {
             title: "Login",
             csrfToken: req.csrfToken(),
             loginErrorMessage: null,
@@ -33,7 +33,7 @@ function routeGet(app) {
     });
 
     app.get("/resetpassword", (req, res) => {
-        res.render("partials/form-reset", {
+        res.render("forms/reset", {
             title: "Resetar a senha",
             csrfToken: req.csrfToken(),
             resetSucessMessage: null,
@@ -42,7 +42,7 @@ function routeGet(app) {
     });
 
     app.get("/register", (req, res) => {
-        res.render("partials/form-register", {
+        res.render("forms/register", {
             title: "Registre-se",
             csrfToken: req.csrfToken(),
             registerErrorMessage: null,
@@ -65,6 +65,15 @@ function routeGet(app) {
         res.render("error", {
             title: "Erro",
             error: req.query.error,
+        });
+    });
+
+    app.get("/contact", (req, res) => {
+        res.render("Contact", {
+            title: "Contato",
+            csrfToken: req.csrfToken(),
+            contactErrorMessage: null,
+            contactSucessMessage: null,
         });
     });
 }

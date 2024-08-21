@@ -22,7 +22,7 @@ module.exports = (app) => {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com", "https://kit.fontawesome.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://trusted.cdn.com", "https://fonts.googleapis.com"],
-      imgSrc: ["'self'", "data:", "https://trusted.cdn.com"],
+      imgSrc: ["'self'", "data:", "https://trusted.cdn.com", "https://i.imgur.com", "https://imgur.com"],
       connectSrc: ["'self'", "https://ka-f.fontawesome.com"],
       fontSrc: ["'self'", "https://trusted.cdn.com", "https://fonts.gstatic.com", "https://kit.fontawesome.com", "https://ka-f.fontawesome.com"],
       objectSrc: ["'none'"],

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include('partials/head.html') %>
+        <%- include('partials/head') %>
     </head>
 <body>
-    <%- include('partials/navbar.html') %>
+    <div class="px-24">
+        <%- include('partials/navbar') %>
+    </div>
     <section class="h-[90vh] flex flex-col justify-center items-center">
         <div
             class="w-[80vw] h-[75%] flex justify-between bg-neutral-900 bg-opacity-20 rounded-xl p-10"
@@ -53,21 +55,9 @@
                     </p>
                 </div>
                 <div class="flex flex-row gap-8">
-                    <button
-                        class="material-symbols-outlined relative !inline-flex !items-center justify-center w-12 h-12 gap-x-2 py-2.5 px-6 rounded-[6.25rem] text-xl tracking-[.00714em] text-center font-medium hover:bg-surfacedark-100 focus:bg-surfacedark-200 text-neutral-300"
-                    >
-                        settings
-                    </button>
-                    <button
-                        class="material-symbols-outlined relative !inline-flex !items-center justify-center w-12 h-12 gap-x-2 py-2.5 px-6 rounded-[6.25rem] text-xl tracking-[.00714em] text-center font-medium hover:bg-surfacedark-100 focus:bg-surfacedark-200 text-neutral-300"
-                    >
-                        settings
-                    </button>
-                    <button
-                        class="material-symbols-outlined relative !inline-flex !items-center justify-center w-12 h-12 gap-x-2 py-2.5 px-6 rounded-[6.25rem] text-xl tracking-[.00714em] text-center font-medium hover:bg-surfacedark-100 focus:bg-surfacedark-200 text-neutral-300"
-                    >
-                        settings
-                    </button>
+                    <a href="#" class="text-neutral-400"><i class="fab fa-facebook-f w-12"></i></a>
+                    <a href="#" class="text-neutral-400"><i class="fab fa-twitter w-12"></i></a>
+                    <a href="#" class="text-neutral-400"><i class="fab fa-instagram w-12"></i></a>
                 </div>
             </div>
             <form
@@ -198,6 +188,6 @@
             </form>
         </div>
     </section>
-    <%- include('partials/footer.html') %>
+    <%- include('partials/footer') %>
 </body>
 </html>
