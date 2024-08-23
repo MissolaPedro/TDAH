@@ -9,7 +9,7 @@ const app = express();
 
 // Importação de Middlewares
 require('./src/middlewares/security')(app);
-require('./src/middlewares/logging')(app);
+require('./src/middlewares/logging')(app); // Certifique-se de que o middleware de logging está sendo carregado aqui
 require('./src/middlewares/parsing')(app);
 require('./src/middlewares/layout')(app);
 

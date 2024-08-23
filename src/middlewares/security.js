@@ -86,14 +86,6 @@ module.exports = (app) => {
           console.error('Erro ao registrar no arquivo de log:', err);
         }
       });
-  
-      // Renderiza o formulário de login com mensagens de erro
-      return res.render('partials/form-login', {
-        title: 'Login',
-        csrfToken: req.csrfToken(),
-        loginErrorMessage: errors.array().map(error => error.msg).join(', '),
-        loginSucessMessage: null,
-      });
     }
     next();
   });
@@ -102,6 +94,8 @@ module.exports = (app) => {
     body('registeremail').isEmail().withMessage('Email inválido.').normalizeEmail(),
     body('registerpassword').isLength({ min: 6 }).withMessage('Senha Invalida.').trim().escape(),
     body('registerconfirmpassword').custom((value, { req }) => {
+      console.log('Senha:', req.body.registerpassword); // Adicione este log
+      console.log('Confirmação de Senha:', value); // Adicione este log
       if (value !== req.body.registerpassword) {
         throw new Error('Confirmação de senha não corresponde à senha');
       }
@@ -119,14 +113,6 @@ module.exports = (app) => {
         if (err) {
           console.error('Erro ao registrar no arquivo de log:', err);
         }
-      });
-  
-      // Renderiza o formulário de registro com mensagens de erro
-      return res.render('partials/form-register', {
-        title: 'Registro',
-        csrfToken: req.csrfToken(),
-        registerErrorMessage: errors.array().map(error => error.msg).join(', '),
-        registerSucessMessage: null,
       });
     }
     next();

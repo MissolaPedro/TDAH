@@ -4,6 +4,10 @@ const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sig
 const { getFirestore, collection, addDoc } = require("firebase/firestore");
 const { getAnalytics, isSupported, logEvent } = require("firebase/analytics");
 
+// Importa as funções necessárias do Firebase Admin SDK
+const { initializeApp: initializeAdminApp, cert } = require('firebase-admin/app');
+const { getFirestore: getAdminFirestore } = require('firebase-admin/firestore');
+
 // Configuração do Firebase usando variáveis de ambiente
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -39,4 +43,13 @@ function logCustomEvent(eventName, eventData) {
   }
 }
 
-module.exports = { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, logCustomEvent, signOut, sendPasswordResetEmail };
+// Inicializa o Firebase Admin SDK
+const serviceAccount = require('./serviceAccountKey.json');
+
+initializeAdminApp({
+  credential: cert(serviceAccount)
+});
+
+const adminDb = getAdminFirestore();
+
+module.exports = { auth, db, adminDb, createUserWithEmailAndPassword, signInWithEmailAndPassword, logCustomEvent, signOut, sendPasswordResetEmail, collection, addDoc };

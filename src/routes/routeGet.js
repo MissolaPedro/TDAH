@@ -1,4 +1,5 @@
-// routeGet.js
+const fs = require('fs');
+const path = require('path');
 const { signOutUser } = require("../firebase/functions/signout.js");
 
 function routeGet(app) {
@@ -24,7 +25,6 @@ function routeGet(app) {
             title: "Login",
             csrfToken: req.csrfToken(),
             loginErrorMessage: null,
-            loginSucessMessage: null,
         });
     });
 
@@ -32,7 +32,6 @@ function routeGet(app) {
         res.render("forms/reset", {
             title: "Resetar a senha",
             csrfToken: req.csrfToken(),
-            resetSucessMessage: null,
             resetErrorMessage: null
         });
     });
@@ -42,7 +41,6 @@ function routeGet(app) {
             title: "Registre-se",
             csrfToken: req.csrfToken(),
             registerErrorMessage: null,
-            registerSucessMessage: null,
         });
     });
 
@@ -69,7 +67,6 @@ function routeGet(app) {
             title: "Contato",
             csrfToken: req.csrfToken(),
             contactErrorMessage: null,
-            contactSucessMessage: null,
         });
     });
 
@@ -77,7 +74,7 @@ function routeGet(app) {
         res.render("user/agenda", {
             title: "Agenda",
         });
-    })
+    });
 }
 
 module.exports = routeGet;
