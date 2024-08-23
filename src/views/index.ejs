@@ -4,7 +4,8 @@
     <%- include('partials/head') %>
 </head>
 <body>
-    <div
+    <main
+        id="home"
         class="px-24"
         style="
             background-image: url(/image/backgrounds/background_one.png);
@@ -18,7 +19,7 @@
 			welcomeMenssage: "Bem-vindo ao Projeto TDAH",
 			description: "O Projeto TDAH é uma ferramenta criada para ajudar pessoas com TDAH a organizar e manter uma rotina de estudos eficiente, oferecendo planos personalizados que se adaptam ao estilo de aprendizagem de cada usuário.",
 		}) %>
-    </div>
+    </main>
     <section
         id="home"
         class="bg-neutral-950/25 px-24 w-full h-[75vh] flex items-center justify-between"
@@ -49,33 +50,8 @@
             }) %>
         </div>
     </section>
-    <section id="about" class="h-screen w-full px-24 flex items-center bg-neutral-900">
-        <div class="flex flex-row justify-center items-start gap-8">
-            <img src="/image/about-image.png" alt="" />
-            <div class="flex flex-col gap-6">
-                <h2
-                    class="text-5xl uppercase font-semibold text-neutral-50"
-                >
-                    About Me
-                </h2>
-                <div>
-                    <p class="text-neutral-300 font-normal text-lg">
-                        Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Est quidem ipsum, harum dolores error debitis
-                        illo voluptas nobis, perferendis fugiat dolorem,
-                        beatae fuga commodi enim quo recusandae asperiores
-                        voluptatum ad.
-                    </p>
-                    <p class="text-neutral-300 font-normal text-lg">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Saepe cumque cupiditate amet voluptatibus
-                        exercitationem repellendus asperiores, delectus
-                        similique omnis veritatis, eum possimus odio ab
-                        dolores, natus minus vel perspiciatis praesentium!
-                    </p>
-                </div>
-            </div>
-        </div>
+    <section id="about">
+       <%- include('partials/about') %>
     </section>
     <section id="team">
         <%- include('partials/team') %>
