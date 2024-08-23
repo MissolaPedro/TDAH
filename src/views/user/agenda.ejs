@@ -3,8 +3,61 @@
 <head>
     <%- include('../partials/head') %>
 </head>
-<body>
-    <%- include('../partials/footer') %>
-    <title>agenda</title>
+<body class="">
+    <main class="bg-neutral-950 flex flex-row">
+        <%- include('../partials/sidebar') %>
+        <section class="px-24 flex flex-col gap-6 h-screen w-[92vw] py-12">
+            <div class="flex flex-row justify-between text-neutral-50">
+                <h2 class="text-4xl font-bold">AGENDA</h2>
+                <button class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  Dia da semana 
+                </button>
+            </div>
+            <div class="w-[100%]">
+                <div class="w-[3%]"></div>
+                <section class="flex-col w-[97%]">
+                    <div class="flex bg-neutral-900 h-fit rounded-lg w-full">
+                        <div class="inline-flex justify-between items-center py-6 px-8 text-neutral-50 uppercase w-full">
+                            <div class="inline-flex items-center gap-2">
+                                <img src="/image/icones/sun.svg" alt="" class="w-12">
+                                <h2 class="text-2xl">manhã</h2>
+                            </div>
+                            <h3 class="text-xl">09:00h - 12:00h</h3>
+                        </div>
+                        <hr class="text-neutral-800">
+                        <div>
+                            <div>
+                                <h3></h3>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <div></div>
+                        <hr class="text-neutral-800">
+                        <div>
+                            <div>
+                                <h3></h3>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div>
+                        <div></div>
+                        <hr class="text-neutral-800">
+                        <div>
+                            <div>
+                                <h3></h3>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

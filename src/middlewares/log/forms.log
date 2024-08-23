@@ -25,3 +25,4 @@
 {"timestamp":"2024-08-15T01:58:43.673Z","errors":[{"type":"field","value":"","msg":"Email inválido.","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Senha invalida.","path":"loginpassword","location":"body"}]}
 {"timestamp":"2024-08-15T01:59:36.322Z","errors":[{"type":"field","value":"","msg":"Email inválido.","path":"loginemail","location":"body"},{"type":"field","value":"","msg":"Senha invalida.","path":"loginpassword","location":"body"}]}
 {"timestamp":"2024-08-15T02:57:03.347Z","errors":[{"type":"field","value":"","msg":"Email inválido.","path":"registeremail","location":"body"},{"type":"field","value":"","msg":"Senha Invalida.","path":"registerpassword","location":"body"}]}
+{"timestamp":"2024-08-23T14:04:24.675Z","errors":[{"type":"field","value":"","msg":"Senha invalida.","path":"loginpassword","location":"body"}]}
