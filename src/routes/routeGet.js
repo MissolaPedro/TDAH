@@ -72,6 +72,12 @@ function routeGet(app) {
             contactSucessMessage: null,
         });
     });
+
+    app.get("/agenda", (req, res) => {
+        res.render("user/agenda", {
+            title: "Agenda",
+        });
+    })
 }
 
 module.exports = routeGet;

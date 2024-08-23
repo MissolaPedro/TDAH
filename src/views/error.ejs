@@ -41,8 +41,12 @@
                 <p
                   class="text-center block antialiased font-sans text-base font-light leading-relaxed text-inherit text-[20px] text-neutral-500"
                 >
-                Parece que nossos servidores estão um pouco confusos no momento. Não se preocupe, já estamos trabalhando para resolver isso!
-                Enquanto isso, você pode tentar recarregar a página ou voltar daqui a pouquinho. Agradecemos sua paciência!
+                <%= errorMessage %>
+                <% if (errorDetails) { %>
+                <code class="text-neutral-100 font-medium text-left">
+                  <pre><%= errorDetails %></pre>
+                </code>
+                <% } %>
                 </p>
                 <a
                   class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3.5 px-7 rounded-lg text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none bg-primary-600 gap-3 mt-8"
