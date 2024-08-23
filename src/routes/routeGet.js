@@ -10,10 +10,6 @@ function routeGet(app) {
         res.render("index", {
             title: "Projeto TDAH",
             query: req.query,
-            welcomeMenssage: "Bem-vindo ao Projeto TDAH",
-            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, distinctio architecto accusantium cum enim ipsam quos vitae natus voluptate rem, corporis quidem laborum eveniet ex magnam debitis. Asperiores, in eum!",
-            showContact,
-            showRegister,
             csrfToken: req.csrfToken(),
         });
     });
