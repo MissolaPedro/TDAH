@@ -40,12 +40,21 @@ function routeEJS(app) {
             return res.render("forms/login", {
                 title: "Login",
                 csrfToken: req.csrfToken(),
-                loginErrorMessage: errors.join(', ')
+                loginErrorMessage: errors.join(', '),
             });
         }
     
         try {
-            await signInUser(loginemail, loginpassword, loginrememberMe === "true", req);
+            const user = await signInUser(loginemail, loginpassword, loginrememberMe === "true", req);
+    
+            if (!user.emailVerified) {
+                return res.render("forms/login", {
+                    title: "Login",
+                    csrfToken: req.csrfToken(),
+                    loginErrorMessage: 'Por favor, verifique seu e-mail antes de fazer login.',
+                });
+            }
+    
             res.cookie("loggedIn", true, {
                 maxAge: 900000,
                 httpOnly: true,
@@ -56,10 +65,11 @@ function routeEJS(app) {
             return res.render("forms/login", {
                 title: "Login",
                 csrfToken: req.csrfToken(),
-                loginErrorMessage: 'Informações Invalidas'
+                loginErrorMessage: 'Informações Invalidas',
             });
         }
     });
+    
 
     app.post("/register", async (req, res) => {
         const {
@@ -130,11 +140,10 @@ function routeEJS(app) {
         try {
             await registrarUsuario(registeremail, registerpassword, req);
             await insertUserData(registername, registersurname, registeremail);
-            res.cookie("loggedIn", true, { maxAge: 900000, httpOnly: true });
             res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: null
+                registerErrorMessage: "Verifique seu e-mail para completar o registro."
             });
         } catch (error) {
             console.error("Erro ao registrar usuário:", error);
@@ -142,6 +151,30 @@ function routeEJS(app) {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
                 registerErrorMessage: "Erro ao registrar usuário. Tente novamente."
+            });
+        }
+    });
+
+    app.get("/verify-email", async (req, res) => {
+        const { email } = req.query;
+
+        try {
+            const user = await auth.getUserByEmail(email);
+            if (user.emailVerified) {
+                res.redirect("/dashboard");
+            } else {
+                res.render("forms/verify-email", {
+                    title: "Verificação de E-mail",
+                    csrfToken: req.csrfToken(),
+                    verifyErrorMessage: "Por favor, verifique seu e-mail."
+                });
+            }
+        } catch (error) {
+            console.error("Erro ao verificar e-mail:", error);
+            res.render("forms/verify-email", {
+                title: "Verificação de E-mail",
+                csrfToken: req.csrfToken(),
+                verifyErrorMessage: "Erro ao verificar e-mail. Tente novamente."
             });
         }
     });

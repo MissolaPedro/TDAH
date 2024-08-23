@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { signOutUser } = require("../firebase/functions/signout.js");
+const authMiddleware = require('../middlewares/auth.js'); // Certifique-se de importar o middleware
 
 function routeGet(app) {
     // Rota para iniciar o processo de autorização
@@ -70,9 +71,40 @@ function routeGet(app) {
         });
     });
 
-    app.get("/agenda", (req, res) => {
+    // Aplicar o middleware authMiddleware nas rotas protegidas
+    app.get("/dashboard", authMiddleware, (req, res) => {
+        res.render("user/dashboard", {
+            title: "Dashboard",
+            csrfToken: req.csrfToken(),
+        });
+    });
+
+    app.get("/agenda", authMiddleware, (req, res) => {
         res.render("user/agenda", {
             title: "Agenda",
+            csrfToken: req.csrfToken(),
+        });
+    });
+
+    app.get("/task", authMiddleware, (req, res) => {
+        res.render("user/task", {
+            title: "Tarefas",
+            csrfToken: req.csrfToken(),
+        });
+    });
+
+    app.get("/settings", authMiddleware, (req, res) => {
+        res.render("user/settings", {
+            title: "Configurações",
+            csrfToken: req.csrfToken(),
+        });
+    });
+
+    app.get("/verify-email", (req, res) => {
+        res.render("forms/verify-email", {
+            title: "Verificação de E-mail",
+            csrfToken: req.csrfToken(),
+            verifyErrorMessage: "Por favor, verifique seu e-mail.",
         });
     });
 }

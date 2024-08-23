@@ -1,6 +1,5 @@
 const morgan = require('morgan');
 const { validationResult } = require('express-validator');
-const { insertLog } = require('../firebase/inserts/insertLogs'); // Importa a função de inserção de logs
 
 module.exports = (app) => {
   // Formato de log personalizado
@@ -12,12 +11,10 @@ module.exports = (app) => {
     skip: (req, res) => res.statusCode < 400, // Log apenas erros no console
     stream: {
       write: (message) => {
-        const logData = {
+        console.log({
           message,
           timestamp: new Date().toISOString()
-        };
-        // console.log('Tentando inserir log de acesso'); // Log de depuração
-        insertLog(logData, 'accessLogs');
+        });
       }
     }
   }));
@@ -28,12 +25,10 @@ module.exports = (app) => {
     app.use(`/${route}`, morgan(customFormat, {
       stream: {
         write: (message) => {
-          const logData = {
+          console.log({
             message,
             timestamp: new Date().toISOString()
-          };
-          // console.log(`Tentando inserir log para a rota: ${route}`); // Log de depuração
-          insertLog(logData, `${route}Logs`);
+          });
         }
       }
     }));
@@ -41,13 +36,11 @@ module.exports = (app) => {
 
   // Middleware para registrar erros gerais
   app.use((err, req, res, next) => {
-    const errorLog = {
+    console.error({
       timestamp: new Date().toISOString(),
       message: err.message,
       stack: err.stack
-    };
-    // console.log('Tentando inserir log de erro'); // Log de depuração
-    insertLog(errorLog, 'errorLogs');
+    });
     next(err);
   });
 
@@ -56,12 +49,10 @@ module.exports = (app) => {
     if (req.method === 'POST') {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        const validationLog = {
+        console.warn({
           timestamp: new Date().toISOString(),
           errors: errors.array()
-        };
-        // console.log('Tentando inserir log de validação'); // Log de depuração
-        insertLog(validationLog, 'validationLogs');
+        });
       }
     }
     next();

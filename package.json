@@ -32,6 +32,9 @@
     "helmet": "^7.1.0",
     "https": "^1.0.0",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.14",
+    "nodemailer-mailgun-transport": "^2.1.5",
+    "nodemailer-mailjet-transport": "^1.0.4",
     "owasp-password-strength-test": "^1.3.0",
     "rotating-file-stream": "^3.2.3",
     "sal.js": "^0.8.5"
