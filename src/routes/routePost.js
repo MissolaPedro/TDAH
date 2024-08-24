@@ -1,20 +1,35 @@
 const {
-    registrarUsuario,
     signInUser,
-    sendPasswordResetEmailFirebase,
-    signOutUser,
-} = require("../firebase/functions/login");
+} = require("../firebase/functions/login"); // Importar funções de login
 
 const {
-    validarEmailSimples,
-    validarSenhaSimples,
+    sendPasswordResetEmailFirebase,
+} = require("../firebase/functions/resetpassword"); // Importar funções de reset de senha
+
+const {
+    signOutUser,
+} = require("../firebase/functions/signout"); // Importar funções de logout
+
+const {
+    registrarUsuario,
+} = require("../firebase/functions/register"); // Importar funções de registro
+
+const {
     validateLoginForm,
     validarEmailCompleto,
     validateRegisterPassword,
     isNotEmpty
 } = require('../modules/verifications');
 
+const { insertUserData } = require('../firebase/inserts/insertRegister');
+
+// Importar módulo de logging
+const logging = require('../middlewares/logging');
+
 function routeEJS(app) {
+    // Carregar middleware de logging
+    logging(app);
+
     app.post("/login", async (req, res) => {
         const { loginemail, loginpassword, loginrememberMe } = req.body;
     
@@ -26,34 +41,35 @@ function routeEJS(app) {
                 title: "Login",
                 csrfToken: req.csrfToken(),
                 loginErrorMessage: errors.join(', '),
-                loginSucessMessage: null
             });
         }
     
-        // Tentativa de login
-        signInUser(
-            loginemail,
-            loginpassword,
-            loginrememberMe === "true",
-            req,
-            (error, user) => {
-                if (error) {
-                    console.error("Erro ao fazer login",);
-                    return res.render("forms/login", {
-                        title: "Login",
-                        csrfToken: req.csrfToken(),
-                        loginErrorMessage: 'Informações Invalidas',
-                        loginSucessMessage: null,
-                    });
-                }
-                res.cookie("loggedIn", true, {
-                    maxAge: 900000,
-                    httpOnly: true,
+        try {
+            const user = await signInUser(loginemail, loginpassword, loginrememberMe === "true", req);
+    
+            if (!user.emailVerified) {
+                return res.render("forms/login", {
+                    title: "Login",
+                    csrfToken: req.csrfToken(),
+                    loginErrorMessage: 'Por favor, verifique seu e-mail antes de fazer login.',
                 });
-                res.redirect("/dashboard");
             }
-        );
+    
+            res.cookie("loggedIn", true, {
+                maxAge: 900000,
+                httpOnly: true,
+            });
+            res.redirect("/dashboard");
+        } catch (error) {
+            console.error("Erro ao fazer login", error);
+            return res.render("forms/login", {
+                title: "Login",
+                csrfToken: req.csrfToken(),
+                loginErrorMessage: 'Informações Invalidas',
+            });
+        }
     });
+    
 
     app.post("/register", async (req, res) => {
         const {
@@ -70,8 +86,7 @@ function routeEJS(app) {
             return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: "O nome não pode estar vazio.",
-                loginSucessMessage: null
+                registerErrorMessage: "O nome não pode estar vazio."
             });
         }
     
@@ -80,8 +95,7 @@ function routeEJS(app) {
             return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: "O sobrenome não pode estar vazio.",
-                loginSucessMessage: null
+                registerErrorMessage: "O sobrenome não pode estar vazio."
             });
         }
     
@@ -91,8 +105,7 @@ function routeEJS(app) {
             return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: emailValidationResult,
-                loginSucessMessage: null
+                registerErrorMessage: emailValidationResult
             });
         }
     
@@ -102,8 +115,7 @@ function routeEJS(app) {
             return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: passwordErrors.join(", "),
-                loginSucessMessage: null
+                registerErrorMessage: passwordErrors.join(", ")
             });
         }
     
@@ -112,8 +124,7 @@ function routeEJS(app) {
             return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: "As senhas não coincidem.",
-                loginSucessMessage: null
+                registerErrorMessage: "As senhas não coincidem."
             });
         }
     
@@ -122,44 +133,59 @@ function routeEJS(app) {
             return res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerErrorMessage: "Você deve aceitar os termos de uso.",
-                loginSucessMessage: null
+                registerErrorMessage: "Você deve aceitar os termos de uso."
             });
         }
     
-        // Registro do usuário
-        registrarUsuario(registeremail, registerpassword, (error, user) => {
-            if (error) {
-                console.error("Erro ao registrar usuário:", error);
-                return res.render("forms/register", {
-                    title: "Registre-se",
-                    csrfToken: req.csrfToken(),
-                    registerErrorMessage: "Erro ao registrar usuário. Tente novamente.",
-                    loginSucessMessage: null
-                });
-            }
-            console.log("Usuário registrado com sucesso");
-            res.cookie("loggedIn", true, { maxAge: 900000, httpOnly: true });
+        try {
+            await registrarUsuario(registeremail, registerpassword, req);
+            await insertUserData(registername, registersurname, registeremail);
             res.render("forms/register", {
                 title: "Registre-se",
                 csrfToken: req.csrfToken(),
-                registerSucessMessage: "Usuário registrado com sucesso",
-                loginErrorMessage: null
+                registerErrorMessage: "Verifique seu e-mail para completar o registro."
             });
-        });
+        } catch (error) {
+            console.error("Erro ao registrar usuário:", error);
+            return res.render("forms/register", {
+                title: "Registre-se",
+                csrfToken: req.csrfToken(),
+                registerErrorMessage: "Erro ao registrar usuário. Tente novamente."
+            });
+        }
+    });
+
+    app.get("/verify-email", async (req, res) => {
+        const { email } = req.query;
+
+        try {
+            const user = await auth.getUserByEmail(email);
+            if (user.emailVerified) {
+                res.redirect("/dashboard");
+            } else {
+                res.render("forms/verify-email", {
+                    title: "Verificação de E-mail",
+                    csrfToken: req.csrfToken(),
+                    verifyErrorMessage: "Por favor, verifique seu e-mail."
+                });
+            }
+        } catch (error) {
+            console.error("Erro ao verificar e-mail:", error);
+            res.render("forms/verify-email", {
+                title: "Verificação de E-mail",
+                csrfToken: req.csrfToken(),
+                verifyErrorMessage: "Erro ao verificar e-mail. Tente novamente."
+            });
+        }
     });
     
-    app.post("/logout", (req, res) => {
-        signOutUser(error => {
-            if (error) {
-                console.error("Erro ao deslogar:", error);
-                res.redirect("/");
-            } else {
-                console.log("Usuário deslogado com sucesso");
-                res.clearCookie("loggedIn");
-                res.redirect("/home");
-            }
-        });
+    app.post("/logout", async (req, res) => {
+        try {
+            await signOutUser(req, res);
+        } catch (error) {
+            console.error("Erro ao deslogar:", error);
+            return res.redirect("/");
+        }
     });
 
     app.post("/resetpassword", async (req, res) => {
@@ -170,25 +196,22 @@ function routeEJS(app) {
             return res.render("forms/reset", {
                 title: "Resetar senha",
                 csrfToken: req.csrfToken(),
-                resetSucessMessage: null,
                 resetErrorMessage: "Email inválido."
             });
         }
 
-        sendPasswordResetEmailFirebase(email, (error, message) => {
-            if (error) {
-                return res.render("forms/reset", {
-                    title: "Resetar senha",
-                    csrfToken: req.csrfToken(),
-                    resetSucessMessage: null,
-                    resetErrorMessage: "Ocorreu um erro ao reseta a senha. Tente novamente."
-                });
-            }
+        try {
+            await sendPasswordResetEmailFirebase(email, req);
             res.status(200).json({
-                resetSucessMessage: "Email de redefinição de senha enviado com sucesso.",
                 resetErrorMessage: null
             });
-        });
+        } catch (error) {
+            return res.render("forms/reset", {
+                title: "Resetar senha",
+                csrfToken: req.csrfToken(),
+                resetErrorMessage: "Ocorreu um erro ao reseta a senha. Tente novamente."
+            });
+        }
     });
 
     app.post("/contact", async (req, res) => {

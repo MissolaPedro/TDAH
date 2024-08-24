@@ -1,14 +1,17 @@
-const { auth } = require("../../../config/auth-firebase");
-const { sendPasswordResetEmail } = require("firebase/auth");
+const { auth, sendPasswordResetEmail } = require("../../../config/auth-firebase");
 
-function sendPasswordResetEmailFirebase(email, callback) {
-  sendPasswordResetEmail(auth, email)
-    .then(() => {
-      callback(null, "E-mail de redefinição de senha enviado com sucesso.");
-    })
-    .catch((error) => {
-      callback("Erro ao enviar e-mail de redefinição de senha.", null);
-    });
+async function sendPasswordResetEmailFirebase(email, req, callback) {
+    try {
+        await sendPasswordResetEmail(auth, email);
+        if (callback && typeof callback === 'function') {
+            callback(null, "E-mail de redefinição de senha enviado com sucesso.");
+        }
+    } catch (error) {
+        console.error("Erro ao enviar e-mail de redefinição de senha:", error);
+        if (callback && typeof callback === 'function') {
+            callback("Erro ao enviar e-mail de redefinição de senha.", null);
+        }
+    }
 }
 
 module.exports = { sendPasswordResetEmailFirebase };

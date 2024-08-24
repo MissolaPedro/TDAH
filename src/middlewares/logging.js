@@ -1,20 +1,7 @@
 const morgan = require('morgan');
-const fs = require('fs');
-const path = require('path');
-const rfs = require('rotating-file-stream');
+const { validationResult } = require('express-validator');
 
 module.exports = (app) => {
-  // Cria um stream de rotação de arquivos
-  const logDirectory = path.resolve(__dirname, '../../logs/');
-  if (!fs.existsSync(logDirectory)) {
-    fs.mkdirSync(logDirectory, { recursive: true });
-  }
-
-  const accessLogStream = rfs.createStream('access.log', {
-    interval: '1d', // rotaciona diariamente
-    path: logDirectory
-  });
-
   // Formato de log personalizado
   morgan.token('date', () => new Date().toISOString());
   const customFormat = ':remote-addr - :remote-user [:date] ":method :url HTTP/:http-version" :status :res[content-length] - :response-time ms';
@@ -22,8 +9,52 @@ module.exports = (app) => {
   // Middleware de logging
   app.use(morgan(customFormat, {
     skip: (req, res) => res.statusCode < 400, // Log apenas erros no console
-    stream: process.stdout
+    stream: {
+      write: (message) => {
+        console.log({
+          message,
+          timestamp: new Date().toISOString()
+        });
+      }
+    }
   }));
 
-  app.use(morgan('combined', { stream: accessLogStream }));
+  // Middleware de logging para cada rota
+  const routes = ['login', 'register', 'logout', 'resetpassword', 'contact'];
+  routes.forEach(route => {
+    app.use(`/${route}`, morgan(customFormat, {
+      stream: {
+        write: (message) => {
+          console.log({
+            message,
+            timestamp: new Date().toISOString()
+          });
+        }
+      }
+    }));
+  });
+
+  // Middleware para registrar erros gerais
+  app.use((err, req, res, next) => {
+    console.error({
+      timestamp: new Date().toISOString(),
+      message: err.message,
+      stack: err.stack
+    });
+    next(err);
+  });
+
+  // Middleware para registrar erros de validação
+  app.use((req, res, next) => {
+    if (req.method === 'POST') {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        console.warn({
+          timestamp: new Date().toISOString(),
+          errors: errors.array()
+        });
+      }
+    }
+    next();
+  });
 };
