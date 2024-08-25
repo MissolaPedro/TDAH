@@ -1,237 +1,218 @@
-const {
-    signInUser,
-} = require("../firebase/functions/login"); // Importar funções de login
-
-const {
-    sendPasswordResetEmailFirebase,
-} = require("../firebase/functions/resetpassword"); // Importar funções de reset de senha
-
-const {
-    signOutUser,
-} = require("../firebase/functions/signout"); // Importar funções de logout
-
-const {
-    registrarUsuario,
-} = require("../firebase/functions/register"); // Importar funções de registro
-
-const {
-    validateLoginForm,
-    validarEmailCompleto,
-    validateRegisterPassword,
-    isNotEmpty
-} = require('../modules/verifications');
-
-const { insertUserData } = require('../firebase/inserts/insertRegister');
-
-// Importar módulo de logging
-const logging = require('../middlewares/logging');
+const { validateLoginForm, validarEmail, validarSenha, isNotEmpty } = require('../modules/verifications');
+const loginUser = require('../firebase/functions/login');
+const { createUser, verifyEmailCode } = require('../firebase/functions/register'); // Adicione verifyEmailCode aqui
+const { resetUserPassword } = require('../firebase/functions/resetpassword');
 
 function routeEJS(app) {
-    // Carregar middleware de logging
-    logging(app);
+    app.post("/login", validateLoginMiddleware, handleLogin);
+    app.post("/register", validateRegisterMiddleware, handleRegister);
+    app.post("/resetpassword", validateResetPasswordMiddleware, handleResetPassword);
+    app.post("/contact", validateContactMiddleware, handleContact);
+    app.post("/verify-email", handleVerifyEmail);
+}
 
-    app.post("/login", async (req, res) => {
-        const { loginemail, loginpassword, loginrememberMe } = req.body;
-    
-        // Validação do formulário de login
-        const { isValid, errors } = await validateLoginForm({ loginemail, loginpassword });
-    
-        if (!isValid) {
+async function validateLoginMiddleware(req, res, next) {
+    const { loginemail, loginpassword } = req.body;
+    const { isValid, errors } = await validateLoginForm({ email: loginemail, password: loginpassword });
+
+    if (!isValid) {
+        if (res && !res.headersSent) {
             return res.render("forms/login", {
                 title: "Login",
-                csrfToken: req.csrfToken(),
                 loginErrorMessage: errors.join(', '),
             });
         }
-    
-        try {
-            const user = await signInUser(loginemail, loginpassword, loginrememberMe === "true", req);
-    
-            if (!user.emailVerified) {
-                return res.render("forms/login", {
-                    title: "Login",
-                    csrfToken: req.csrfToken(),
-                    loginErrorMessage: 'Por favor, verifique seu e-mail antes de fazer login.',
-                });
-            }
-    
-            res.cookie("loggedIn", true, {
-                maxAge: 900000,
-                httpOnly: true,
-            });
-            res.redirect("/dashboard");
-        } catch (error) {
-            console.error("Erro ao fazer login", error);
+    }
+    next();
+}
+
+async function handleLogin(req, res) {
+    const { loginemail, loginpassword, loginrememberMe } = req.body;
+
+    try {
+        const result = await loginUser(loginemail, loginpassword, loginrememberMe === "true");
+
+        res.cookie("loggedIn", true, {
+            maxAge: 900000,
+            httpOnly: true,
+        });
+        res.cookie("session", result.sessionCookie, {
+            maxAge: loginrememberMe === "true" ? 60 * 60 * 24 * 30 * 1000 : 60 * 60 * 24 * 5 * 1000,
+            httpOnly: true,
+        });
+        res.redirect("/dashboard");
+    } catch (error) {
+        console.error("Erro ao fazer login", error);
+        if (res && !res.headersSent) {
             return res.render("forms/login", {
                 title: "Login",
-                csrfToken: req.csrfToken(),
                 loginErrorMessage: 'Informações Invalidas',
             });
         }
-    });
-    
+    }
+}
 
-    app.post("/register", async (req, res) => {
-        const {
-            registername,
-            registersurname,
-            registeremail,
-            registerpassword,
-            registerconfirmpassword,
-            termos,
-        } = req.body;
-    
-        // Verificação do nome
-        if (!isNotEmpty(registername)) {
-            return res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: "O nome não pode estar vazio."
-            });
+async function validateRegisterMiddleware(req, res, next) {
+    const {
+        registername,
+        registersurname,
+        registeremail,
+        registerpassword,
+        registerconfirmpassword,
+        termos,
+    } = req.body;
+
+    if (!isNotEmpty(registername)) {
+        return renderRegisterError(res, "O nome não pode estar vazio.");
+    }
+
+    if (!isNotEmpty(registersurname)) {
+        return renderRegisterError(res, "O sobrenome não pode estar vazio.");
+    }
+
+    const emailValidationResult = await validarEmail(registeremail);
+    if (emailValidationResult !== "O email é válido.") {
+        return renderRegisterError(res, emailValidationResult);
+    }
+
+    const passwordErrors = validarSenha(registerpassword);
+    if (passwordErrors !== "A senha é válida.") {
+        return renderRegisterError(res, passwordErrors);
+    }
+
+    if (registerconfirmpassword !== registerpassword) {
+        return renderRegisterError(res, "As senhas não coincidem.");
+    }
+
+    if (!termos) {
+        return renderRegisterError(res, "Você deve aceitar os termos de uso.");
+    }
+
+    next();
+}
+
+async function handleRegister(req, res) {
+    const {
+        registername,
+        registersurname,
+        registeremail,
+        registerpassword,
+    } = req.body;
+
+    try {
+        console.log("Registrando usuário...");
+        await createUser({
+            email: registeremail,
+            password: registerpassword,
+            displayName: registername,
+            surname: registersurname
+        });
+
+        if (res && !res.headersSent) {
+            res.redirect(`/verify-email?email=${encodeURIComponent(registeremail)}`);
         }
-    
-        // Verificação do sobrenome
-        if (!isNotEmpty(registersurname)) {
+    } catch (error) {
+        console.error("Erro ao registrar usuário:", error);
+        if (res && !res.headersSent) {
             return res.render("forms/register", {
                 title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: "O sobrenome não pode estar vazio."
-            });
-        }
-    
-        // Validação do email
-        const emailValidationResult = await validarEmailCompleto(registeremail);
-        if (emailValidationResult !== "O email é válido.") {
-            return res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: emailValidationResult
-            });
-        }
-    
-        // Validação da senha
-        const passwordErrors = validateRegisterPassword(registerpassword);
-        if (passwordErrors.length > 0) {
-            return res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: passwordErrors.join(", ")
-            });
-        }
-    
-        // Verificação da confirmação da senha
-        if (registerconfirmpassword !== registerpassword) {
-            return res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: "As senhas não coincidem."
-            });
-        }
-    
-        // Verificação dos termos de uso
-        if (!termos) {
-            return res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: "Você deve aceitar os termos de uso."
-            });
-        }
-    
-        try {
-            await registrarUsuario(registeremail, registerpassword, req);
-            await insertUserData(registername, registersurname, registeremail);
-            res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
-                registerErrorMessage: "Verifique seu e-mail para completar o registro."
-            });
-        } catch (error) {
-            console.error("Erro ao registrar usuário:", error);
-            return res.render("forms/register", {
-                title: "Registre-se",
-                csrfToken: req.csrfToken(),
                 registerErrorMessage: "Erro ao registrar usuário. Tente novamente."
             });
         }
-    });
+    }
+}
 
-    app.get("/verify-email", async (req, res) => {
-        const { email } = req.query;
+async function validateResetPasswordMiddleware(req, res, next) {
+    const { email } = req.body;
 
-        try {
-            const user = await auth.getUserByEmail(email);
-            if (user.emailVerified) {
-                res.redirect("/dashboard");
-            } else {
-                res.render("forms/verify-email", {
-                    title: "Verificação de E-mail",
-                    csrfToken: req.csrfToken(),
-                    verifyErrorMessage: "Por favor, verifique seu e-mail."
-                });
-            }
-        } catch (error) {
-            console.error("Erro ao verificar e-mail:", error);
-            res.render("forms/verify-email", {
-                title: "Verificação de E-mail",
-                csrfToken: req.csrfToken(),
-                verifyErrorMessage: "Erro ao verificar e-mail. Tente novamente."
-            });
-        }
-    });
-    
-    app.post("/logout", async (req, res) => {
-        try {
-            await signOutUser(req, res);
-        } catch (error) {
-            console.error("Erro ao deslogar:", error);
-            return res.redirect("/");
-        }
-    });
-
-    app.post("/resetpassword", async (req, res) => {
-        const { email } = req.body;
-
-        const emailValidationResult = await validarEmailCompleto(email);
-        if (emailValidationResult !== "O email é válido.") {
+    const emailValidationResult = await validarEmail(email);
+    if (emailValidationResult !== "O email é válido.") {
+        if (res && !res.headersSent) {
             return res.render("forms/reset", {
                 title: "Resetar senha",
-                csrfToken: req.csrfToken(),
                 resetErrorMessage: "Email inválido."
             });
         }
+    }
 
-        try {
-            await sendPasswordResetEmailFirebase(email, req);
+    next();
+}
+
+async function handleResetPassword(req, res) {
+    const { email } = req.body;
+
+    try {
+        const log = await resetUserPassword(email);
+        if (log.success) {
             res.status(200).json({
                 resetErrorMessage: null
             });
-        } catch (error) {
+        } else {
+            throw new Error(log.error);
+        }
+    } catch (error) {
+        if (res && !res.headersSent) {
             return res.render("forms/reset", {
                 title: "Resetar senha",
-                csrfToken: req.csrfToken(),
-                resetErrorMessage: "Ocorreu um erro ao reseta a senha. Tente novamente."
+                resetErrorMessage: "Ocorreu um erro ao resetar a senha. Tente novamente."
             });
         }
-    });
+    }
+}
 
-    app.post("/contact", async (req, res) => {
-        const { name, email, message } = req.body;
+async function validateContactMiddleware(req, res, next) {
+    const { name, email, message } = req.body;
 
-        if (!isNotEmpty(name)) {
-            return res.status(400).json({ error: "Nome é obrigatório" });
-        }
+    if (!isNotEmpty(name)) {
+        return res.status(400).json({ error: "Nome é obrigatório" });
+    }
 
-        const emailValidationResult = await validarEmailCompleto(email);
-        if (emailValidationResult !== "O email é válido.") {
-            return res.status(400).json({ error: emailValidationResult });
-        }
+    const emailValidationResult = await validarEmail(email);
+    if (emailValidationResult !== "O email é válido.") {
+        return res.status(400).json({ error: emailValidationResult });
+    }
 
-        if (!isNotEmpty(message)) {
-            return res.status(400).json({ error: "Mensagem é obrigatória" });
-        }
+    if (!isNotEmpty(message)) {
+        return res.status(400).json({ error: "Mensagem é obrigatória" });
+    }
 
+    next();
+}
+
+async function handleContact(req, res) {
+    if (res && !res.headersSent) {
         res.status(200).json({ message: "Contato recebido com sucesso" });
-    });
+    }
+}
+
+async function handleVerifyEmail(req, res) {
+    const { email, code } = req.body;
+
+    try {
+        await verifyEmailCode(email, code);
+        res.send(`
+            <script>
+                alert('Seu e-mail foi verificado com sucesso. Você será redirecionado para a página de login.');
+                window.location.href = '/login';
+            </script>
+        `);
+    } catch (error) {
+        console.error("Erro ao verificar e-mail:", error);
+        res.render("forms/verify-email", {
+            title: "Verificação de E-mail",
+            message: "Erro ao verificar e-mail. Por favor, tente novamente.",
+            email: email,
+        });
+    }
+}
+
+function renderRegisterError(res, message) {
+    if (res && !res.headersSent) {
+        return res.render("forms/register", {
+            title: "Registre-se",
+            registerErrorMessage: message
+        });
+    }
 }
 
 module.exports = routeEJS;

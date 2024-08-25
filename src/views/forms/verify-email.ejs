@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+    <h1>Verificação de E-mail</h1>
+    <p><%= message %></p>
+    <form action="/verify-email" method="POST">
+        <input type="hidden" id="email" name="email" value="<%= email %>" required>
+        <label for="code">Código de Verificação:</label>
+        <input type="text" id="code" name="code" required>
+        <br>
+        <button type="submit">Verificar</button>
+    </form>
+</body>
+</html>

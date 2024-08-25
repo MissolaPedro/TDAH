@@ -1,30 +1,28 @@
-const { auth } = require('../../config/auth-firebase'); // Certifique-se de importar corretamente o auth do Firebase
+const admin = require('firebase-admin');
 
-function authMiddleware(req, res, next) {
-    // Verifica se o usuário está logado
+// Middleware para checar se o usuário está autenticado e o e-mail está verificado
+async function authMiddleware(req, res, next) {
     const isLoggedIn = req.cookies.loggedIn;
 
     if (!isLoggedIn) {
         return res.redirect('/login');
     }
 
-    // Verifica se o usuário tem a sessão de usuário ativa
     if (!req.session.userId) {
         return res.redirect('/login');
     }
 
-    // Verifica se o e-mail foi verificado
-    const user = auth.currentUser;
-    if (user) {
-        if (!user.emailVerified) {
-            return res.redirect('/verify-email');
+    try {
+        const user = await admin.auth().getUser(req.session.userId);
+        if (user.emailVerified) {
+            next();
+        } else {
+            res.redirect('/verify-email');
         }
-    } else {
-        return res.redirect('/login');
+    } catch (error) {
+        console.error('Erro ao verificar usuário:', error);
+        res.redirect('/login');
     }
-
-    // Se tudo estiver ok, continua para a próxima função
-    next();
 }
 
 module.exports = authMiddleware;

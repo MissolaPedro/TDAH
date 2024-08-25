@@ -10,7 +10,6 @@ const app = express();
 
 // Importação de Middlewares
 require('./src/middlewares/security')(app);
-// require('./src/middlewares/logging')(app);
 require('./src/middlewares/parsing')(app);
 require('./src/middlewares/layout')(app);
 
@@ -27,9 +26,12 @@ app.use('/protected-route', authMiddleware, (req, res) => {
 });
 
 // Middleware de Tratamento de Erros
-require('./src/middlewares/errorHandler')(app);
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Algo deu errado!');
+});
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV === 'development') {
   const options = {
