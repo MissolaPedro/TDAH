@@ -190,12 +190,7 @@ async function handleVerifyEmail(req, res) {
 
     try {
         await verifyEmailCode(email, code);
-        res.send(`
-            <script>
-                alert('Seu e-mail foi verificado com sucesso. Você será redirecionado para a página de login.');
-                window.location.href = '/login';
-            </script>
-        `);
+        res.redirect('/login');
     } catch (error) {
         console.error("Erro ao verificar e-mail:", error);
         res.render("forms/verify-email", {
