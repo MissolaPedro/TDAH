@@ -37,7 +37,8 @@
                 Resetar senha
             </h1>
             <form id="form-reset" action="/resetpassword" method="post" class="">
-                <!-- <input type="hidden" name="_csrf" value="%= csrfToken %" /> -->
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
                 <fieldset class="w-96 h-72 flex flex-col gap-4 justify-center">
                     <div class="relative z-0 input-filled">
                         <div class="absolute left-4 top-4 z-10">

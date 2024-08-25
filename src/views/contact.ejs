@@ -27,34 +27,23 @@
               alt="map"
               class="w-full h-full lg:max-h-[510px] rounded-xl"
             />
-            <form action="#" class="flex flex-col gap-4 lg:max-w-sm">
-              <p
-                class="block antialiased font-sans text-sm leading-normal text-inherit text-left !font-semibold !text-neutral-600"
-              >
-                Selecione uma categoria
+            <form action="/contact" method="POST" class="flex flex-col gap-4 lg:max-w-sm">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <p class="block antialiased font-sans text-sm leading-normal text-inherit text-left !font-semibold !text-neutral-600">
+                  Selecione uma categoria
               </p>
               <div class="flex gap-4">
-                <button
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit"
-                  type="button"
-                  data-ripple-dark="true"
-                >
-                  Suporte</button
-                ><button
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit"
-                  type="button"
-                  data-ripple-dark="true"
-                >
-                  Feedback
-                </button>
-                <button
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit"
-                  type="button"
-                  data-ripple-dark="true"
-                >
-                  Duvida
-                </button>
+                  <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit" type="button" data-ripple-dark="true" onclick="document.getElementById('category').value='Suporte'">
+                      Suporte
+                  </button>
+                  <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit" type="button" data-ripple-dark="true" onclick="document.getElementById('category').value='Feedback'">
+                      Feedback
+                  </button>
+                  <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit" type="button" data-ripple-dark="true" onclick="document.getElementById('category').value='Duvida'">
+                      Duvida
+                  </button>
               </div>
+              <input type="hidden" id="category" name="category" value="Suporte">
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <p

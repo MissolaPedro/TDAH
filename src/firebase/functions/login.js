@@ -1,6 +1,7 @@
-const { authAdmin, firestoreAdmin } = require('../../../config/configsFirebase');
+const { auth, firestoreAdmin, authAdmin } = require('../../../config/configsFirebase');
 const { validarEmail, validarSenha } = require('../../modules/verifications');
 const mailjet = require('node-mailjet').connect(process.env.MAILJET_API_KEY, process.env.MAILJET_API_SECRET);
+const { signInWithEmailAndPassword } = require('firebase/auth');
 
 async function loginUser(email, password, rememberMe) {
   const startTime = Date.now();
@@ -24,9 +25,11 @@ async function loginUser(email, password, rememberMe) {
   }
 
   try {
-    // Autenticar usuário
-    const userRecord = await authAdmin.getUserByEmail(email);
-    const user = await authAdmin.verifyPassword(email, password);
+    console.log('Iniciando autenticação do usuário...');
+    // Autenticar usuário usando Firebase SDK Client
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    // console.log('Usuário autenticado:', user);
 
     // Enviar email de confirmação usando Mailjet
     const request = mailjet.post("send", {'version': 'v3.1'}).request({
@@ -34,7 +37,7 @@ async function loginUser(email, password, rememberMe) {
         {
           "From": {
             "Email": process.env.EMAIL_USER,
-            "Name": "Seu Nome"
+            "Name": "Projeto TDAH"
           },
           "To": [
             {
@@ -50,6 +53,14 @@ async function loginUser(email, password, rememberMe) {
     });
 
     await request;
+    console.log('Email de confirmação enviado.');
+
+    // Configurar cookie de sessão
+    const idToken = await user.getIdToken();
+    const sessionCookie = await authAdmin.createSessionCookie(idToken, {
+      expiresIn: rememberMe ? 60 * 60 * 24 * 14 * 1000 : 60 * 5 * 1000 // 2 semanas ou 5 minutos
+    });
+    console.log('Cookie de sessão criado:', sessionCookie);
 
     // Registrar sucesso do login no Firestore
     await logsRef.add({
@@ -57,12 +68,8 @@ async function loginUser(email, password, rememberMe) {
       success: true,
       message: 'Login bem-sucedido',
       timestamp: new Date(),
-      duration: Date.now() - startTime
-    });
-
-    // Configurar cookie de sessão
-    const sessionCookie = await authAdmin.createSessionCookie(user.idToken, {
-      expiresIn: rememberMe ? 60 * 60 * 24 * 30 * 1000 : 60 * 60 * 24 * 5 * 1000 // 30 dias ou 5 dias
+      duration: Date.now() - startTime,
+      sessionCookie // Armazenar o token de sessão
     });
 
     return {
@@ -70,6 +77,7 @@ async function loginUser(email, password, rememberMe) {
       sessionCookie
     };
   } catch (error) {
+    console.error('Erro durante a autenticação:', error);
     // Registrar falha do login no Firestore
     await logsRef.add({
       email,

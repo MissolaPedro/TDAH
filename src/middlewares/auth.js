@@ -8,13 +8,14 @@ async function authMiddleware(req, res, next) {
         return res.redirect('/login');
     }
 
-    if (!req.session.userId) {
+    if (!req.cookies.session) {
         return res.redirect('/login');
     }
 
     try {
-        const user = await admin.auth().getUser(req.session.userId);
-        if (user.emailVerified) {
+        const decodedClaims = await admin.auth().verifySessionCookie(req.cookies.session, true);
+        if (decodedClaims.email_verified) {
+            req.user = decodedClaims;
             next();
         } else {
             res.redirect('/verify-email');

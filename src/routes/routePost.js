@@ -1,13 +1,17 @@
 const { validateLoginForm, validarEmail, validarSenha, isNotEmpty } = require('../modules/verifications');
 const loginUser = require('../firebase/functions/login');
-const { createUser, verifyEmailCode } = require('../firebase/functions/register'); // Adicione verifyEmailCode aqui
+const { createUser, verifyEmailCode } = require('../firebase/functions/register');
 const { resetUserPassword } = require('../firebase/functions/resetpassword');
+const { firestoreAdmin } = require('../../config/configsFirebase'); // Adicione esta linha para importar firestoreAdmin
+const securityMiddleware = require('../middlewares/security'); // Importar o middleware de segurança
+const { handleContactForm } = require('../firebase/insertContact');
 
 function routeEJS(app) {
+    securityMiddleware(app); // Aplicar o middleware de segurança
     app.post("/login", validateLoginMiddleware, handleLogin);
     app.post("/register", validateRegisterMiddleware, handleRegister);
     app.post("/resetpassword", validateResetPasswordMiddleware, handleResetPassword);
-    app.post("/contact", validateContactMiddleware, handleContact);
+    app.post("/contact", validateContactMiddleware, handleContactForm); // Atualizar para usar handleContactForm
     app.post("/verify-email", handleVerifyEmail);
 }
 
@@ -32,15 +36,26 @@ async function handleLogin(req, res) {
     try {
         const result = await loginUser(loginemail, loginpassword, loginrememberMe === "true");
 
+        // Buscar o token de sessão do Firestore
+        const logsRef = firestoreAdmin.collection('loginLogs');
+        const logSnapshot = await logsRef.where('email', '==', loginemail).where('success', '==', true).orderBy('timestamp', 'desc').limit(1).get();
+
+        if (logSnapshot.empty) {
+            throw new Error('Token de sessão não encontrado.');
+        }
+
+        const logData = logSnapshot.docs[0].data();
+        const sessionCookie = logData.sessionCookie;
+
         res.cookie("loggedIn", true, {
-            maxAge: 900000,
-            httpOnly: true,
-        });
-        res.cookie("session", result.sessionCookie, {
             maxAge: loginrememberMe === "true" ? 60 * 60 * 24 * 30 * 1000 : 60 * 60 * 24 * 5 * 1000,
             httpOnly: true,
         });
-        res.redirect("/dashboard");
+        res.cookie("session", sessionCookie, {
+            maxAge: loginrememberMe === "true" ? 60 * 60 * 24 * 30 * 1000 : 60 * 60 * 24 * 5 * 1000,
+            httpOnly: true,
+        });
+        res.redirect("/agenda"); // Redirecionar para /agenda após login bem-sucedido
     } catch (error) {
         console.error("Erro ao fazer login", error);
         if (res && !res.headersSent) {

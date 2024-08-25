@@ -1,5 +1,4 @@
-const { authAdmin, firestoreAdmin } = require('../../../config/configsFirebase');
-const { getAuth } = require('firebase-admin/auth');
+const { firestoreAdmin, auth } = require('../../../config/configsFirebase');
 
 async function signOutUser(req, res) {
     const userToken = req.cookies.session;
@@ -8,20 +7,24 @@ async function signOutUser(req, res) {
     }
 
     try {
-        const decodedToken = await authAdmin.verifySessionCookie(userToken, true);
-        const userId = decodedToken.uid;
-        const userRecord = await authAdmin.getUser(userId);
+        const user = auth.currentUser;
+        if (!user) {
+            return res.status(400).json({ error: 'Usuário não está logado' });
+        }
 
-        const loginTime = new Date(decodedToken.auth_time * 1000);
+        const userId = user.uid;
+        const userRecord = await user.getIdTokenResult();
+
+        const loginTime = new Date(userRecord.authTime * 1000);
         const logoutTime = new Date();
         const loggedInDuration = logoutTime - loginTime;
 
-        await authAdmin.revokeRefreshTokens(userId);
+        await auth.signOut();
 
         // Guardar logs no Firestore
         const logData = {
             userId: userId,
-            email: userRecord.email,
+            email: user.email,
             loginTime: loginTime.toISOString(),
             logoutTime: logoutTime.toISOString(),
             loggedInDuration: loggedInDuration,
@@ -31,9 +34,11 @@ async function signOutUser(req, res) {
 
         await firestoreAdmin.collection('signoutLogs').add(logData);
 
-        res.clearCookie('session');
-        res.clearCookie('loggedIn');
-        res.status(200).json({ message: 'Usuário deslogado com sucesso' });
+        if (!res.headersSent) {
+            res.clearCookie('session');
+            res.clearCookie('loggedIn');
+            res.status(200).json({ message: 'Usuário deslogado com sucesso' });
+        }
     } catch (error) {
         console.error('Erro ao deslogar usuário:', error);
 
@@ -51,7 +56,9 @@ async function signOutUser(req, res) {
 
         await firestoreAdmin.collection('signoutLogs').add(logData);
 
-        res.status(500).json({ error: 'Erro ao deslogar usuário' });
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'Erro ao deslogar usuário' });
+        }
     }
 }
 

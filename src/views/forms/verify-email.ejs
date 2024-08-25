@@ -7,6 +7,7 @@
     <h1>Verificação de E-mail</h1>
     <p><%= message %></p>
     <form action="/verify-email" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <input type="hidden" id="email" name="email" value="<%= email %>" required>
         <label for="code">Código de Verificação:</label>
         <input type="text" id="code" name="code" required>
