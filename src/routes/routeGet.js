@@ -48,7 +48,7 @@ function routeGet(app) {
                 res.redirect("/login");
             }
         } catch (error) {
-            console.error("Erro ao fazer logout:", error);
+            //console.error("Erro ao fazer logout:", error);
             if (!res.headersSent) {
                 res.redirect("/");
             }

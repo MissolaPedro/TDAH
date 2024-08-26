@@ -4,9 +4,40 @@
         <%- include('../partials/head') %>
     </head>
     <body class="bg-neutral-950 font-sans">
-            <div class="w-full h-screen flex items-center justify-center">
-                <div class="space-y-2 p-4 relative w-fit top-0 left-0">
-                    <% if (registerErrorMessage) { %>
+        <style>
+            .custom-checkbox {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                width: 22px; /* w-7 */
+                height: 22px; /* h-7 */
+                background-color: #171717; /* bg-neutral-900 */
+                border: 2px solid #262626; /* border-neutral-800 */
+                border-radius: 6px; /* rounded-sm */
+                display: inline-block;
+                position: relative;
+            }
+        
+            .custom-checkbox:checked {
+                background-color: #D97706; /* bg-amber-600 */
+            }
+        
+            .custom-checkbox:checked::after {
+                content: '';
+                position: absolute;
+                top: 3px; /* Ajuste conforme necessário */
+                left: 7px; /* Ajuste conforme necessário */
+                width: 5px; /* Ajuste conforme necessário */
+                height: 10px; /* Ajuste conforme necessário */
+                border: solid white;
+                border-width: 0 0.2rem 0.2rem 0;
+                transform: rotate(45deg);
+            }
+        </style>
+
+        <section class="w-full h-screen flex items-center justify-center bg-neutral-950">
+            <div class="w-[50%] m-auto flex gap-6 flex-col">
+                <% if (registerErrorMessage) { %>
                     <div
                         role="alert"
                         class="flex bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-900 dark:text-red-100 p-2 rounded-lg items-center transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105"
@@ -28,183 +59,114 @@
                         <p class="text-xs font-semibold"><%= registerErrorMessage %></p>
                     </div>
                     <% } %>
-                <div
-                    class="w-fit h-fit flex flex-col items-center justify-center gap-3 bg-neutral-950/25 rounded-xl p-12"
-                >
-                    <h1
-                        class="text-[2rem] leading-10 font-semibold text-gray-100 uppercase mb-6"
-                    >
-                        Registre-se
-                    </h1>
-                    <form
-                        id="form-register"
-                        action="/register"
-                        method="post"
-                        class=""
-                    >
+                <div class="flex flex-col items-center gap-3">
+                    <h1 class="font-bold uppercase text-5xl text-neutral-50">Faça seu Registro</h1>
+                    <p class="w-[500px] text-lg text-center text-neutral-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos ipsam architecto!</p>
+                </div>
+                <form action="/register" method="POST" class="flex flex-col justify-center items-center gap-8">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                        <fieldset
-                            class="w-96 h-fit flex flex-col gap-4 justify-center mb-4"
-                        >
-                            <div class="flex flex-row gap-4">
-                                <div class="relative z-0 input-filled">
-                                    <div class="absolute left-4 top-4 z-10">
-                                        <span class="material-symbols-outlined">
-                                            person
-                                        </span>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        aria-label="inputtext"
-                                        name="registername"
-                                        id="fregister-name"
-                                        class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                        placeholder=" "
-                                        value=""
-                                    />
-                                    <label
-                                        for="fregister-name"
-                                        class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                        >Primeiro nome</label
-                                    >
-                                </div>
-                                <div class="relative z-0 input-filled">
-                                    <div class="absolute left-4 top-4 z-10">
-                                        <span class="material-symbols-outlined">
-                                            person
-                                        </span>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        aria-label="inputtext"
-                                        name="registersurname"
-                                        id="fregister-surname"
-                                        class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                        placeholder=" "
-                                        value=""
-                                    />
-                                    <label
-                                        for="fregister-surname"
-                                        class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                        >Sobrenome</label
-                                    >
-                                </div>
-                            </div>
-                            <div class="relative z-0 input-filled">
-                                <div class="absolute left-4 top-4 z-10">
-                                    <span class="material-symbols-outlined">
-                                        email
-                                    </span>
-                                </div>
+                    <fieldset class="w-[75%] flex flex-row gap-6">
+                    <div class="flex flex-col items-start justify-center">
+                        <label for="registername" class="text-neutral-600/75 uppercase text-sm">Informe o seu primeiro nome</label>
+                        <div class="relative w-full">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                person
+                            </span>
+                            <input
+                            type="text"
+                            name="registername"
+                            class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                            placeholder="PRIMEIRO NOME"
+                        />
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-2">
+                        <div class="flex flex-col items-start justify-center">
+                            <label for="registersurnname" class="text-neutral-600/75 uppercase text-sm">Informe o seu sobrenome</label>
+                            <div class="relative w-full">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                    person
+                                </span>
                                 <input
-                                    type="email"
-                                    aria-label="inputtext"
-                                    name="registeremail"
-                                    id="fregister-email"
-                                    class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                    placeholder=" "
-                                    value=""
-                                />
-                                <label
-                                    for="fregister-email"
-                                    class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                    >Email</label
-                                >
+                                type="text"
+                                name="registersurnname"
+                                class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="SOBRENOME"
+                            />
                             </div>
-                            <div class="relative z-0 input-filled">
-                                <div class="absolute left-4 top-4 z-10">
-                                    <span class="material-symbols-outlined">
-                                        lock
-                                    </span>
-                                </div>
+                        </div>
+                    </div>
+                    </fieldset>
+
+                    <fieldset class="w-[75%] flex flex-col gap-6">
+                        <div class="flex flex-col items-start justify-center">
+                            <label for="registeremail" class="text-neutral-600/75 uppercase text-sm">Informe o seu email</label>
+                            <div class="relative w-full">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                    mail
+                                </span>
                                 <input
+                                type="email"
+                                name="registeremail"
+                                class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="EMAIL"
+                            />
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col gap-2">
+                            <div class="flex flex-col items-start justify-center">
+                                <label for="registerpassword" class="text-neutral-600/75 uppercase text-sm">Informe a sua senha</label>
+                                <div class="relative w-full">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                        key
+                                    </span>
+                                    <input
                                     type="password"
-                                    aria-label="inputtext"
                                     name="registerpassword"
-                                    id="fregister-password"
-                                    class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                    placeholder=" "
-                                    value=""
+                                    class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                    placeholder="SENHA"
                                 />
-                                <label
-                                    for="fregister-password"
-                                    class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                    >Senha</label
-                                >
-                            </div>
-                            <div class="relative z-0 input-filled">
-                                <div class="absolute left-4 top-4 z-10">
-                                    <span class="material-symbols-outlined">
-                                        lock
-                                    </span>
                                 </div>
-                                <input
-                                    type="password"
-                                    aria-label="inputtext"
-                                    name="registerconfirmpassword"
-                                    id="fregister-confirmpassword"
-                                    class="w-full h-14 block leading-5 relative pt-2 pl-14 pr-4 rounded-t bg-gray-100 border-b focus:border-b-2 border-gray-500 overflow-x-auto focus:outline-none focus:ring-0 text-gray-800 focus:border-primary-600 peer"
-                                    placeholder=" "
-                                    value=""
-                                />
-                                <label
-                                    for="fregister-confirmpassword"
-                                    class="absolute text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-4 z-10 origin-[0] left-14 peer-focus:left-14 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3.5 peer-invalid:text-error-600"
-                                    >Confirme a Senha</label
-                                >
                             </div>
-                        </fieldset>
-                        <fieldset
-                            class="w-96 h-fit flex flex-col gap-4 justify-center mb-6"
-                        >
-                            <div class="flex justify-between items-center">
-                                <label class="flex items-center">
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <div class="flex flex-col items-start justify-center">
+                                <label for="registerconfirmpassword" class="text-neutral-600/75 uppercase text-sm">Repita a sua senha</label>
+                                <div class="relative w-full">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                        key
+                                    </span>
                                     <input
-                                        type="checkbox"
-                                        name="termos"
-                                        class="w-[18px] h-[18px] hover:accent-primary-600 accent-primary-600 rounded-[2px] ltr:mr-3 rtl:ml-3"
-                                        value="true"
-                                    />
-                                    <span
-                                        style="padding-left: 8px"
-                                        class="uppercase text-xs tracking-[0.5px] font-medium text-gray-200"
-                                        >Aceito os termos de
-                                        <a href="#" class="text-primary-600">uso</a>
-                                        e de
-                                        <a href="#" class="text-primary-600"
-                                            >privacidade</a
-                                        ></span
-                                    >
-                                </label>
+                                    type="password"
+                                    name="registerconfirmpassword"
+                                    class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                    placeholder="CONFIRME A SENHA"
+                                />
+                                </div>
                             </div>
-    
-                            <button
-                                type="submit"
-                                class="btn relative flex flex-row items-center justify-center gap-x-2 py-2.5 px-6 rounded-[6.25rem] hover:shadow-md text-sm tracking-[.00714em] font-medium bg-primary-600 text-white"
-                            >
-                                Enviar
-                            </button>
+
+                                <div class="flex flex-row items-center gap-2">
+                                    <input type="checkbox" name="termos" class="custom-checkbox">
+                                    <label for="termos" class="text-neutral-500 uppercase text-sm">Aceito os termos de privacidade e segurança</label>
+                                </div>
+                            </div>
                         </fieldset>
-                    </form>
-                    <div class="flex items-center flex-col gap-2">
-                        <a
-                            href="/login"
-                            class="text-neutral-600 uppercase text-xs tracking-[0.5px] font-medium underline"
-                            >Tem conta? Faça o seu login aqui!</a
-                        >
-                        <a
-                            href="/"
-                            class="text-neutral-600 uppercase text-xs tracking-[0.5px] font-medium inline-flex gap-1 items-center"
-                        >
-                            <span
-                                class="material-symbols-outlined text-neutral-600 text-sm"
-                                >home</span
-                            >
-                            Voltar ao inicio
-                        </a>
+                
+
+                <div class="flex flex-col justify-center items-center w-full gap-6">
+                    <button type="submit" class="bg-primary-600 w-[50%] py-3 text-neutral-50 rounded-lg text-lg font-semibold uppercase">
+                        Registrar
+                    </button>
+                    <div class="flex flex-col items-center gap-1">
+                        <a href="/login" class="uppercase text-neutral-600 text-xs">Ja tem uma conta ? Faça login <span class="text-primary-600">AQUI!</span></a>
+                        <a href="/" class="uppercase text-neutral-600 text-xs flex items-center gap-1"><span class="material-symbols-outlined">home</span>Voltar ao inicio</a>
                     </div>
                 </div>
+                </form>
             </div>
-        </div>
+        </section>
     </body>
 </html>

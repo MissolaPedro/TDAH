@@ -9,7 +9,7 @@ module.exports = (app) => {
 
   // Middleware de Tratamento de Erros
   app.use((err, req, res, next) => {
-    console.error(err.stack);
+    //console.error(err.stack);
 
     // Verifica o ambiente
     const isDevelopment = process.env.NODE_ENV === 'development';

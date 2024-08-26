@@ -71,9 +71,9 @@ const configureCSRF = (app) => {
     const referer = req.headers.referer;
     const host = req.headers.host;
 
-    // console.log(`Origin: ${origin}`);
-    // console.log(`Referer: ${referer}`);
-    // console.log(`Host: ${host}`);
+    //console.log(`Origin: ${origin}`);
+    //console.log(`Referer: ${referer}`);
+    //console.log(`Host: ${host}`);
 
     if (req.method === 'POST') {
       const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];

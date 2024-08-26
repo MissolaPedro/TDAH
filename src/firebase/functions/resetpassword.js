@@ -12,7 +12,7 @@ async function resetUserPassword(email) {
     timestamp: new Date().toISOString()
   };
 
-  console.log('Iniciando reset de senha para:', email);
+  //console.log('Iniciando reset de senha para:', email);
 
   try {
     // Verificar se o email é válido e se o usuário existe
@@ -48,14 +48,14 @@ async function resetUserPassword(email) {
     await request;
 
     log.success = true;
-    console.log('Senha resetada com sucesso para:', email);
+    //console.log('Senha resetada com sucesso para:', email);
   } catch (error) {
     log.error = error.message;
-    console.error('Erro ao resetar senha para:', email, error.message);
+    //console.error('Erro ao resetar senha para:', email, error.message);
   } finally {
     log.duration = Date.now() - startTime;
     await firestoreAdmin.collection('resetPasswordLogs').add(log);
-    console.log('Log de reset de senha salvo para:', email);
+    //console.log('Log de reset de senha salvo para:', email);
   }
 }
 

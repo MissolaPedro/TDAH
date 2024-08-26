@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <%- include('partials/head') %>
-    </head>
-<body>
-    <div class="px-24 bg-neutral-950/25">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body class="">
+    <div class="px-24 bg-neutral-900">
         <%- include('partials/navbar') %>
     </div>
-    <section class="px-8 py-8 lg:py-16">
+
+    <section class="px-8 py-8 lg:py-16 bg-neutral-900">
         <div class="container mx-auto text-center">
           <h1
-            class="text-neutral-50 block antialiased tracking-normal font-sans font-semibold leading-tight text-blue-primary-600 mb-4 !text-3xl lg:!text-5xl"
+            class="text-neutral-50 block antialiased tracking-normal font-sans font-semibold leading-tight text-neutral-primary-600 mb-4 !text-3xl lg:!text-5xl"
           >
           Estamos Aqui para Ajudar
           </h1>
@@ -33,59 +34,60 @@
                   Selecione uma categoria
               </p>
               <div class="flex gap-4">
-                  <label>
-                      <input type="radio" name="category" value="Suporte" checked>
-                      Suporte
-                  </label>
-                  <label>
-                      <input type="radio" name="category" value="Feedback">
-                      Feedback
-                  </label>
-                  <label>
-                      <input type="radio" name="category" value="Duvida">
-                      Duvida
-                  </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="categoria" class="hidden" />
+                  <span class="px-4 py-2 bg-neutral-950/25 text-neutral-200 rounded-lg border border-solid border-neutral-800 cursor-pointer">Duvida</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="categoria" class="hidden" />
+                  <span class="px-4 py-2 bg-neutral-950/25 text-neutral-200 rounded-lg border border-solid border-neutral-800 cursor-pointer">Opinião</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="categoria" class="hidden" />
+                  <span class="px-4 py-2 bg-neutral-950/25 text-neutral-200 rounded-lg border border-solid border-neutral-800 cursor-pointer">Problema</span>
+                </label>
               </div>
+              
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
+                  <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-neutral-200">
                     Primeiro Nome
                   </p>
                   <div class="relative w-full h-11 !min-w-full">
                     <input
                       placeholder="First Name"
                       name="name"
-                      class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                      class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-neutral-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-neutral-neutral-200 placeholder-shown:border-t-neutral-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-neutral-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
                     />
                   </div>
                 </div>
                 <div>
-                  <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
+                  <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-neutral-200">
                     Sobrenome
                   </p>
                   <div class="relative w-full h-11 !min-w-full">
                     <input
                       placeholder="Last Name"
                       name="surname"
-                      class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                      class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-neutral-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-neutral-neutral-200 placeholder-shown:border-t-neutral-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-neutral-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
                     />
                   </div>
                 </div>
               </div>
               <div>
-                <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
+                <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-neutral-200">
                   Email
                 </p>
                 <div class="relative w-full h-11 !min-w-full">
                   <input
                     placeholder="name@email.com"
                     name="email"
-                    class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                    class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-neutral-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-neutral-neutral-200 placeholder-shown:border-t-neutral-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-neutral-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
                   />
                 </div>
               </div>
               <div>
-                <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
+                <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-neutral-200">
                   Sua mensagem
                 </p>
                 <div class="relative w-full !min-w-full">
@@ -93,7 +95,7 @@
                     rows="6"
                     placeholder="Message"
                     name="message"
-                    class="peer w-full h-full min-h-[100px] bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 resize-y disabled:bg-blue-neutral-50 disabled:border-0 disabled:resize-none transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 text-sm px-3 py-2.5 rounded-[7px] !resize-none !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
+                    class="peer w-full h-full min-h-[100px] bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-neutral-neutral-50 disabled:border-0 disabled:resize-none transition-all placeholder-shown:border placeholder-shown:border-neutral-neutral-200 placeholder-shown:border-t-neutral-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 text-sm px-3 py-2.5 rounded-[7px] !resize-none !border !border-neutral-800 text-neutral-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
                     spellcheck="false"
                   ></textarea>
                 </div>
@@ -110,5 +112,6 @@
         </div>
       </section>
     <%- include('partials/footer') %>
+    <script src="/js/animations/changeRadio.js"></script>
 </body>
 </html>

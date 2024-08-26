@@ -3,19 +3,19 @@ const { firestoreAdmin, auth } = require('../../../config/configsFirebase');
 async function signOutUser(req, res) {
     const user = auth.currentUser;
     if (!user) {
-        console.log('Nenhum usuário logado.');
+        //console.log('Nenhum usuário logado.');
         return;
     }
 
     try {
-        console.log('Iniciando processo de logout...');
+        //console.log('Iniciando processo de logout...');
         const userId = user.uid;
 
         // Obter informações do usuário
         const userRecord = user;
 
         if (!userRecord) {
-            console.log('Usuário não encontrado.');
+            //console.log('Usuário não encontrado.');
             return;
         }
 
@@ -28,7 +28,7 @@ async function signOutUser(req, res) {
         const loggedInDuration = logoutTime - loginTime;
 
         await auth.signOut();
-        console.log('Usuário deslogado com sucesso.');
+        //console.log('Usuário deslogado com sucesso.');
 
         // Guardar logs no Firestore
         const logData = {
@@ -42,9 +42,9 @@ async function signOutUser(req, res) {
         };
 
         await firestoreAdmin.collection('signoutLogs').add(logData);
-        console.log('Log de logout salvo.');
+        //console.log('Log de logout salvo.');
     } catch (error) {
-        console.error('Erro ao deslogar usuário:', error);
+        //console.error('Erro ao deslogar usuário:', error);
 
         // Guardar logs de erro no Firestore
         const logData = {
@@ -59,7 +59,7 @@ async function signOutUser(req, res) {
         };
 
         await firestoreAdmin.collection('signoutLogs').add(logData);
-        console.log('Log de erro salvo.');
+        //console.log('Log de erro salvo.');
     }
 }
 

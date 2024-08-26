@@ -57,7 +57,7 @@ async function handleLogin(req, res) {
         });
         res.redirect("/agenda"); // Redirecionar para /agenda após login bem-sucedido
     } catch (error) {
-        console.error("Erro ao fazer login", error);
+        //console.error("Erro ao fazer login", error);
         if (res && !res.headersSent) {
             return res.render("forms/login", {
                 title: "Login",
@@ -115,7 +115,7 @@ async function handleRegister(req, res) {
     } = req.body;
 
     try {
-        console.log("Registrando usuário...");
+        //console.log("Registrando usuário...");
         await createUser({
             email: registeremail,
             password: registerpassword,
@@ -127,7 +127,7 @@ async function handleRegister(req, res) {
             res.redirect(`/verify-email?email=${encodeURIComponent(registeremail)}`);
         }
     } catch (error) {
-        console.error("Erro ao registrar usuário:", error);
+        //console.error("Erro ao registrar usuário:", error);
         if (res && !res.headersSent) {
             return res.render("forms/register", {
                 title: "Registre-se",
@@ -209,7 +209,7 @@ async function handleVerifyEmail(req, res) {
         await verifyEmailCode(email, code);
         res.redirect('/login');
     } catch (error) {
-        console.error("Erro ao verificar e-mail:", error);
+        //console.error("Erro ao verificar e-mail:", error);
         res.render("forms/verify-email", {
             title: "Verificação de E-mail",
             message: "Erro ao verificar e-mail. Por favor, tente novamente.",

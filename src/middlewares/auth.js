@@ -21,7 +21,7 @@ async function authMiddleware(req, res, next) {
             res.redirect('/verify-email');
         }
     } catch (error) {
-        console.error('Erro ao verificar usuário:', error);
+        //console.error('Erro ao verificar usuário:', error);
         res.redirect('/login');
     }
 }

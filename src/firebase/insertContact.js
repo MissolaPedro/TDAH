@@ -6,16 +6,16 @@ async function insertContactAndLog(contactData) {
     try {
         const contactRef = firestoreAdmin.collection('contacts').doc();
         await contactRef.set(contactData);
-        console.log('Contato inserido:', contactData);
+        //console.log('Contato inserido:', contactData);
 
         const logRef = firestoreAdmin.collection('contactLogs').doc();
         await logRef.set({
             ...contactData,
             timestamp: admin.firestore.FieldValue.serverTimestamp(),
         });
-        console.log('Log armazenado:', contactData);
+        //console.log('Log armazenado:', contactData);
     } catch (error) {
-        console.error('Erro ao inserir contato e armazenar log:', error);
+        //console.error('Erro ao inserir contato e armazenar log:', error);
     }
 }
 
@@ -33,7 +33,7 @@ async function handleContactForm(req, res) {
     // Inserir dados do contato e armazenar log no Firestore
     await insertContactAndLog(contactData);
 
-    console.log('Processo de inserção de contato concluído.');
+    //console.log('Processo de inserção de contato concluído.');
 }
 
 module.exports = { handleContactForm };

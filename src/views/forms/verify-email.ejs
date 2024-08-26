@@ -4,15 +4,82 @@
     <%- include('../partials/head') %>
 </head>
 <body>
-    <h1>Verificação de E-mail</h1>
-    <p><%= message %></p>
-    <form action="/verify-email" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-        <input type="hidden" id="email" name="email" value="<%= email %>" required>
-        <label for="code">Código de Verificação:</label>
-        <input type="text" id="code" name="code" required>
-        <br>
-        <button type="submit">Verificar</button>
-    </form>
+    <section class="w-full h-screen flex items-center justify-center bg-neutral-950">
+        <div class="w-[50%] m-auto flex gap-6 flex-col">
+            <div class="flex flex-col items-center gap-3">
+                <h1 class="font-bold uppercase text-5xl text-neutral-50">Verifique seu email</h1>
+                <p class="w-[500px] text-lg text-center text-neutral-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos ipsam architecto!</p>
+            </div>
+            <form action="/verify-email" method="POST" class="flex flex-col justify-center items-center gap-8">
+                <input
+                    type="hidden"
+                    name="_csrf"
+                    value="<%= csrfToken %>"
+                />
+                <fieldset
+                    class="w-[75%] flex flex-col gap-6"
+                >
+                    <input
+                        type="hidden"
+                        id="email"
+                        name="email"
+                        value="<%= email %>"
+                        required
+                    />
+                    <div class="flex flex-col items-start justify-center m-auto">
+                        <label for="code" class="text-neutral-600/75 uppercase text-sm">Informe o código de verificação</label>
+                        <div class="flex space-x-4 mt-2" id="code-inputs">
+                            <input
+                                type="text"
+                                name="code[0]"
+                                maxlength="1"
+                                class="w-[56px] h-20 bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 text-center placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="0"
+                            />
+                            <input
+                                type="text"
+                                name="code[1]"
+                                maxlength="1"
+                                class="w-[56px] h-20 bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 text-center placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="0"
+                            />
+                            <input
+                                type="text"
+                                name="code[2]"
+                                maxlength="1"
+                                class="w-[56px] h-20 bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 text-center placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="0"
+                            />
+                            <input
+                                type="text"
+                                name="code[3]"
+                                maxlength="1"
+                                class="w-[56px] h-20 bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 text-center placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="0"
+                            />
+                            <input
+                                type="text"
+                                name="code[4]"
+                                maxlength="1"
+                                class="w-[56px] h-20 bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 text-center placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="0"
+                            />
+                            <input
+                                type="text"
+                                name="code[5]"
+                                maxlength="1"
+                                class="w-[56px] h-20 bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 text-center placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                placeholder="0"
+                            />
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="submit" class="bg-primary-600 w-[50%] py-3 text-neutral-50 rounded-xl text-lg font-semibold uppercase">
+                    Verificar
+                </button>
+            </form>
+        </div>
+    </section>
+    <script src="/js/animations/verifyEmail.js"></script>
 </body>
 </html>
