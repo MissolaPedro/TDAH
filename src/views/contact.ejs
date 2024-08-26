@@ -33,57 +33,47 @@
                   Selecione uma categoria
               </p>
               <div class="flex gap-4">
-                  <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit" type="button" data-ripple-dark="true" onclick="document.getElementById('category').value='Suporte'">
+                  <label>
+                      <input type="radio" name="category" value="Suporte" checked>
                       Suporte
-                  </button>
-                  <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit" type="button" data-ripple-dark="true" onclick="document.getElementById('category').value='Feedback'">
+                  </label>
+                  <label>
+                      <input type="radio" name="category" value="Feedback">
                       Feedback
-                  </button>
-                  <button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg border border-primary-600 text-primary-600 hover:opacity-75 focus:ring focus:ring-neutral-300 active:opacity-[0.85] max-w-fit" type="button" data-ripple-dark="true" onclick="document.getElementById('category').value='Duvida'">
+                  </label>
+                  <label>
+                      <input type="radio" name="category" value="Duvida">
                       Duvida
-                  </button>
+                  </label>
               </div>
-              <input type="hidden" id="category" name="category" value="Suporte">
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <p
-                    class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
-                  >
+                  <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
                     Primeiro Nome
                   </p>
                   <div class="relative w-full h-11 !min-w-full">
                     <input
                       placeholder="First Name"
-                      name="first-name"
+                      name="name"
                       class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
-                    /><label
-                      class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[4.1] text-neutral-500 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
-                    >
-                    </label>
+                    />
                   </div>
                 </div>
                 <div>
-                  <p
-                    class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
-                  >
+                  <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
                     Sobrenome
                   </p>
                   <div class="relative w-full h-11 !min-w-full">
                     <input
                       placeholder="Last Name"
-                      name="last-name"
+                      name="surname"
                       class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
-                    /><label
-                      class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[4.1] text-neutral-500 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
-                    >
-                    </label>
+                    />
                   </div>
                 </div>
               </div>
               <div>
-                <p
-                  class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
-                >
+                <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
                   Email
                 </p>
                 <div class="relative w-full h-11 !min-w-full">
@@ -91,42 +81,26 @@
                     placeholder="name@email.com"
                     name="email"
                     class="peer w-full h-full bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-neutral-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-3 rounded-md !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
-                  /><label
-                    class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[4.1] text-neutral-500 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
-                  >
-                  </label>
+                  />
                 </div>
               </div>
               <div>
-                <p
-                  class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600"
-                >
+                <p class="block antialiased font-sans text-sm leading-normal text-inherit mb-2 text-left font-medium !text-primary-600">
                   Sua mensagem
                 </p>
                 <div class="relative w-full !min-w-full">
-                  <grammarly-extension
-                    data-grammarly-shadow-root="true"
-                    class="dnXmp"
-                  ></grammarly-extension
-                  ><grammarly-extension
-                    data-grammarly-shadow-root="true"
-                    class="dnXmp"
-                  ></grammarly-extension
-                  ><textarea
+                  <textarea
                     rows="6"
                     placeholder="Message"
                     name="message"
                     class="peer w-full h-full min-h-[100px] bg-neutral-950/25 font-sans font-normal outline outline-0 focus:outline-0 resize-y disabled:bg-blue-neutral-50 disabled:border-0 disabled:resize-none transition-all placeholder-shown:border placeholder-shown:border-blue-neutral-200 placeholder-shown:border-t-blue-neutral-200 border-t-neutralbg-neutral-950/25 focus:border-t-neutralbg-neutral-950/25 text-sm px-3 py-2.5 rounded-[7px] !resize-none !border !border-neutral-800 text-primary-600 placeholder:!text-neutral-500 focus:!border-primary-600 focus:!border-2 focus:border-t-primary-600"
                     spellcheck="false"
-                  ></textarea
-                  ><label
-                    class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-blue-neutral-500 leading-tight peer-focus:leading-tight peer-disabled:text-neutralbg-neutral-950/25 peer-disabled:peer-placeholder-shown:text-blue-neutral-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-neutralbg-neutral-950/25 before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-neutralbg-neutral-950/25 after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-neutralbg-neutral-950/25 after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-neutralbg-neutral-950/25 peer-placeholder-shown:leading-[3.75] text-blue-neutral-400 peer-focus:text-primary-600 before:border-blue-neutral-200 peer-focus:before:!border-primary-600 after:border-blue-neutral-200 peer-focus:after:!border-primary-600 hidden"
-                  ></label>
+                  ></textarea>
                 </div>
               </div>
               <button
                 class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-primary-600 text-white shadow-md shadow-primary-600/10 hover:shadow-lg hover:shadow-primary-600/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none bg-primary-600 w-full"
-                type="button"
+                type="submit"
                 data-ripple-light="true"
               >
                 Enviar Mensagem
