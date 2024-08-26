@@ -660,6 +660,10 @@ video {
   z-index: 10;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -668,11 +672,6 @@ video {
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
 .mb-10 {
@@ -723,13 +722,6 @@ video {
   margin-top: 2rem;
 }
 
-<<<<<<< HEAD
-=======
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
 .block {
   display: block;
 }
@@ -891,6 +883,10 @@ video {
   width: 30%;
 }
 
+.w-\[40\%\] {
+  width: 40%;
+}
+
 .w-\[48rem\] {
   width: 48rem;
 }
@@ -915,13 +911,10 @@ video {
   width: 92vw;
 }
 
-<<<<<<< HEAD
 .w-\[95\%\] {
   width: 95%;
 }
 
-=======
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
 .w-\[97\%\] {
   width: 97%;
 }
@@ -935,21 +928,10 @@ video {
   width: 100%;
 }
 
-<<<<<<< HEAD
-=======
-.w-\[\] {
-  width: ;
+.w-8 {
+  width: 2rem;
 }
 
-.w-\[90\%\] {
-  width: 90%;
-}
-
-.w-\[95\%\] {
-  width: 95%;
-}
-
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
 .\!min-w-full {
   min-width: 100% !important;
 }
@@ -1026,10 +1008,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.touch-auto {
-  touch-action: auto;
 }
 
 .select-none {
@@ -1130,6 +1108,10 @@ video {
   gap: 1.5rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .gap-x-12 {
   -moz-column-gap: 3rem;
        column-gap: 3rem;
@@ -1151,6 +1133,11 @@ video {
 
 .gap-y-6 {
   row-gap: 1.5rem;
+}
+
+.gap-x-3 {
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -1175,16 +1162,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
-}
-
-.divide-gray-800 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(31 41 55 / var(--tw-divide-opacity));
-}
-
-.divide-primary-500 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(245 158 11 / var(--tw-divide-opacity));
 }
 
 .overflow-hidden {
@@ -1289,17 +1266,14 @@ video {
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.border-green-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(34 197 94 / var(--tw-border-opacity));
-}
-
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
 .border-neutral-600 {
   --tw-border-opacity: 1;
   border-color: rgb(82 82 82 / var(--tw-border-opacity));
+}
+
+.border-neutral-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(38 38 38 / var(--tw-border-opacity));
 }
 
 .border-neutral-950 {
@@ -1390,19 +1364,6 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-}
-
-.bg-neutral-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2;
 }
@@ -1439,10 +1400,6 @@ video {
 
 .p-6 {
   padding: 1.5rem;
-}
-
-.p-3 {
-  padding: 0.75rem;
 }
 
 .px-2 {
@@ -1530,6 +1487,21 @@ video {
   padding-bottom: 2rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -1550,13 +1522,14 @@ video {
   padding-top: 0.5rem;
 }
 
-<<<<<<< HEAD
-=======
-.pb-8 {
-  padding-bottom: 2rem;
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1898,19 +1871,6 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.text-gray-50 {
-  --tw-text-opacity: 1;
-  color: rgb(249 250 251 / var(--tw-text-opacity));
-}
-
-.text-neutral-900 {
-  --tw-text-opacity: 1;
-  color: rgb(23 23 23 / var(--tw-text-opacity));
-}
-
->>>>>>> 329a5ce29847dd001b83fa115a762badec7eefde
 .underline {
   text-decoration-line: underline;
 }
@@ -3555,11 +3515,6 @@ td:is(.dark *), th:is(.dark *) {
 .dark\:bg-red-900:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(127 29 29 / var(--tw-bg-opacity));
-}
-
-.dark\:bg-neutral-700:is(.dark *) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
 }
 
 .dark\:text-gray-500:is(.dark *) {
