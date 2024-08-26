@@ -1,5 +1,5 @@
 const express = require('express');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const session = require('express-session');
 const csrf = require('csrf');
 const cookieParser = require('cookie-parser');
@@ -12,25 +12,33 @@ dotenv.config();
 const tokens = new csrf();
 
 const configureHelmet = (app) => {
-  app.use(helmet());
-  /*
-  app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://trusted.cdn.com", "https://kit.fontawesome.com"],
-      styleSrc: ["'self'", "https://trusted.cdn.com", "https://fonts.googleapis.com"],
-      imgSrc: ["'self'", "data:", "https://trusted.cdn.com", "https://i.imgur.com", "https://imgur.com"],
-      connectSrc: ["'self'", "https://ka-f.fontawesome.com"],
-      fontSrc: ["'self'", "https://trusted.cdn.com", "https://fonts.gstatic.com", "https://kit.fontawesome.com", "https://ka-f.fontawesome.com"],
-      objectSrc: ["'none'"],
-      frameAncestors: ["'self'"],
-      reportUri: "/csp-violation-report-endpoint",
-      sandbox: ["allow-forms", "allow-scripts"],
-      upgradeInsecureRequests: [],
-    },
-  }));
-  app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
-  */
+  // app.use(helmet());
+  // app.use(helmet.contentSecurityPolicy({
+  //   directives: {
+  //     defaultSrc: ["'self'", "http://localhost", "https://localhost"],
+  //     scriptSrc: ["'self'", "'unsafe-inline'", "http://localhost", "https://localhost", "https://localhost:80/js", "https://localhost:80/src", "https://kit.fontawesome.com"],
+  //     styleSrc: ["'self'", "'unsafe-inline'", "http://localhost", "https://localhost", "https://localhost:80/css", "https://localhost:80/src", "https://fonts.googleapis.com"],
+  //     imgSrc: ["'self'", "data:", "http://localhost", "https://localhost", "https://localhost:80/image", "https://localhost:80/src"],
+  //     connectSrc: ["'self'", "http://localhost", "https://localhost", "https://localhost:80/src"],
+  //     fontSrc: ["'self'", "http://localhost", "https://localhost", "https://localhost:80/fonts", "https://localhost:80/src", "https://fonts.gstatic.com"],
+  //     objectSrc: ["'none'"],
+  //     frameAncestors: ["'self'"],
+  //     reportUri: "/csp-violation-report-endpoint",
+  //     sandbox: ["allow-forms", "allow-scripts"],
+  //     upgradeInsecureRequests: [],
+  //   },
+  // }));
+  // app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
+};
+
+const configureCORS = (app) => {
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost");
+    res.header("Access-Control-Allow-Origin", "https://localhost");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+  });
 };
 
 const configureSessionAndCookies = (app) => {
@@ -70,10 +78,6 @@ const configureCSRF = (app) => {
     const origin = req.headers.origin;
     const referer = req.headers.referer;
     const host = req.headers.host;
-
-    //console.log(`Origin: ${origin}`);
-    //console.log(`Referer: ${referer}`);
-    //console.log(`Host: ${host}`);
 
     if (req.method === 'POST') {
       const token = req.body._csrf || req.query._csrf || req.headers['csrf-token'];
@@ -116,7 +120,8 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  configureHelmet(app);
+  // configureHelmet(app);
+  configureCORS(app);
   configureSessionAndCookies(app);
   configureCSRF(app);
 };
