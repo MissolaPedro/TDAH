@@ -23,16 +23,16 @@ async function loginUser(email, password, rememberMe) {
       timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
       duration: Date.now() - startTime
     });
-    ////console.log('Validação de email ou senha falhou');
+    console.log('Validação de email ou senha falhou');
     return;
   }
 
   try {
-    //console.log('Iniciando autenticação do usuário...');
+    console.log('Iniciando autenticação do usuário...');
     // Autenticar usuário usando Firebase SDK Client
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    //console.log('Usuário autenticado:', user.uid);
+    console.log('Usuário autenticado:', user.uid);
 
     // Enviar email de confirmação usando Mailjet
     const request = mailjet.post("send", {'version': 'v3.1'}).request({
@@ -56,14 +56,14 @@ async function loginUser(email, password, rememberMe) {
     });
 
     await request;
-    //console.log('Email de confirmação enviado.');
+    console.log('Email de confirmação enviado.');
 
     // Configurar cookie de sessão
     const idToken = await user.getIdToken();
     const sessionCookie = await authAdmin.createSessionCookie(idToken, {
       expiresIn: rememberMe ? 60 * 60 * 24 * 14 * 1000 : 60 * 5 * 1000 // 2 semanas ou 5 minutos
     });
-    //console.log('Cookie de sessão criado:', sessionCookie);
+    console.log('Cookie de sessão criado:', sessionCookie);
 
     // Registrar sucesso do login no Firestore
     await logsRef.add({
@@ -75,9 +75,9 @@ async function loginUser(email, password, rememberMe) {
       sessionCookie // Armazenar o token de sessão
     });
 
-    //console.log('Login bem-sucedido para:', email);
+    console.log('Login bem-sucedido para:', email);
   } catch (error) {
-    //console.error('Erro durante a autenticação:', error);
+    console.error('Erro durante a autenticação:', error);
     // Registrar falha do login no Firestore
     await logsRef.add({
       email,
@@ -87,7 +87,7 @@ async function loginUser(email, password, rememberMe) {
       timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
       duration: Date.now() - startTime
     });
-    //console.log('Erro ao autenticar usuário para:', email);
+    console.log('Erro ao autenticar usuário para:', email);
   }
 }
 
