@@ -89,26 +89,19 @@ async function createUser({ email, password, displayName, surname }) {
 
 async function verifyEmailCode(email, code) {
   try {
-    //console.log('Iniciando verificação de código para:', email);
+      const snapshot = await firestoreAdmin.collection('emailVerificationCodes')
+          .where('email', '==', email)
+          .where('code', '==', code)
+          .get();
 
-    // Procurar o código de verificação no Firestore
-    const snapshot = await firestoreAdmin.collection('emailVerificationCodes')
-      .where('email', '==', email)
-      .where('code', '==', code)
-      .get();
+      if (snapshot.empty) {
+          throw new Error('Código de verificação inválido.');
+      }
 
-    if (snapshot.empty) {
-      throw new Error('Código de verificação inválido.');
-    }
-
-    // Buscar UID do usuário com base no e-mail
-    const userRecord = await authAdmin.getUserByEmail(email);
-
-    // Código de verificação válido, marcar e-mail como verificado
-    await authAdmin.updateUser(userRecord.uid, { emailVerified: true });
-    //console.log('Endereço de e-mail verificado com sucesso para:', email);
+      const userRecord = await authAdmin.getUserByEmail(email);
+      await authAdmin.updateUser(userRecord.uid, { emailVerified: true });
   } catch (error) {
-    //console.error('Erro ao verificar código de e-mail para:', email, error);
+      throw new Error('Erro ao verificar código de e-mail.');
   }
 }
 

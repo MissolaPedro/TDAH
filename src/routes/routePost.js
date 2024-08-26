@@ -212,9 +212,10 @@ async function handleContact(req, res) {
 
 async function handleVerifyEmail(req, res) {
     const { email, code } = req.body;
+    const verificationCode = code.join(''); // Concatenar os valores dos inputs
 
     try {
-        await verifyEmailCode(email, code);
+        await verifyEmailCode(email, verificationCode);
         res.redirect('/login');
     } catch (error) {
         res.render("forms/verify-email", {
@@ -235,3 +236,4 @@ function renderRegisterError(res, message) {
 }
 
 module.exports = routeEJS;
+
