@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "csrf": "^3.1.0",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",

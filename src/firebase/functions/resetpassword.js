@@ -1,6 +1,8 @@
 require('dotenv').config();
 const { authAdmin, firestoreAdmin } = require('../../../config/configsFirebase');
 const mailjet = require('node-mailjet').connect(process.env.MAILJET_API_KEY, process.env.MAILJET_API_SECRET);
+const { format } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
 
 async function resetUserPassword(email) {
   const startTime = Date.now();
@@ -9,7 +11,7 @@ async function resetUserPassword(email) {
     success: false,
     error: null,
     duration: 0,
-    timestamp: new Date().toISOString()
+    timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR })
   };
 
   //console.log('Iniciando reset de senha para:', email);

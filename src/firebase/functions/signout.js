@@ -1,4 +1,6 @@
 const { firestoreAdmin, auth } = require('../../../config/configsFirebase');
+const { format } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
 
 async function signOutUser(req, res) {
     const user = auth.currentUser;
@@ -34,11 +36,11 @@ async function signOutUser(req, res) {
         const logData = {
             userId: userId,
             email: userRecord.email,
-            loginTime: loginTime.toISOString(),
-            logoutTime: logoutTime.toISOString(),
+            loginTime: format(loginTime, "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
+            logoutTime: format(logoutTime, "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
             loggedInDuration: loggedInDuration,
             success: true,
-            timestamp: new Date().toISOString()
+            timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR })
         };
 
         await firestoreAdmin.collection('signoutLogs').add(logData);
@@ -51,11 +53,11 @@ async function signOutUser(req, res) {
             userId: null,
             email: null,
             loginTime: null,
-            logoutTime: new Date().toISOString(),
+            logoutTime: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
             loggedInDuration: null,
             success: false,
             error: error.message,
-            timestamp: new Date().toISOString()
+            timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR })
         };
 
         await firestoreAdmin.collection('signoutLogs').add(logData);

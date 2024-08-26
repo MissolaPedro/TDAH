@@ -2,6 +2,8 @@ const { auth, firestoreAdmin, authAdmin } = require('../../../config/configsFire
 const { validarEmail, validarSenha } = require('../../modules/verifications');
 const mailjet = require('node-mailjet').connect(process.env.MAILJET_API_KEY, process.env.MAILJET_API_SECRET);
 const { signInWithEmailAndPassword } = require('firebase/auth');
+const { format } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
 
 async function loginUser(email, password, rememberMe) {
   const startTime = Date.now();
@@ -18,7 +20,7 @@ async function loginUser(email, password, rememberMe) {
       message: 'Validação falhou',
       emailValidationResult,
       passwordValidationResult,
-      timestamp: new Date(),
+      timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
       duration: Date.now() - startTime
     });
     ////console.log('Validação de email ou senha falhou');
@@ -68,7 +70,7 @@ async function loginUser(email, password, rememberMe) {
       email,
       success: true,
       message: 'Login bem-sucedido',
-      timestamp: new Date(),
+      timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
       duration: Date.now() - startTime,
       sessionCookie // Armazenar o token de sessão
     });
@@ -82,7 +84,7 @@ async function loginUser(email, password, rememberMe) {
       success: false,
       message: 'Erro ao autenticar usuário',
       error: error.message,
-      timestamp: new Date(),
+      timestamp: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
       duration: Date.now() - startTime
     });
     //console.log('Erro ao autenticar usuário para:', email);

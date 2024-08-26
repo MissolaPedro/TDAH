@@ -3,6 +3,8 @@ const { authAdmin, firestoreAdmin } = require('../../../config/configsFirebase')
 const mailjet = require('node-mailjet').connect(process.env.MAILJET_API_KEY, process.env.MAILJET_API_SECRET);
 const { validarEmail, validarSenha } = require('../../modules/verifications');
 const crypto = require('crypto');
+const { format } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
 
 async function createUser({ email, password, displayName, surname }) {
   const startTime = Date.now();
@@ -10,7 +12,7 @@ async function createUser({ email, password, displayName, surname }) {
     email,
     displayName,
     surname,
-    createdAt: new Date().toISOString(),
+    createdAt: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
     validationErrors: [],
     success: false,
     duration: 0,
@@ -49,7 +51,7 @@ async function createUser({ email, password, displayName, surname }) {
     await firestoreAdmin.collection('emailVerificationCodes').add({
       email: email,
       code: verificationCode,
-      createdAt: new Date().toISOString(),
+      createdAt: format(new Date(), "dd 'de' MMMM 'de' yyyy 'às' HH:mm:ss 'UTC'xxx", { locale: ptBR }),
     });
 
     // Enviar código de verificação por e-mail

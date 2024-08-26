@@ -2,16 +2,16 @@ const { validateLoginForm, validarEmail, validarSenha, isNotEmpty } = require('.
 const loginUser = require('../firebase/functions/login');
 const { createUser, verifyEmailCode } = require('../firebase/functions/register');
 const { resetUserPassword } = require('../firebase/functions/resetpassword');
-const { firestoreAdmin } = require('../../config/configsFirebase'); // Adicione esta linha para importar firestoreAdmin
-const securityMiddleware = require('../middlewares/security'); // Importar o middleware de segurança
+const { firestoreAdmin } = require('../../config/configsFirebase');
+const securityMiddleware = require('../middlewares/security');
 const { handleContactForm } = require('../firebase/insertContact');
 
 function routeEJS(app) {
-    securityMiddleware(app); // Aplicar o middleware de segurança
+    securityMiddleware(app);
     app.post("/login", validateLoginMiddleware, handleLogin);
     app.post("/register", validateRegisterMiddleware, handleRegister);
     app.post("/resetpassword", validateResetPasswordMiddleware, handleResetPassword);
-    app.post("/contact", validateContactMiddleware, handleContactForm); // Atualizar para usar handleContactForm
+    app.post("/contact", validateContactMiddleware, handleContactForm);
     app.post("/verify-email", handleVerifyEmail);
 }
 
@@ -36,7 +36,6 @@ async function handleLogin(req, res) {
     try {
         const result = await loginUser(loginemail, loginpassword, loginrememberMe === "true");
 
-        // Buscar o token de sessão do Firestore
         const logsRef = firestoreAdmin.collection('loginLogs');
         const logSnapshot = await logsRef.where('email', '==', loginemail).where('success', '==', true).orderBy('timestamp', 'desc').limit(1).get();
 
@@ -55,9 +54,8 @@ async function handleLogin(req, res) {
             maxAge: loginrememberMe === "true" ? 60 * 60 * 24 * 30 * 1000 : 60 * 60 * 24 * 5 * 1000,
             httpOnly: true,
         });
-        res.redirect("/agenda"); // Redirecionar para /agenda após login bem-sucedido
+        res.redirect("/agenda");
     } catch (error) {
-        //console.error("Erro ao fazer login", error);
         if (res && !res.headersSent) {
             return res.render("forms/login", {
                 title: "Login",
@@ -115,7 +113,6 @@ async function handleRegister(req, res) {
     } = req.body;
 
     try {
-        //console.log("Registrando usuário...");
         await createUser({
             email: registeremail,
             password: registerpassword,
@@ -127,7 +124,6 @@ async function handleRegister(req, res) {
             res.redirect(`/verify-email?email=${encodeURIComponent(registeremail)}`);
         }
     } catch (error) {
-        //console.error("Erro ao registrar usuário:", error);
         if (res && !res.headersSent) {
             return res.render("forms/register", {
                 title: "Registre-se",
@@ -178,19 +174,31 @@ async function handleResetPassword(req, res) {
 }
 
 async function validateContactMiddleware(req, res, next) {
-    const { name, email, message, category } = req.body;
+    const { name, surname, email, message, categoria } = req.body;
 
-    if (!name || !email || !message || !category) {
-        return res.status(400).json({ error: "Todos os campos são obrigatórios" });
+    if (!name || !surname || !email || !message || !categoria) {
+        return res.render("Contact", {
+            title: "Contato",
+            contactErrorMessage: "Todos os campos são obrigatórios",
+            contactSuccessMessage: null,
+        });
     }
 
     const emailValidationResult = await validarEmail(email);
     if (emailValidationResult !== "O email é válido.") {
-        return res.status(400).json({ error: emailValidationResult });
+        return res.render("Contact", {
+            title: "Contato",
+            contactErrorMessage: emailValidationResult,
+            contactSuccessMessage: null,
+        });
     }
 
     if (!isNotEmpty(message)) {
-        return res.status(400).json({ error: "Mensagem é obrigatória" });
+        return res.render("Contact", {
+            title: "Contato",
+            contactErrorMessage: "Mensagem é obrigatória",
+            contactSuccessMessage: null,
+        });
     }
 
     next();
@@ -209,7 +217,6 @@ async function handleVerifyEmail(req, res) {
         await verifyEmailCode(email, code);
         res.redirect('/login');
     } catch (error) {
-        //console.error("Erro ao verificar e-mail:", error);
         res.render("forms/verify-email", {
             title: "Verificação de E-mail",
             message: "Erro ao verificar e-mail. Por favor, tente novamente.",

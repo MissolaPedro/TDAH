@@ -66,6 +66,7 @@ function routeGet(app) {
         res.render("Contact", {
             title: "Contato",
             contactErrorMessage: null,
+            contactSuccessMessage: null,
         });
     });
 
