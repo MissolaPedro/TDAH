@@ -9,17 +9,18 @@
         <section class="px-24 flex flex-col gap-6 h-screen w-[92vw] py-12">
             <div class="flex flex-row justify-between text-neutral-50">
                 <h2 class="text-4xl font-bold">AGENDA</h2>
-                <button class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center">
-                    <i class="fa-solid fa-arrow-down"></i>
-                  Dia da semana 
+                <button id="button-calendar" class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center border-primary-600 bg-neutral-900 text-neutral-50">
+                  <img src="/image/icones/calendar.svg" alt="Calendar Icon" class="w-6">
+                  Dia da Semana
                 </button>
+                <input id="input-calendar" type="text" class="hidden">
             </div>
-            <div class="w-[100%]">
+            <div class="w-[100%] overflow-auto">
                 <div class="w-[3%]"></div>
                 <section class="flex-col w-[97%] gap-3">
 
                     <div class="flex-col bg-neutral-900 h-fit rounded-lg w-full mb-8">
-                        <input type="checkbox" id="manha" class="hidden peer">
+                        <input type="checkbox" id="checkmanha" class="hidden peer">
                         <label for="manha" class="group cursor-pointer w-full">
                           <div class="inline-flex justify-between items-center py-6 px-8 text-neutral-50 uppercase w-full">
                             <div class="inline-flex items-center gap-2">
@@ -34,15 +35,15 @@
                             <hr class="w-[95%]">
                           </div>
                           <div class="flex">
-                            <div class="flex-col text-gray-50 p-5">
-                              <span class="flex"><h3 class="text-primary-600">08:00h:</h3><p>Matemática</p></span>  
-                              <span class="flex"><h3 class="text-primary-600">08:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">09:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">09:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">10:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">10:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">11:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">11:30h:</h3><p>Matemática</p></span>
+                            <div id="tdia" class="flex-col text-gray-50 p-5">
+                              <span class="flex"><h3 class="text-primary-600">08:00h :</h3><p><!----></p></span>  
+                              <span class="flex"><h3 class="text-primary-600">08:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">09:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">09:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">10:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">10:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">11:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">11:30h :</h3><p><!----></p></span>
                             </div>
                           </div>
                         </div>
@@ -50,7 +51,7 @@
            
 
                       <div class="flex-col bg-neutral-900 h-fit rounded-lg w-full mb-8">
-                        <input type="checkbox" id="tarde" class="hidden peer">
+                        <input type="checkbox" id="checktarde" class="hidden peer">
                         <label for="tarde" class="group cursor-pointer w-full">
                           <div class="inline-flex justify-between items-center py-6 px-8 text-neutral-50 uppercase w-full">
                             <div class="inline-flex items-center gap-2">
@@ -65,23 +66,23 @@
                             <hr class="w-[95%]">
                           </div>
                           <div class="flex">
-                            <div class="flex-col text-gray-50 p-5">
-                              <span class="flex"><h3 class="text-primary-600">14:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">14:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">15:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">15:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">16:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">16:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">17:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">17:30h:</h3><p>Matemática</p></span>
+                            <div id="tarde" class="flex-col text-gray-50 p-5">
+                              <span class="flex"><h3 class="text-primary-600">14:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">14:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">15:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">15:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">16:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">16:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">17:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">17:30h :</h3><p><!----></p></span>
                             </div>
                           </div>
                         </div>
                       </div>
               
     
-                      <div class="flex-col bg-neutral-900 h-fit rounded-lg w-full mb-8 overflow-auto">
-                        <input type="checkbox" id="noite" class="hidden peer">
+                      <div class="flex-col bg-neutral-900 h-fit rounded-lg w-full mb-8">
+                        <input type="checkbox" id="checknoite" class="hidden peer">
                         <label for="noite" class="group cursor-pointer w-full">
                           <div class="inline-flex justify-between items-center py-6 px-8 text-neutral-50 uppercase w-full">
                             <div class="inline-flex items-center gap-2">
@@ -96,15 +97,15 @@
                             <hr class="w-[95%]">
                           </div>
                           <div class="flex">
-                            <div class="flex-col text-gray-50 p-5 overflow-auto">
-                              <span class="flex"><h3 class="text-primary-600">18:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">18:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">19:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">19:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">20:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">20:30h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">21:00h:</h3><p>Matemática</p></span>
-                              <span class="flex"><h3 class="text-primary-600">21:30h:</h3><p>Matemática</p></span>
+                            <div id="noite" class="flex-col text-gray-50 p-5 overflow-auto">
+                              <span class="flex"><h3 class="text-primary-600">18:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">18:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">19:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">19:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">20:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">20:30h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">21:00h :</h3><p><!----></p></span>
+                              <span class="flex"><h3 class="text-primary-600">21:30h :</h3><p><!----></p></span>
                             </div>
                           </div>
                         </div>
