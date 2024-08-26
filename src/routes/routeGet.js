@@ -4,7 +4,6 @@ const { signOutUser } = require("../firebase/functions/signout.js");
 const { verifyEmailCode } = require("../firebase/functions/register.js");
 const securityMiddleware = require('../middlewares/security'); // Importar o middleware de segurança
 
-
 function routeGet(app) {
     app.get("/", (req, res) => {
         res.render("index", {
@@ -29,6 +28,7 @@ function routeGet(app) {
         res.render("forms/reset", {
             title: "Resetar a senha",
             resetErrorMessage: null,
+            resetSuccessMessage: null,
         });
     });
 
@@ -104,4 +104,3 @@ function routeGet(app) {
 }
 
 module.exports = routeGet;
-

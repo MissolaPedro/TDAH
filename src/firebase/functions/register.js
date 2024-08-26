@@ -16,6 +16,8 @@ async function createUser({ email, password, displayName, surname }) {
     duration: 0,
   };
 
+  console.log('Iniciando registro de conta para:', email);
+
   try {
     // Validações
     const emailValidationResult = await validarEmail(email);
@@ -73,20 +75,20 @@ async function createUser({ email, password, displayName, surname }) {
     // Enviar o email
     await request;
     console.log('Código de verificação enviado com sucesso para:', email);
-
-    return { success: true, message: 'Usuário criado com sucesso. Verifique seu e-mail para completar o registro.' };
   } catch (error) {
     console.error('Erro ao criar usuário ou enviar email:', error);
-    return { success: false, message: 'Erro ao criar usuário ou enviar email.' };
   } finally {
     log.duration = Date.now() - startTime;
     // Guardar log no Firestore
     await firestoreAdmin.collection('registrationLogs').add(log);
+    console.log('Log de registro salvo para:', email);
   }
 }
 
 async function verifyEmailCode(email, code) {
   try {
+    console.log('Iniciando verificação de código para:', email);
+
     // Procurar o código de verificação no Firestore
     const snapshot = await firestoreAdmin.collection('emailVerificationCodes')
       .where('email', '==', email)
@@ -102,9 +104,9 @@ async function verifyEmailCode(email, code) {
 
     // Código de verificação válido, marcar e-mail como verificado
     await authAdmin.updateUser(userRecord.uid, { emailVerified: true });
-    console.log('Endereço de e-mail verificado com sucesso.');
+    console.log('Endereço de e-mail verificado com sucesso para:', email);
   } catch (error) {
-    console.error('Erro ao verificar código de e-mail:', error);
+    console.error('Erro ao verificar código de e-mail para:', email, error);
   }
 }
 

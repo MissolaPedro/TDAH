@@ -21,7 +21,8 @@ async function loginUser(email, password, rememberMe) {
       timestamp: new Date(),
       duration: Date.now() - startTime
     });
-    throw new Error('Validação de email ou senha falhou');
+    console.log('Validação de email ou senha falhou');
+    return;
   }
 
   try {
@@ -29,7 +30,7 @@ async function loginUser(email, password, rememberMe) {
     // Autenticar usuário usando Firebase SDK Client
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    // console.log('Usuário autenticado:', user);
+    console.log('Usuário autenticado:', user.uid);
 
     // Enviar email de confirmação usando Mailjet
     const request = mailjet.post("send", {'version': 'v3.1'}).request({
@@ -72,10 +73,7 @@ async function loginUser(email, password, rememberMe) {
       sessionCookie // Armazenar o token de sessão
     });
 
-    return {
-      success: true,
-      sessionCookie
-    };
+    console.log('Login bem-sucedido para:', email);
   } catch (error) {
     console.error('Erro durante a autenticação:', error);
     // Registrar falha do login no Firestore
@@ -87,7 +85,7 @@ async function loginUser(email, password, rememberMe) {
       timestamp: new Date(),
       duration: Date.now() - startTime
     });
-    throw new Error('Erro ao autenticar usuário');
+    console.log('Erro ao autenticar usuário para:', email);
   }
 }
 

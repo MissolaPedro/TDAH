@@ -145,7 +145,8 @@ async function validateResetPasswordMiddleware(req, res, next) {
         if (res && !res.headersSent) {
             return res.render("forms/reset", {
                 title: "Resetar senha",
-                resetErrorMessage: "Email inválido."
+                resetErrorMessage: "Email inválido.",
+                resetSuccessMessage: null
             });
         }
     }
@@ -169,17 +170,18 @@ async function handleResetPassword(req, res) {
         if (res && !res.headersSent) {
             return res.render("forms/reset", {
                 title: "Resetar senha",
-                resetErrorMessage: "Ocorreu um erro ao resetar a senha. Tente novamente."
+                resetErrorMessage: "Ocorreu um erro ao resetar a senha. Tente novamente.",
+                resetSuccessMessage: null
             });
         }
     }
 }
 
 async function validateContactMiddleware(req, res, next) {
-    const { name, email, message } = req.body;
+    const { name, email, message, category } = req.body;
 
-    if (!isNotEmpty(name)) {
-        return res.status(400).json({ error: "Nome é obrigatório" });
+    if (!name || !email || !message || !category) {
+        return res.status(400).json({ error: "Todos os campos são obrigatórios" });
     }
 
     const emailValidationResult = await validarEmail(email);
