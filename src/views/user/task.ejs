@@ -22,79 +22,67 @@
 
                 <div class="w-[40%]">
                     <form class=" flex flex-col w-full">
-                        <select class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center">
+                        <select class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
                             <option class="">Períodos de estudo</option>
                             <option class="">Manhã</option>
                             <option class="">Tarde</option>
                             <option class="">Noite</option>
                         </select>
                     </form>
-                    <div class="grid grid-cols-2 justify-beetwen w-full">
-                        <div class="flex justify-beetwen">
-                            <button class="border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50">
-                                <p class="text-neutral-50">08:00h - 08:30h</p>
+                    <div class=" grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
+                        <div class="justify-beetwen">
+                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input id="horacomeco" required placeholder="Horário de Início" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
-                        <div class="flex justify-beetwen">
-                            <button class="border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50">
-                                <p class="text-neutral-50">08:00h - 08:30h</p>
+                        <div class="justify-beetwen">
+                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input id="horatermino" required placeholder="Horário de Término" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
-                        <div class="flex justify-beetwen">
-                            <button class="border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50">
-                                <p class="text-neutral-50">08:00h - 08:30h</p>
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        <div class="flex justify-beetwen">
-                            <button class="border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50">
-                                <p class="text-neutral-50">08:00h - 08:30h</p>
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        <div class="flex justify-beetwen">
-                            <button class="border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50">
-                                <p class="text-neutral-50">08:00h - 08:30h</p>
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        <div class="flex justify-beetwen">
-                            <button class="border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50">
-                                <p class="text-neutral-50">08:00h - 08:30h</p>
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
 
 
                 <div class="w-[40%]">
-                    <form class="flex-col w-full text-center">
-                        <select class="appearance-none w-full bg-neutral-900 h-full p-4 rounded-lg">
-                            <option selected class="appearance-none">Área de estudo</option>
-                                <img src="/image/icones/task.svg" alt="" class="w-8">
-                                <option class="appearance-none">Matemática</option>
-                                <option class="appearance-none">Português</option>
-                                <option class="appearance-none">Geografia</option>
-                                <option class="appearance-none">História</option>
-                                <option class="appearance-none">Quimica</option>
-                                <option class="appearance-none">Biologia</option>
-                                <option class="appearance-none">Sociologia</option>
-                                <option class="appearance-none">Filosofia</option>
+                    <form class=" flex flex-col w-full">
+                        <select class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
+                            <option class="">Matérias</option>
+                            <option class="">Matemática</option>
+                            <option class="">Português</option>
+                            <option class="">História</option>
+                            <option class="">Geografia</option>
+                            <option class="">Inglês</option>
+                            <option class="">Espanhol</option>
+                            <option class="">Física</option>
+                            <option class="">Química</option>
+                            <option class="">Biologia</option>
                         </select>
                     </form>
-                    <div class="m-8 flex justify-beetwen">
-                        Geometria 
+                    <div class=" grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
+                        <div class="justify-beetwen">
+                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input id="assunto" required placeholder="Assunto" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
                         </div>
-                         <!--funçôes
-                        Baskhara
-                        Pitagoras
-                        Aritimeticas
-                        Analise Combinatorias -->
-                    </div>
-                </div>
+                        <div class="justify-beetwen">
+                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input  id="descricao" placeholder="Descrição" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div> 
+                    </div>  
+                </div> 
+            </div>
+            <div class="w-full flex items-center justify-center">
+                <button class="rounded-lg bg-primary-600 text-neutral-950 px-4 py-2 uppercase font-bold hover:scale-105 transition duration-300  ">
+                salvar
+                </button>
+            </div>
         </section>
     </main>
 </body>
