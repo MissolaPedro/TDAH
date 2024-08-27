@@ -21,7 +21,7 @@
             <div class="flex justify-between text-neutral-50"> 
 
                 <div class="w-[40%]">
-                    <form class=" flex flex-col w-full">
+                    <form id="taskform" class=" flex flex-col w-full">
                         <select class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
                             <option class="">Períodos de estudo</option>
                             <option class="">Manhã</option>
@@ -31,14 +31,14 @@
                     </form>
                     <div class=" grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
                         <div class="justify-beetwen">
-                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input id="horacomeco" required placeholder="Horário de Início" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
+                            <button id="horacomeco" type="submit" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input  required placeholder="Horário de Início" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
                         <div class="justify-beetwen">
-                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input id="horatermino" required placeholder="Horário de Término" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
+                            <button id="horatermino" type="submit" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input  required placeholder="Horário de Término" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
@@ -64,14 +64,14 @@
                     </form>
                     <div class=" grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
                         <div class="justify-beetwen">
-                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input id="assunto" required placeholder="Assunto" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
+                            <button id="assunto" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input required placeholder="Assunto" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
                         <div class="justify-beetwen">
-                            <button class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input  id="descricao" placeholder="Descrição" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
+                            <button id="descricao" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
+                                <input placeholder="Descrição" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div> 
@@ -79,11 +79,12 @@
                 </div> 
             </div>
             <div class="w-full flex items-center justify-center">
-                <button class="rounded-lg bg-primary-600 text-neutral-950 px-4 py-2 uppercase font-bold hover:scale-105 transition duration-300  ">
+                <button type="submit" id="savebutton" class="rounded-lg bg-primary-600 text-neutral-950 px-4 py-2 uppercase font-bold hover:scale-105 transition duration-300  ">
                 salvar
                 </button>
             </div>
         </section>
     </main>
+    <script src="/task.js"></script>
 </body>
 </html>
