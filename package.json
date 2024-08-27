@@ -28,6 +28,7 @@
     "express-session": "^1.18.0",
     "firebase": "^10.12.4",
     "firebase-admin": "^12.4.0",
+    "flatpickr": "^4.6.13",
     "fs": "^0.0.1-security",
     "helmet": "^7.1.0",
     "https": "^1.0.0",
