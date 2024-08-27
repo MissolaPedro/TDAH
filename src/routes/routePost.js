@@ -5,6 +5,7 @@ const { resetUserPassword } = require('../firebase/functions/resetpassword');
 const { firestoreAdmin } = require('../../config/configsFirebase');
 const securityMiddleware = require('../middlewares/security');
 const { handleContactForm } = require('../firebase/insertContact');
+//const {} = require('../js/task') 
 
 function routeEJS(app) {
     securityMiddleware(app);
@@ -234,6 +235,43 @@ function renderRegisterError(res, message) {
         });
     }
 }
+
+/*const saveTaskToFile = (taskData, callback) => {
+    // Define o caminho para o arquivo JSON
+    const filePath = path.join(__dirname, 'data', 'tasks.json');
+
+    // Lê o arquivo existente
+    fs.readFile(filePath, (err, data) => {
+        if (err) return callback(err);
+        
+        let tasks = [];
+        if (data.length) {
+            tasks = JSON.parse(data);
+            }
+
+        // Adiciona a nova tarefa
+        tasks.push(taskData);
+
+        // Salva as tarefas no arquivo JSON
+        fs.writeFile(filePath, JSON.stringify(tasks, null, 2), (err) => {
+            if (err) return callback(err);
+            callback(null, { message: 'Tarefa salva com sucesso!' });
+        });
+    });
+};
+
+// Rota para salvar os dados
+app.post('/task.json', (req, res) => {
+    const taskData = req.body;
+
+    // Usa a função saveTaskToFile para salvar a tarefa
+    saveTaskToFile(taskData, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao salvar a tarefa!' });
+        }
+        res.json(result);
+    });
+}*/
 
 module.exports = routeEJS;
 

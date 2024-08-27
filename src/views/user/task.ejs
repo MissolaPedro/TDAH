@@ -7,7 +7,6 @@
     <main class="bg-neutral-950 flex flex-row">
         <%- include('../partials/sidebar') %>
         <section class="px-24 flex flex-col h-screen w-[92vw] gap-6 py-12">
-            <!--faaaalaaa sinissstrooo-->
             <div class="flex flex-row justify-between text-neutral-50">
                 <div class="flex-col">
                     <h2 class="text-4xl font-bold">ORGANIZADOR DE TAREFAS</h2>
@@ -15,76 +14,46 @@
                 </div>
                 <button class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center">
                     <i class="fa-solid fa-arrow-down"></i>
-                  Dia da semana 
+                    Dia da semana 
                 </button>
             </div>
             <div class="flex justify-between text-neutral-50"> 
-
                 <div class="w-[40%]">
-                    <form id="taskform" class=" flex flex-col w-full">
-                        <select class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
-                            <option class="">Períodos de estudo</option>
-                            <option class="">Manhã</option>
-                            <option class="">Tarde</option>
-                            <option class="">Noite</option>
+                    <form id="taskform" class="flex flex-col w-full">
+                        <select id="periodo" class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
+                            <option value="">Períodos de estudo</option>
+                            <option value="manhã">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noite">Noite</option>
                         </select>
+                        <div class="grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
+                            <div class="justify-between">
+                                <div class="relative">
+                                    <input id="horacomeco" required placeholder="Horário de Início" type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                                </div>
+                            </div>
+                            <div class="justify-between">
+                                <div class="relative">
+                                    <input id="horatermino" required placeholder="Horário de Término" type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
+                            <div class="justify-between">
+                                <input id="assunto" required placeholder="Assunto" type="text" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                            </div>
+                            <div class="justify-between">
+                                <input id="descricao" required placeholder="Descrição" type="text" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                            </div>
+                        </div>
+                        <button id="savebutton" type="button" class="mt-4 bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition duration-300">
+                            Salvar Tarefa
+                        </button>
                     </form>
-                    <div class=" grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
-                        <div class="justify-beetwen">
-                            <button id="horacomeco" type="submit" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input  required placeholder="Horário de Início" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        <div class="justify-beetwen">
-                            <button id="horatermino" type="submit" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input  required placeholder="Horário de Término" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        
-                    </div>
                 </div>
-
-
-                <div class="w-[40%]">
-                    <form class=" flex flex-col w-full">
-                        <select class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
-                            <option class="">Matérias</option>
-                            <option class="">Matemática</option>
-                            <option class="">Português</option>
-                            <option class="">História</option>
-                            <option class="">Geografia</option>
-                            <option class="">Inglês</option>
-                            <option class="">Espanhol</option>
-                            <option class="">Física</option>
-                            <option class="">Química</option>
-                            <option class="">Biologia</option>
-                        </select>
-                    </form>
-                    <div class=" grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
-                        <div class="justify-beetwen">
-                            <button id="assunto" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input required placeholder="Assunto" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        <div class="justify-beetwen">
-                            <button id="descricao" class="w-[70%] focus:text-primary-600 active:bg-neutral-950 focus:border-primary-600 hover:scale-105 transition duration-300 border-2 border-neutral-800 rounded-lg py-2 px-4 inline-flex gap-2 items-center bg-neutral-900 text-neutral-50 hover:border-primary-600">
-                                <input placeholder="Descrição" type="text" class="bg-transparent text-neutral-50 focus:outline-none placeholder-neutral-500 w-full">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div> 
-                    </div>  
-                </div> 
-            </div>
-            <div class="w-full flex items-center justify-center">
-                <button type="submit" id="savebutton" class="rounded-lg bg-primary-600 text-neutral-950 px-4 py-2 uppercase font-bold hover:scale-105 transition duration-300  ">
-                salvar
-                </button>
             </div>
         </section>
     </main>
-    <script src="/task.js"></script>
+    <script src="/js/tasks.js"></script>
 </body>
 </html>
