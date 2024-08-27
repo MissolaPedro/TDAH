@@ -79,12 +79,6 @@ function routeGet(app) {
     });
 
     // Rotas protegidas
-    app.get("/dashboard", authMiddleware, (req, res) => {
-        res.render("user/dashboard", {
-            title: "Dashboard",
-        });
-    });
-
     app.get("/agenda", authMiddleware, (req, res) => {
         res.render("user/agenda", {
             title: "Agenda",

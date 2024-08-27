@@ -52,11 +52,12 @@ const configureSessionAndCookies = (app) => {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    rolling: true, // Redefine o tempo de expiração a cada solicitação
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 dias
+      maxAge: 60 * 60 * 24 * 1000 // 24 horas
     }
   }));
 };
