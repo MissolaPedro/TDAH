@@ -5,13 +5,9 @@
 </head>
 <body>
     <style>
-
         input[type="time"]::-webkit-calendar-picker-indicator {
-        
-        display: none;
-        
+            display: none;
         }
-        
     </style>
 
     <main class="bg-neutral-950 flex flex-row">
@@ -27,37 +23,96 @@
                     <p id="diasemana"></p>
                 </div>
             </div>
-            <div class="flex justify-center text-neutral-50"> 
+            
+            <div class="flex justify-center text-neutral-50 my-auto">
+                <% if (TaskErrorMessage) { %>
+                    <div
+                        role="alert"
+                        class="flex bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-900 dark:text-red-100 p-2 rounded-lg items-center transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105"
+                    >
+                        <svg
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            class="h-5 w-5 flex-shrink-0 mr-2 text-red-600"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                stroke-width="2"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                            ></path>
+                        </svg>
+                        <p class="text-xs font-semibold"><%= TaksErrorMessage %></p> 
                 <div class="w-[40%]">
-                    <form id="taskform" class="flex flex-col w-full">
-                        <select id="periodo" class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
-                            <option value="">Períodos de estudo</option>
-                            <option value="manhã">Manhã</option>
-                            <option value="tarde">Tarde</option>
-                            <option value="noite">Noite</option>
+                    <form id="taskform" class="flex flex-col justify-center items-center gap-8">
+                        <select id="periodo" class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 active:bg-neutral-900 text-center">
+                            <option value="" class="uppercase text-neutral-200 font-medium">PERIODO</option>
+                            <option value="manhã" class="uppercase text-neutral-200 font-medium">Manhã</option>
+                            <option value="tarde" class="uppercase text-neutral-200 font-medium">Tarde</option>
+                            <option value="noite" class="uppercase text-neutral-200 font-medium">Noite</option>
                         </select>
-                        <div id="timet" class="grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
-                            <div class="justify-between">
-                                <div class="relative">
-                                    <input id="horacomeco" required type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none w-full p-2 rounded-lg border-2 border-neutral-800">
+                        <fieldset class="w-full flex flex-col gap-6">
+                            <div class="flex flex-col items-start justify-center">
+                                <label for="timestart" class="text-neutral-600/75 uppercase text-sm">Informe o horario de inicio</label>
+                                <div class="relative w-full">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                        schedule
+                                    </span>
+                                    <input
+                                    type="time"
+                                    name="timestart"
+                                    class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                />
                                 </div>
                             </div>
-                            <div class="justify-between">
-                                <div class="relative">
-                                    <input id="horatermino" required type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                            <div class="flex flex-col items-start justify-center">
+                                <label for="timestart" class="text-neutral-600/75 uppercase text-sm">Informe o horario de termino</label>
+                                <div class="relative w-full">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                        schedule
+                                    </span>
+                                    <input
+                                    type="time"
+                                    name="timestart"
+                                    class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                />
                                 </div>
                             </div>
-                        </div>
-                        <div class="grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
-                            <div class="justify-between">
-                                <input id="assunto" required placeholder="Assunto" type="text" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                        </fieldset>
+                        <fieldset class="w-full flex flex-col gap-6">
+                            <div class="flex flex-col items-start justify-center">
+                                <!-- <label for="materia" class="text-neutral-600/75 uppercase text-sm">Informe a materia a ser estudada</label> -->
+                                <div class="relative w-full">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                        library_books
+                                    </span>
+                                    <input
+                                    type="text"
+                                    name="materia"
+                                    class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                    placeholder="MATERIA"
+                                />
+                                </div>
                             </div>
-                            <div class="justify-between">
-                                <input id="descricao" required placeholder="Descrição" type="text" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                            <div class="flex flex-col items-start justify-center">
+                                <!-- <label for="materia" class="text-neutral-600/75 uppercase text-sm">Informe a materia a ser estudada</label> -->
+                                <div class="relative w-full">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+                                        book
+                                    </span>
+                                    <input
+                                    type="text"
+                                    name="assunto"
+                                    class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
+                                    placeholder="ASSUNTO"
+                                />
+                                </div>
                             </div>
-                        </div>
-                        <button id="savebutton" type="submit" class="mt-4 bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition duration-300">
-                            Salvar Tarefa
+                        </fieldset>
+                        <button type="submit" class="bg-primary-600 w-[50%] py-3 text-neutral-50 rounded-lg text-lg font-semibold uppercase">
+                            Registrar tarefa
                         </button>
                     </form>
                 </div>

@@ -124,5 +124,7 @@ module.exports = {
       serif: ['Roboto Serif', 'serif'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

@@ -6,7 +6,7 @@
 <body>
     <main
         id="home"
-        class="px-24"
+        class="px-4 md:px-8 lg:px-24"
         style="
             background-image: url(/image/backgrounds/background_one.png);
             background-position: center;
@@ -15,49 +15,57 @@
         "
     >
         <%- include('partials/navbar') %>
-		<%- include('partials/header', {
-			welcomeMenssage: "Bem-vindo ao Projeto TDAH",
-			description: "O Projeto TDAH é uma ferramenta criada para ajudar pessoas com TDAH a organizar e manter uma rotina de estudos eficiente, oferecendo planos personalizados que se adaptam ao estilo de aprendizagem de cada usuário.",
-		}) %>
+        <%- include('partials/header', {
+            welcomeMenssage: "Bem-vindo ao Projeto TDAH",
+            description: "O Projeto TDAH é uma ferramenta criada para ajudar pessoas com TDAH a organizar e manter uma rotina de estudos eficiente, oferecendo planos personalizados que se adaptam ao estilo de aprendizagem de cada usuário.",
+        }) %>
     </main>
     <section
         id="home"
-        class="bg-neutral-950/25 px-24 w-full h-[75vh] flex items-center justify-between"
+        class="bg-neutral-950/25 px-4 md:px-8 lg:px-24 w-full h-[75vh] flex items-center justify-between"
     >
-        <div class="flex flex-row items-center justify-between">
-            <%- include('partials/cards', { 
-                imageCard: '/image/icones/accessibility.svg', 
-                titleCard: 'Feito para Todos', 
-                descriptionCard: 'Um design pensado para simplificar sua rotina de estudos, com acessibilidade em cada detalhe, facilitando o uso para todos.', 
-                buttonCard: 'Explore Mais',
-                linkCard: '#' 
-            }) %>
+        <div class="flex flex-col md:flex-row items-center justify-between w-full">
+            <div class="opacity-0 transition-opacity duration-700 ease-in-out" data-scroll>
+                <%- include('partials/cards', { 
+                    imageCard: '/image/icones/accessibility.svg', 
+                    titleCard: 'Feito para Todos', 
+                    descriptionCard: 'Um design pensado para simplificar sua rotina de estudos, com acessibilidade em cada detalhe, facilitando o uso para todos.', 
+                    buttonCard: 'Explore Mais',
+                    linkCard: '#' 
+                }) %>
+            </div>
 
-            <%- include('partials/cards', { 
-                imageCard: '/image/icones/calendar.svg', 
-                titleCard: 'Agenda Personalizada', 
-                descriptionCard: 'Uma agenda adaptada às suas necessidades, ajudando você a manter o foco e a gerenciar seu tempo com eficiência.', 
-                buttonCard: 'Personalize Sua Agenda',
-                linkCard: 'agenda'  
-            }) %>
+            <div class="opacity-0 transition-opacity duration-700 ease-in-out" data-scroll>
+                <%- include('partials/cards', { 
+                    imageCard: '/image/icones/calendar.svg', 
+                    titleCard: 'Agenda Personalizada', 
+                    descriptionCard: 'Uma agenda adaptada às suas necessidades, ajudando você a manter o foco e a gerenciar seu tempo com eficiência.', 
+                    buttonCard: 'Personalize Sua Agenda',
+                    linkCard: 'agenda'  
+                }) %>
+            </div>
 
-            <%- include('partials/cards', { 
-                imageCard: '/image/icones/task.svg', 
-                titleCard: 'Organização Inteligente', 
-                descriptionCard: 'Ferramentas de tarefas que tornam o planejamento dos estudos fácil e intuitivo, ajudando você a alcançar suas metas.', 
-                buttonCard: 'Organize Suas Tarefas',
-                linkCard: 'task' 
-            }) %>
+            <div class="opacity-0 transition-opacity duration-700 ease-in-out" data-scroll>
+                <%- include('partials/cards', { 
+                    imageCard: '/image/icones/task.svg', 
+                    titleCard: 'Organização Inteligente', 
+                    descriptionCard: 'Ferramentas de tarefas que tornam o planejamento dos estudos fácil e intuitivo, ajudando você a alcançar suas metas.', 
+                    buttonCard: 'Organize Suas Tarefas',
+                    linkCard: 'task' 
+                }) %>
+            </div>
         </div>
     </section>
-    <section id="about">
+    <section id="about" class="opacity-0 transition-opacity duration-700 ease-in-out" data-scroll>
        <%- include('partials/about') %>
     </section>
-    <section id="team">
+    <section id="team" class="opacity-0 transition-opacity duration-700 ease-in-out" data-scroll>
         <%- include('partials/team') %>
-	</section>
-    <section id="contact">
+    </section>
+    <section id="contact" class="opacity-0 transition-opacity duration-700 ease-in-out" data-scroll>
         <%- include('partials/footer') %>
-	</section>
+    </section>
+    <button id="scrollToTop" class="fixed bottom-5 right-5 hidden bg-black text-white p-3 rounded-full transition-opacity duration-300 opacity-0">Topo</button>
+    <script src="/js/animations/scroll.js"></script>
 </body>
 </html>
