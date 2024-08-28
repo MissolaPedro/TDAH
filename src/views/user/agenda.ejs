@@ -10,10 +10,10 @@
         <section class="px-24 flex flex-col gap-6 h-screen w-[92vw] py-12">
             <div class="flex flex-row justify-between text-neutral-50">
                 <h2 class="text-4xl font-bold">AGENDA</h2>
-                <button id="button-calendar" class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center border-primary-600 bg-neutral-900 text-neutral-50">
+                <div class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center border-primary-600 bg-neutral-900 text-neutral-50">
                   <img src="/image/icones/calendar.svg" alt="Calendar Icon" class="w-6">
-                  <span id="diasemana">Dia da Semana</span>
-                </button>
+                  <p id="diasemana"></p>
+                </div>
 
             </div>
             <div class="w-[100%] overflow-auto">
@@ -28,7 +28,7 @@
                               <img src="/image/icones/sun.svg" alt="" class="w-12">
                               <h2 class="text-2xl">Manhã</h2>
                             </div>
-                            <h3 class="text-xl">09:00h - 12:00h</h3>
+                            <h3 class="text-xl">08:00h - 12:00h</h3>
                           </div>
                         </label>
                         <div class="hidden peer-checked:block mt-2"> 
@@ -37,20 +37,14 @@
                           </div>
                           <div class="flex">
                             <div id="tdia" class="flex-col text-gray-50 p-5"> 
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono"><!--scrip--> :</h3><p class="font-sans"><!--scrip--></p></span>  
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">08:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">09:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">09:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">10:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">10:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">11:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">11:30h :</h3><p class="font-sans"><!----></p></span>
+
+                              <span class="px-5 flex"><h3 id="scriphorario" class="text-primary-600 italic text-2x1 font-mono"><!--scriphorario--></h3><p id="scripconteudo" class="font-sans"><!--scripconteudo--></p></span>  
+                            
                             </div>
                           </div>
                         </div>
                       </div>
-           
-
+          
                       <div class="flex-col bg-neutral-900 h-fit rounded-lg w-full mb-8">
                         <input type="checkbox" id="tarde" class="hidden peer">
                         <label for="tarde" class="group cursor-pointer w-full">
@@ -68,14 +62,9 @@
                           </div>
                           <div class="flex">
                             <div id="tarde" class="flex-col text-gray-50 p-5">
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">14:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">14:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">15:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">15:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">16:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">16:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">17:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">17:30h :</h3><p class="font-sans"><!----></p></span>
+                              
+                              <span class="px-5 flex"><h3 id="scriphorario" class="text-primary-600 italic text-2x1 font-mono"><!--scriphorario--></h3><p id="scripconteudo" class="font-sans"><!--scripconteudo--></p></span>
+                            
                             </div>
                           </div>
                         </div>
@@ -99,14 +88,9 @@
                           </div>
                           <div class="flex">
                             <div id="noite" class="flex-col text-gray-50 p-5 overflow-auto">
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">18:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">18:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">19:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">19:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">20:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">20:30h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">21:00h :</h3><p class="font-sans"><!----></p></span>
-                              <span class="flex"><h3 class="text-primary-600 italic text-2x1 font-mono">21:30h :</h3><p class="font-sans"><!----></p></span>
+
+                              <span class="px-5 flex"><h3 id="scriphorario" class="text-primary-600 italic text-2x1 font-mono"><!--scriphorario--></h3><p id="scripconteudo" class="font-sans"><!--scripconteudo--></p></span>
+                            
                             </div>
                           </div>
                         </div>
@@ -115,5 +99,7 @@
             </div>
         </section>
     </main>
+    <script src="/js/agenda.js"></script>
+    <script src="/js/day.js"></script>
 </body>
 </html>

@@ -879,10 +879,6 @@ video {
   width: 56px;
 }
 
-.w-\[70\%\] {
-  width: 70%;
-}
-
 .w-\[75\%\] {
   width: 75%;
 }
@@ -1247,10 +1243,6 @@ video {
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
-.bg-transparent {
-  background-color: transparent;
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1373,6 +1365,11 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .pb-5 {
@@ -2880,11 +2877,6 @@ td:is(.dark *), th:is(.dark *) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:border-primary-600:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(217 119 6 / var(--tw-border-opacity));
-}
-
 .hover\:bg-gray-900\/10:hover {
   background-color: rgb(17 24 39 / 0.1);
 }
@@ -2892,6 +2884,11 @@ td:is(.dark *), th:is(.dark *) {
 .hover\:bg-primary-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(217 119 6 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(180 83 9 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-red-200:hover {
@@ -2949,19 +2946,9 @@ td:is(.dark *), th:is(.dark *) {
   border-color: rgb(217 119 6 / var(--tw-border-opacity)) !important;
 }
 
-.focus\:border-primary-600:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(217 119 6 / var(--tw-border-opacity));
-}
-
 .focus\:border-t-primary-600:focus {
   --tw-border-opacity: 1;
   border-top-color: rgb(217 119 6 / var(--tw-border-opacity));
-}
-
-.focus\:text-primary-600:focus {
-  --tw-text-opacity: 1;
-  color: rgb(217 119 6 / var(--tw-text-opacity));
 }
 
 .focus\:opacity-\[0\.85\]:focus {
@@ -3004,11 +2991,6 @@ td:is(.dark *), th:is(.dark *) {
 .active\:bg-neutral-900:active {
   --tw-bg-opacity: 1;
   background-color: rgb(23 23 23 / var(--tw-bg-opacity));
-}
-
-.active\:bg-neutral-950:active {
-  --tw-bg-opacity: 1;
-  background-color: rgb(10 10 10 / var(--tw-bg-opacity));
 }
 
 .active\:bg-none:active {
