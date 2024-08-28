@@ -4,6 +4,16 @@
     <%- include('../partials/head') %>
 </head>
 <body>
+    <style>
+
+        input[type="time"]::-webkit-calendar-picker-indicator {
+        
+        display: none;
+        
+        }
+        
+    </style>
+
     <main class="bg-neutral-950 flex flex-row">
         <%- include('../partials/sidebar') %>
         <section class="px-24 flex flex-col h-screen w-[92vw] gap-6 py-12">
@@ -12,12 +22,12 @@
                     <h2 class="text-4xl font-bold">ORGANIZADOR DE TAREFAS</h2>
                     <p>Escolha quando você deseja estudar e quais matérias</p>
                 </div>
-                <button class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center">
-                    <i class="fa-solid fa-arrow-down"></i>
-                    Dia da semana 
-                </button>
+                <div class="border-2 rounded-lg py-2 px-4 inline-flex gap-2 items-center border-primary-600 bg-neutral-900 text-neutral-50">
+                    <img src="/image/icones/calendar.svg" alt="Calendar Icon" class="w-6">
+                    <span id="diasemana">Dia da Semana</span>
+                </div>
             </div>
-            <div class="flex justify-between text-neutral-50"> 
+            <div class="flex justify-center text-neutral-50"> 
                 <div class="w-[40%]">
                     <form id="taskform" class="flex flex-col w-full">
                         <select id="periodo" class="flex w-full bg-neutral-900 h-full p-4 rounded-lg border-2 border-neutral-800 text-center text-2xl font-bold">
@@ -26,15 +36,15 @@
                             <option value="tarde">Tarde</option>
                             <option value="noite">Noite</option>
                         </select>
-                        <div class="grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
+                        <div id="timet" class="grid grid-rows-2 gap-4 p-4 items-center w-full text-center text-xl">
                             <div class="justify-between">
                                 <div class="relative">
-                                    <input id="horacomeco" required placeholder="Horário de Início" type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                                    <input id="horacomeco" required type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none w-full p-2 rounded-lg border-2 border-neutral-800">
                                 </div>
                             </div>
                             <div class="justify-between">
                                 <div class="relative">
-                                    <input id="horatermino" required placeholder="Horário de Término" type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
+                                    <input id="horatermino" required type="time" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
                                 </div>
                             </div>
                         </div>
@@ -46,7 +56,7 @@
                                 <input id="descricao" required placeholder="Descrição" type="text" class="bg-neutral-900 text-neutral-50 focus:outline-none placeholder-neutral-500 w-full p-2 rounded-lg border-2 border-neutral-800">
                             </div>
                         </div>
-                        <button id="savebutton" type="button" class="mt-4 bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition duration-300">
+                        <button id="savebutton" type="submit" class="mt-4 bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition duration-300">
                             Salvar Tarefa
                         </button>
                     </form>
