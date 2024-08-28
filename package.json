@@ -1,6 +1,6 @@
 {
   "name": "tdah",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Combinação dos projetos TDAH e Google Calendar Node.js Quickstart.",
   "main": "server.js",
   "private": true,
