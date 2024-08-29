@@ -1,15 +1,10 @@
-const { firestoreAdmin } = require('../../config/configsFirebase');
-const admin = require('firebase-admin');
+const { firestoreAdmin } = require('../../../config/configsFirebase');
 const { format } = require('date-fns');
 const { ptBR } = require('date-fns/locale');
 
 // Função para inserir dados do formulário de contato e armazenar logs
 async function insertContactAndLog(contactData) {
     try {
-        // Removido: Inserção na coleção 'contacts'
-        // const contactRef = firestoreAdmin.collection('contacts').doc();
-        // await contactRef.set(contactData);
-
         const logRef = firestoreAdmin.collection('contact').doc();
         await logRef.set({
             ...contactData,

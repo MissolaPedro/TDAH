@@ -1,4 +1,4 @@
-const { firestoreAdmin, auth } = require('../../../config/configsFirebase');
+const { firestoreAdmin, auth } = require('../../../../config/configsFirebase');
 const { format } = require('date-fns');
 const { ptBR } = require('date-fns/locale');
 

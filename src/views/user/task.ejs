@@ -25,7 +25,7 @@
             </div>
             
             <div class="flex justify-center text-neutral-50 my-auto">
-                <% if (TaskErrorMessage) { %>
+                <% if (taskErrorMessage) { %>
                     <div
                         role="alert"
                         class="flex bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-900 dark:text-red-100 p-2 rounded-lg items-center transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105"
@@ -44,7 +44,31 @@
                                 stroke-linecap="round"
                             ></path>
                         </svg>
-                        <p class="text-xs font-semibold"><%= TaksErrorMessage %></p> 
+                        <p class="text-xs font-semibold"><%= taskErrorMessage %></p>
+                    </div>
+                <% } %>
+                <% if (taskSuccessMessage) { %>
+                    <div
+                        role="alert"
+                        class="flex bg-green-100 dark:bg-green-900 border-l-4 border-green-500 dark:border-green-700 text-green-900 dark:text-green-100 p-2 rounded-lg items-center transition duration-300 ease-in-out hover:bg-green-200 dark:hover:bg-green-800 transform hover:scale-105"
+                    >
+                        <svg
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            class="h-5 w-5 flex-shrink-0 mr-2 text-green-600"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                stroke-width="2"
+                                stroke-linejoin="round"
+                                stroke-linecap="round"
+                            ></path>
+                        </svg>
+                        <p class="text-xs font-semibold"><%= taskSuccessMessage %></p>
+                    </div>
+                <% } %>
                 <div class="w-[40%]">
                     <form id="taskform" class="flex flex-col justify-center items-center gap-8">
                         <select id="periodo" class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 text-neutral-500 active:bg-neutral-900 text-center">
@@ -63,6 +87,7 @@
                                     <input
                                     type="time"
                                     name="timestart"
+                                    id="horacomeco"
                                     class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
                                 />
                                 </div>
@@ -76,6 +101,7 @@
                                     <input
                                     type="time"
                                     name="timestart"
+                                    id="horatermino"
                                     class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
                                 />
                                 </div>
@@ -91,6 +117,7 @@
                                     <input
                                     type="text"
                                     name="materia"
+                                    id="materia"
                                     class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
                                     placeholder="MATERIA"
                                 />
@@ -105,13 +132,14 @@
                                     <input
                                     type="text"
                                     name="assunto"
+                                    id="assunto"
                                     class="w-full bg-neutral-900 border-2 rounded-xl border-neutral-800 p-4 pl-10 text-neutral-500 placeholder-neutral-500 placeholder-uppercase active:bg-neutral-900"
                                     placeholder="ASSUNTO"
                                 />
                                 </div>
                             </div>
                         </fieldset>
-                        <button type="submit" class="bg-primary-600 w-[50%] py-3 text-neutral-50 rounded-lg text-lg font-semibold uppercase">
+                        <button type="submit" id="savebutton" class="bg-primary-600 w-[50%] py-3 text-neutral-50 rounded-lg text-lg font-semibold uppercase">
                             Registrar tarefa
                         </button>
                     </form>
@@ -119,7 +147,6 @@
             </div>
         </section>
     </main>
-    <script src="/js/tasks.js"></script>
     <script src="/js/day.js"></script>
 </body>
 </html>

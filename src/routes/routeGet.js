@@ -1,10 +1,35 @@
 const authMiddleware = require("../middlewares/auth.js");
-const admin = require("firebase-admin");
-const { signOutUser } = require("../firebase/functions/signout.js");
-const { verifyEmailCode } = require("../firebase/functions/register.js");
-const securityMiddleware = require('../middlewares/security'); // Importar o middleware de segurança
+const { signOutUser } = require("../firebase/functions/auth/signout.js");
+const { verifyEmailCode } = require("../firebase/functions/auth/register.js");
+const securityMiddleware = require("../middlewares/security");
+
+async function handleVerifyEmail(req, res) {
+    const { email, code } = req.query;
+    if (!Array.isArray(code)) {
+        return res.render("forms/verify-email", {
+            title: "Verificação de E-mail",
+            message: "Código de verificação inválido.",
+            email: email,
+        });
+    }
+    const verificationCode = code.join(""); // Concatenar os valores dos inputs
+
+    try {
+        await verifyEmailCode(email, verificationCode);
+        res.redirect("/login");
+    } catch (error) {
+        res.render("forms/verify-email", {
+            title: "Verificação de E-mail",
+            message: "Erro ao verificar e-mail. Por favor, tente novamente.",
+            email: email,
+        });
+    }
+}
 
 function routeGet(app) {
+    app.use(securityMiddleware); // Aplicar o middleware de segurança a todas as rotas
+
+    // Rotas públicas
     app.get("/", (req, res) => {
         res.render("index", {
             title: "Projeto TDAH",
@@ -48,7 +73,6 @@ function routeGet(app) {
                 res.redirect("/login");
             }
         } catch (error) {
-            //console.error("Erro ao fazer logout:", error);
             if (!res.headersSent) {
                 res.redirect("/");
             }
@@ -70,12 +94,17 @@ function routeGet(app) {
         });
     });
 
-    app.get("/verify-email", (req, res) => {
-        res.render("forms/verify-email", {
-            title: "Verificação de E-mail",
-            message: "Por favor, insira o código de verificação enviado para o seu e-mail.",
-            email: req.query.email,
-        });
+    app.get("/verify-email", async (req, res) => {
+        const { email, code } = req.query;
+        if (email && code) {
+            await handleVerifyEmail(req, res);
+        } else {
+            res.render("forms/verify-email", {
+                title: "Verificação de E-mail",
+                message: "Por favor, insira o código de verificação enviado para o seu e-mail.",
+                email: req.query.email,
+            });
+        }
     });
 
     // Rotas protegidas
@@ -88,12 +117,8 @@ function routeGet(app) {
     app.get("/task", authMiddleware, (req, res) => {
         res.render("user/task", {
             title: "Tarefas",
-        });
-    });
-
-    app.get("/settings", authMiddleware, (req, res) => {
-        res.render("user/settings", {
-            title: "Configurações",
+            taskSuccessMessage: null,
+            taskErrorMessage: null,
         });
     });
 }

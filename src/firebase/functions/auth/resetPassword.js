@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { authAdmin, firestoreAdmin } = require('../../../config/configsFirebase');
+const { authAdmin, firestoreAdmin } = require('../../../../config/configsFirebase');
 const mailjet = require('node-mailjet').connect(process.env.MAILJET_API_KEY, process.env.MAILJET_API_SECRET);
 const { format } = require('date-fns');
 const { ptBR } = require('date-fns/locale');
